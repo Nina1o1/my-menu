@@ -1,0 +1,52 @@
+/* ==== General Layout ==== */
+body{
+  text-align: center;
+  margin:0;
+  padding:0;
+}
+/* style all list */
+ul, li{
+  margin:0;
+  padding:0;
+  list-style-type: none;
+}
+/* style all button and link */
+a{
+  text-decoration: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+button{
+  background-color: #BFACE2;
+  color:white;
+  border-style: none;
+  border-radius: 0.5rem;
+  width: 100px;
+  height: 55px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+}
+button:hover{
+  background-color: #ECF2FF;
+  color: #3E54AC;
+}
+/* style all input */
+.text{
+  padding: 13px;
+  font-family: 'Courier New', Courier, monospace;
+  border-style: solid;
+  border-color: #BFACE2;
+  border-width: 1px;
+  border-radius: 0.3rem;
+}
+.text:hover{
+  background-color:#ECF2FF;
+}
+.text:focus{
+  background-color: #ECF2FF;
+}
+::placeholder{
+  color: gray;
+}
+textarea {
+  resize: none;
+}

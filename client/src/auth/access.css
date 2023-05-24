@@ -1,0 +1,51 @@
+/* styles shared by both input page and register page */
+.access-container{
+  display: flex;
+  flex-flow: column;
+
+  margin-top: 10%;
+  font-family: 'Courier New', Courier, monospace;
+  /* background-color: #BFACE2; */
+}
+.access-row{
+  padding: 1rem 0;
+}
+.access-page {
+  background-color: #BFACE2;
+}
+.access-row:nth-child(3){
+  margin-top: 35px;
+  padding-bottom: 0.5rem;
+}
+
+.access-label{
+  color: #3E54AC;
+  font-size: 1.2rem;
+  padding-right: 2rem;
+}
+.access-bar{
+  width: 14rem
+}
+.access-btn{
+  width: 24.5rem;
+  background-color: #BFACE2;
+  color: #3E54AC;
+  font-size: 1.2rem;
+  border-style: none;
+  border-bottom-style: solid;
+  border-color: #3E54AC;
+  border-radius: 0;
+}
+.access-btn:hover{
+  background-color: #3E54AC;
+  color:#ECF2FF;
+  font-weight: 100;
+  border-style: solid;
+  border-radius: 0.5rem;
+}
+.access-switch{
+  color: #ECF2FF;
+}
+.access-switch>a{
+  color: #3E54AC;
+}

@@ -1,0 +1,36 @@
+/* heading */
+.header{
+  background-color: #BFACE2;
+}
+
+.big-heading{
+  margin: 0;
+  padding: 7vh 0 1vh 0;
+  color:#3E54AC;
+  font-size: 3rem;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.big-heading:hover{
+  color: #fff;
+}
+.nav-container{
+  padding: 2vh 12% 4vh 12%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  gap: 0 30px;
+}
+
+.nav-item{
+  color:#fff;
+  font-size: 1.2rem;
+}
+
+.nav-item:hover{
+  color:#3E54AC;
+}
+
+
+/* .kaomoji{
+  display: inline-block;
+} */

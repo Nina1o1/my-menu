@@ -1,0 +1,33 @@
+/* ==== Editor Page ==== */
+.edit-container{
+  margin-top: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0 15%;
+}
+.displayImg{
+  width: 280px;
+  height: 280px;
+}
+.input-container{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px 0;
+}
+.addName{
+  height: 1rem;
+}
+.addIngredients{
+  height: 3rem;
+}
+.addDescription{
+  height: 6rem;
+}
+.displayImg{
+  background-color: gray;
+}
+.edit-btn{
+  margin-top: 7%;
+}
