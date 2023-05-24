@@ -10,9 +10,6 @@
 .access-row{
   padding: 1rem 0;
 }
-.access-page {
-  background-color: #BFACE2;
-}
 .access-row:nth-child(3){
   margin-top: 35px;
   padding-bottom: 0.5rem;

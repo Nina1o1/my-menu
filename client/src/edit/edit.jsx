@@ -3,6 +3,8 @@ import { useRef } from 'react'
 import './edit.css'
 
 export default function Edit() {
+  document.body.classList.remove("purple-page")
+  
   // access DOM elements via useRef
   const nameRef = useRef(null);
   const ingredientsRef = useRef(null);

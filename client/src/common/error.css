@@ -1,0 +1,11 @@
+.msg{
+  margin-top: 20vh;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.error-msg {
+  color:#3E54AC;
+}
+.redirect-msg{
+  font-weight: 100;
+  color:#fff;
+}
