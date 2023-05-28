@@ -3,18 +3,32 @@
   display: flex;
   flex-flow: column;
 
-  margin-top: 10%;
   font-family: 'Courier New', Courier, monospace;
-  /* background-color: #BFACE2; */
 }
 .access-row{
   padding: 1rem 0;
 }
 .access-row:nth-child(3){
-  margin-top: 35px;
+  margin-top: 30px;
   padding-bottom: 0.5rem;
 }
-
+/* alerts */
+.access-alerts{
+  width: 24.5rem;
+  height: 4rem;
+  margin: auto;
+  margin-bottom: 2rem;
+  color: #3E54AC;
+  /* font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+}
+.access-msg-title{
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+.access-msg-p{
+  font-size: 0.9rem;
+}
+/* form and button*/
 .access-label{
   color: #3E54AC;
   font-size: 1.2rem;

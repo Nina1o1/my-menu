@@ -1,4 +1,5 @@
 import './dictionary.css'
+import terms from '../assets/terms.json'
 
 export default function Dictionary() {
   document.body.classList.remove("purple-page")
@@ -23,7 +24,7 @@ function SearchBar() {
   return(
     <div className="search-container">
       <button type="submit" className="search-btn">Search</button>
-      <input type="text" name="search" className="search-bar text" placeholder="What do you have for the next meal?" />
+      <input type="text" name="search" className="search-bar text" placeholder={terms["dict-search"]} />
     </div>
   )
 }
@@ -31,8 +32,8 @@ function SearchBar() {
 // items
 
 function ItemList (props) {
-  const itemList = props.items.map(item => {
-    return <Item name={item.name} ingredients={item.ingredients}/>
+  const itemList = props.items.map((item, i) => {
+    return <Item name={item.name} ingredients={item.ingredients} key={i}/>
   })
   return(
     <ul className="dict-container">
@@ -44,8 +45,8 @@ function ItemList (props) {
 // name / ingredients
 
 function Item (props) {
-  const ingredientList = props.ingredients.map(ingred => {
-    return (<span>{ingred} </span>)
+  const ingredientList = props.ingredients.map((ingred, i) => {
+    return (<span key={i}>{ingred} </span>)
   })
 
   return(

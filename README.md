@@ -10,7 +10,7 @@ The application will store Users and Recipes
 A Sample User: 
 ```json
 {
-  "username": "Nina",
+  "username": "Nina", // unique username
   "hash": ,// a hashed password
   "menus": ,// an array of references to List documents
 }

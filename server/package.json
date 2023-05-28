@@ -1,9 +1,16 @@
 {
+  "scripts": {
+    "dev": "nodemon src/app.mjs"
+  },
+  "type": "module",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "mongo-sanitize": "^1.1.0",
     "mongoose": "^7.2.0",
     "nodemon": "^2.0.22",
+    "passport": "^0.6.0",
     "socket.io": "^4.6.1"
   }
 }

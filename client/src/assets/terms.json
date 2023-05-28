@@ -1,0 +1,17 @@
+{
+  "dict-search" : "What do you have for the next meal?",
+
+  "edit-name": "Dish Name",
+  "edit-ingredients": "Add ingredients. Separate each by COMMA",
+  "edit-description": "Describe your meal!",
+
+  "reg-success-t": "Successully Registered!",
+  "reg-success-p": "Redirecting You to Login Page...",
+  "reg-exist-t": "This Username Already Exists",
+  "reg-exist-p": "Please change your username",
+  "reg-error-t": "Sorry, Some Error Occurs",
+  "reg-error-p": "Please try again",
+  
+  "login-err-noUser": "No User Found",
+  "login-err-wrongPassword": "Password Is Incorrect"
+}

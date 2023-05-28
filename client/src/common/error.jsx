@@ -17,7 +17,7 @@ function Error() {
       navigate("/")
     }, 1000);
 
-  }, 2000);
+  }, 1000);
 
   return(
     <>
