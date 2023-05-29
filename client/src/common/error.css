@@ -1,11 +1,14 @@
-.msg{
+.error-msg{
   margin-top: 20vh;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-.error-msg {
   color:#3E54AC;
 }
 .redirect-msg{
-  font-weight: 100;
-  color:#fff;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 30vh;
+  border-bottom: solid;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.redirect-msg:hover{
+  color: #3E54AC;
 }

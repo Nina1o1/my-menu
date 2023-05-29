@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
 import './access.css'
-import socket from '../socket'
+// import socket from '../socket'
 
 function Login() {
   document.body.classList.add("purple-page")
@@ -11,17 +11,17 @@ function Login() {
   const [title, setTitle] = useState("");
   const [parag, setParag] = useState("");
   
-  function handleClick (evt) {
-    evt.preventDefault();
-    const userInfo = {
-      username: usernameRef.current.value,
-      password: passwordRef.current.value
-    }
-    socket.emit("login", userInfo);
-  }
-  socket.on("login status", (data) => {
-    // TODO: successful status or unsuccessful
-  });
+  // function handleClick (evt) {
+  //   evt.preventDefault();
+  //   const userInfo = {
+  //     username: usernameRef.current.value,
+  //     password: passwordRef.current.value
+  //   }
+  //   socket.emit("login", userInfo);
+  // }
+  // socket.on("login status", (data) => {
+  //   // TODO: successful status or unsuccessful
+  // });
 
   return(
     <>

@@ -1,39 +1,71 @@
+import url from 'url';
+import path from 'path';
 import express, { urlencoded } from 'express';
-import { createServer } from 'http';
-import { Server } from 'socket.io';
+// import { createServer } from 'http';
+// import { Server } from 'socket.io';
+import passport from 'passport';
+import LocalStrategy from "passport-local"
 import cors from 'cors';
+import session from "express-session";
 import { handleEditRecipe, handleUserLogin, handleUserRegister} from './socketFuncs.mjs'
+import authRouter from "./routes/auth.mjs";
+import indexRouter from "./routes/index.mjs"
+const app = express();
 
 const clientURL = "http://localhost:5173";
 
-// connect to socket.io frontend
-const app = express();
+// cors
 app.use(cors());
-const server = createServer(app);
-const io = new Server(server, { 
-  cors: {
-    origin: clientURL,
-    methods: ["GET","POST"]
-  }
-});
-
+// form format
+app.use(urlencoded({extended: false}));
+app.use(express.json());
 // serve static files
-import url from 'url';
-import path from 'path';
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'public')));
+// session set up
+const options = {
+	secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: true }
+}
+app.use(passport.initialize());
+app.use(session(options));
+app.use(passport.session());
+// serve routes
+app.use("/", authRouter);
+app.use("/", indexRouter);
 
-// urlencoded
-app.use(urlencoded({extended: true}));
+// // ...connect to socket.io frontend
+// const server = createServer(app);
+// const io = new Server(server, { 
+//   cors: {
+//     origin: clientURL,
+//     methods: ["GET","POST"]
+//   }
+// });
 
 // handle io connection
-function handleIOConnection (socket) {
-  console.log(socket.id, "has connected");
-  socket.on("send data", (data) => handleEditRecipe(data, socket));
-  socket.on("login", (data) => handleUserLogin(data, socket));
-  socket.on("register", (data) => handleUserRegister(data, socket));
-}
+// as well as also post and get requests
+// function handleIOConnection (socket) {
+//   console.log(socket.id, "has connected");
 
-io.on("connection", handleIOConnection);
+//   // user register
+//   app.post("/register", (req,res) => {
+//     handleUserRegister(req.body, socket)
+//   });
 
-server.listen(3000);
+//   // user login
+//   // app.post("/login", (req,res) => {
+//   //   handleUserLogin(req.body, socket);
+//   // })
+
+//   // query recipes
+//   socket.on("send data", (data) => handleEditRecipe(data, socket));
+// }
+
+// io.on("connection", handleIOConnection);
+
+app.listen(3000, () => {
+  console.log("connected to server...")
+});

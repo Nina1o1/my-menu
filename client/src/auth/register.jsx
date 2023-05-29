@@ -2,9 +2,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState, useRef } from 'react'
 
 import './access.css'
+// import socket from '../socket'
 import terms from '../assets/terms.json'
 import status from "../assets/status.json"
-import socket from '../socket'
 
 function Register() {
   document.body.classList.add("purple-page")
@@ -13,43 +13,58 @@ function Register() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [title, setTitle] = useState("");
-  const [parag, setParag] = useState("")
-
-  // form submission
-  function handleClick (evt) {
+  const [parag, setParag] = useState("")  
+  
+  // submit form to server
+  async function handleClick (evt) {
     evt.preventDefault();
+    // get user info
     const userInfo = {
       username: usernameRef.current.value,
       password: passwordRef.current.value
     }
-    socket.emit("register", userInfo);
+    // post form
+    const postOptions = {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userInfo)
+    }
+    const serverURL = "http://localhost:3000";
+    const postURL = `${serverURL}/register`;
+    try {
+      await fetch(postURL, postOptions);
+    } catch (error) {
+      
+    }
   }
 
   // listen from server
-  function handleRegistration(regStatus){
-    switch (regStatus) {
-      case status["reg-success"]: {
-        setTitle(terms["reg-success-t"])
-        setParag(terms["reg-success-p"])
-        navigate("/login")
-        break;
-      }
-      case status["reg-exist"]:{
-        setTitle(terms["reg-exist-t"])
-        setParag(terms["reg-exist-p"])
-        break;
-      }
-      case status["reg-error"]:{
-        setTitle(terms["reg-error-t"])
-        setParag(terms["reg-error-p"])
-        break;
-      }
-      default:{
-        break;
-      }
-    }
-  }
-  socket.on("register status", handleRegistration);
+  // function handleRegistration(regStatus){
+  //   switch (regStatus) {
+  //     case status["reg-success"]: {
+  //       setTitle(terms["reg-success-t"])
+  //       setParag(terms["reg-success-p"])
+  //       navigate("/login")
+  //       break;
+  //     }
+  //     case status["reg-exist"]:{
+  //       setTitle(terms["reg-exist-t"])
+  //       setParag(terms["reg-exist-p"])
+  //       break;
+  //     }
+  //     case status["reg-error"]:{
+  //       setTitle(terms["reg-error-t"])
+  //       setParag(terms["reg-error-p"])
+  //       break;
+  //     }
+  //     default:{
+  //       break;
+  //     }
+  //   }
+  // }
+  // socket.on("register status", handleRegistration);
 
   return(
     <>
