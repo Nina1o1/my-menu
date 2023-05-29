@@ -1,5 +1,9 @@
 {
   "reg-success": "success",
   "reg-exist": "exist",
-  "reg-error": "error"
+  "reg-error": "error",
+
+  "login-success": "success",
+  "login-noexist": "noexist",
+  "login-error": "error"
 }

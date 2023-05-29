@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
 import './access.css'
-// import socket from '../socket'
+import terms from '../assets/terms.json'
+import status from "../assets/status.json"
 
 function Login() {
   document.body.classList.add("purple-page")
@@ -11,17 +12,56 @@ function Login() {
   const [title, setTitle] = useState("");
   const [parag, setParag] = useState("");
   
-  // function handleClick (evt) {
-  //   evt.preventDefault();
-  //   const userInfo = {
-  //     username: usernameRef.current.value,
-  //     password: passwordRef.current.value
-  //   }
-  //   socket.emit("login", userInfo);
-  // }
-  // socket.on("login status", (data) => {
-  //   // TODO: successful status or unsuccessful
-  // });
+  async function handleClick (evt) {
+    evt.preventDefault();
+
+    // post request
+    const userInfo = {
+      username: usernameRef.current.value,
+      password: passwordRef.current.value
+    }
+    const postOptions = {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userInfo)
+    }
+    const serverURL = "http://localhost:3000";
+    const postURL = `${serverURL}/login`;
+
+    try {
+      const res = await fetch(postURL, postOptions);
+      const json = await res.json();
+
+      // display response messages
+      switch (json["loginStatus"]) {
+      case status["login-success"]: {
+        setTitle(terms["login-success-t"])
+        setParag(terms["login-success-p"])
+        navigate("/login")
+        break;
+      }
+      case status["login-noexist"]:{
+        setTitle(terms["login-noexist-t"])
+        setParag(terms["login-noexist-p"])
+        break;
+      }
+      case status["login-error"]:{
+        setTitle(terms["login-error-t"])
+        setParag(terms["login-error-p"])
+        break;
+      }
+      default:{
+        break;
+      }
+    }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 
   return(
     <>

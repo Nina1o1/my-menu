@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState, useRef } from 'react'
 
 import './access.css'
-// import socket from '../socket'
 import terms from '../assets/terms.json'
 import status from "../assets/status.json"
 
@@ -18,12 +17,12 @@ function Register() {
   // submit form to server
   async function handleClick (evt) {
     evt.preventDefault();
-    // get user info
+    
+    // post form
     const userInfo = {
       username: usernameRef.current.value,
       password: passwordRef.current.value
     }
-    // post form
     const postOptions = {
       method: "POST",
       headers: {
@@ -33,38 +32,38 @@ function Register() {
     }
     const serverURL = "http://localhost:3000";
     const postURL = `${serverURL}/register`;
+
     try {
-      await fetch(postURL, postOptions);
+      const res = await fetch(postURL, postOptions);
+      const json = await res.json();
+
+      // display response messages
+      switch (json["regStatus"]) {
+      case status["reg-success"]: {
+        setTitle(terms["reg-success-t"])
+        setParag(terms["reg-success-p"])
+        navigate("/login")
+        break;
+      }
+      case status["reg-exist"]:{
+        setTitle(terms["reg-exist-t"])
+        setParag(terms["reg-exist-p"])
+        break;
+      }
+      case status["reg-error"]:{
+        setTitle(terms["reg-error-t"])
+        setParag(terms["reg-error-p"])
+        break;
+      }
+      default:{
+        break;
+      }
+    }
+
     } catch (error) {
-      
+      console.log(error)
     }
   }
-
-  // listen from server
-  // function handleRegistration(regStatus){
-  //   switch (regStatus) {
-  //     case status["reg-success"]: {
-  //       setTitle(terms["reg-success-t"])
-  //       setParag(terms["reg-success-p"])
-  //       navigate("/login")
-  //       break;
-  //     }
-  //     case status["reg-exist"]:{
-  //       setTitle(terms["reg-exist-t"])
-  //       setParag(terms["reg-exist-p"])
-  //       break;
-  //     }
-  //     case status["reg-error"]:{
-  //       setTitle(terms["reg-error-t"])
-  //       setParag(terms["reg-error-p"])
-  //       break;
-  //     }
-  //     default:{
-  //       break;
-  //     }
-  //   }
-  // }
-  // socket.on("register status", handleRegistration);
 
   return(
     <>

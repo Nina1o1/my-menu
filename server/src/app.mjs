@@ -7,6 +7,7 @@ import passport from 'passport';
 import LocalStrategy from "passport-local"
 import cors from 'cors';
 import session from "express-session";
+import cookieParser from "cookie-parser";
 import { handleEditRecipe, handleUserLogin, handleUserRegister} from './socketFuncs.mjs'
 import authRouter from "./routes/auth.mjs";
 import indexRouter from "./routes/index.mjs"
@@ -32,6 +33,7 @@ const options = {
 app.use(passport.initialize());
 app.use(session(options));
 app.use(passport.session());
+app.use(cookieParser("keyboard cat"))
 // serve routes
 app.use("/", authRouter);
 app.use("/", indexRouter);

@@ -5,6 +5,7 @@
   "type": "module",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
@@ -13,7 +14,6 @@
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^8.0.0",
-    "socket.io": "^4.6.1"
+    "passport-local-mongoose": "^8.0.0"
   }
 }

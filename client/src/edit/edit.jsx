@@ -1,4 +1,4 @@
-import socket from '../socket'
+// import socket from '../socket'
 import { useRef } from 'react'
 import './edit.css'
 import terms from '../assets/terms.json'
@@ -21,8 +21,8 @@ export default function Edit() {
       description: descriptionRef.current.value,
       image: imageRef.current.value // TODO: deal with image
     }
-    console.log(newData)
-    socket.emit("send data", newData)
+    console.log(newData);
+    // socket.emit("send data", newData)
   }
 
   return (
