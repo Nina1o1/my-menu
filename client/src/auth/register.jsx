@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useRef } from 'react'
-
 import './access.css'
 import terms from '../assets/terms.json'
 import status from "../assets/status.json"
@@ -40,22 +39,11 @@ function Register() {
       // display response messages
       switch (json["regStatus"]) {
       case status["reg-success"]: {
-        setTitle(terms["reg-success-t"])
-        setParag(terms["reg-success-p"])
         navigate("/login")
-        break;
-      }
-      case status["reg-exist"]:{
-        setTitle(terms["reg-exist-t"])
-        setParag(terms["reg-exist-p"])
-        break;
-      }
-      case status["reg-error"]:{
-        setTitle(terms["reg-error-t"])
-        setParag(terms["reg-error-p"])
-        break;
       }
       default:{
+        setTitle(terms[`${json["regStatus"]}-t`])
+        setParag(terms[`${json["regStatus"]}-p`])
         break;
       }
     }

@@ -1,23 +1,12 @@
-// import *  as fs from "fs";
-
-// let status = {};
-
-// import url from 'url'; 
-// import path from 'path';
-// const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-// await fs.readFile(path.join(__dirname, "status.json"), "utf-8", (err, data) => {
-//   if(err){
-//     console.log(err);
-//     return;
-//   }
-//   status = JSON.parse(data);
-// });
-
-// TODO: import status file
+// I want to manage my own status code for front-end display
 const status = {
-  "reg-success": "success",
-  "reg-exist": "exist",
-  "reg-error": "error"
-};
+  "reg-success": "reg-success",
+  "reg-exist": "reg-exist",
+  "reg-nodata": "reg-nodata",
+  "reg-error": "reg-error",
 
+  "login-success": "login-success",
+  "login-noexist": "login-noexist",
+  "login-error": "login-error"
+}
 export default status

@@ -20,6 +20,7 @@ function Login() {
       username: usernameRef.current.value,
       password: passwordRef.current.value
     }
+
     const postOptions = {
       method: "POST",
       headers: {
@@ -29,36 +30,25 @@ function Login() {
     }
     const serverURL = "http://localhost:3000";
     const postURL = `${serverURL}/login`;
-
+    
     try {
       const res = await fetch(postURL, postOptions);
-      const json = await res.json();
+      // const json = await res.json();
 
       // display response messages
-      switch (json["loginStatus"]) {
-      case status["login-success"]: {
-        setTitle(terms["login-success-t"])
-        setParag(terms["login-success-p"])
-        navigate("/login")
-        break;
-      }
-      case status["login-noexist"]:{
-        setTitle(terms["login-noexist-t"])
-        setParag(terms["login-noexist-p"])
-        break;
-      }
-      case status["login-error"]:{
-        setTitle(terms["login-error-t"])
-        setParag(terms["login-error-p"])
-        break;
-      }
-      default:{
-        break;
-      }
-    }
+      // switch (json["loginStatus"]) {
+      // case status["login-success"]: {
+      //   navigate("/login");
+      // }
+      // default:{
+      //   setTitle(terms[`${json["loginStatus"]}-t`])
+      //   setParag(terms[`${json["loginStatus"]}-p`])
+      //   break;
+      // }
+    // }
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
 
   }
@@ -93,4 +83,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Login;

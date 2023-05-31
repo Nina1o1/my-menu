@@ -4,11 +4,13 @@
   "edit-name": "Dish Name",
   "edit-ingredients": "Add ingredients. Separate each by COMMA",
   "edit-description": "Describe your meal!",
-
+  
   "reg-success-t": "Successully Registered!",
   "reg-success-p": "Redirecting you to Login page...",
   "reg-exist-t": "This Username Already Exists",
   "reg-exist-p": "Please change your username",
+  "reg-nodata-t": "Please Complete Your Information",
+  "reg-nodata-p": "",
   "reg-error-t": "Sorry, Some Error Occurs",
   "reg-error-p": "Please try again",
   

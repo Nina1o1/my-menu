@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-  // username provided by authentication plugin
-  // password hash provided by authentication plugin
+  username: {type: String, require: true},
+  hash: {type: String},
   lists: [{
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'List'

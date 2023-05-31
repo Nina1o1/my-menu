@@ -9,17 +9,28 @@ import status from "../assets/status.mjs"
 const router = express.Router();
 
 // passport strategy
-const strategy = new LocalStrategy(function verify(username, password, done) {
-  // TODO
+// TODO
+const strategy = new LocalStrategy(async function verify(username, password, done) {
+  try {
+    const foundUser = await User.findOne({username: username});
+    if(!foundUser) {
+      return done(null, false);
+    }
+    const compare = bcrypt.compare(password, foundUser["hash"]);
+    if(!compare){
+      return done(null, false);
+    }
+    return done(null, foundUser);
+
+  } catch (error) {
+    return done(error);
+  }
 });
-passport.use(strategy);
+passport.use("local", strategy);
 
 // serialize and deserialize user
 passport.serializeUser((user, done) => {
-  const storeUser = {
-    username: user.username
-  }
-  return done(null, storeUser);
+  return done(null, {username: user.username});
 });
 
 passport.deserializeUser((user, done) => {
@@ -27,38 +38,39 @@ passport.deserializeUser((user, done) => {
 });
 
 // login post
+// TODO: error here
 router.post("/login", 
-passport.authenticate('local', { 
-  failureRedirect: '/login',
-  failureMessage: true 
-}),
-(req, res) => {
-  console.log(req.body);
+  passport.authenticate("local"),
+  (req, res)=>{
+    console.log(req);
 });
 
+
 // register post
+// TODO: strengthen password
 router.post("/register", async (req, res) => {
   const username = sanitize(req.body.username);
   const password = sanitize(req.body.password);
   
+  // incomplete information
+  if(username=== "" || password==="") {
+    return res.status(401).send({regStatus: status["reg-nodata"]})
+  }
   try {
     const foundUser = await User.findOne({username: username});
     // username exists
-    if(foundUser !== null){
-      res.status(401).send({regStatus: status["reg-exist"]});
+    if(foundUser){
+      return res.status(401).send({regStatus: status["reg-exist"]});
     }
-
     // store new user in database
-    else{
-      const salt = await bcrypt.genSalt();
-      const hash = await bcrypt.hash(password, salt);
-      const newUser = new User({
-        username: username,
-        hash: hash
-      });
-      await newUser.save();
-      res.send({regStatus: status["reg-success"]});
-    }
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(password, salt);
+    const newUser = new User({
+      username: username,
+      hash: hash
+    });
+    await newUser.save();
+    res.send({regStatus: status["reg-success"]});
 
   } catch (error) {
     // if error, display error message

@@ -1,9 +1,10 @@
 {
-  "reg-success": "success",
-  "reg-exist": "exist",
-  "reg-error": "error",
+  "reg-success": "reg-success",
+  "reg-exist": "reg-exist",
+  "reg-nodata": "reg-nodata",
+  "reg-error": "reg-error",
 
-  "login-success": "success",
-  "login-noexist": "noexist",
-  "login-error": "error"
+  "login-success": "login-success",
+  "login-noexist": "login-noexist",
+  "login-error": "login-error"
 }
