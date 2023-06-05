@@ -26,7 +26,13 @@ function Navigation() {
     
     // post request
     const postOptions = {
-      method: "POST"
+      method: "POST",
+      credentials: "include",
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json',
+      // },
+      mode: 'cors'
     }
     const serverURL = "http://localhost:3000";
     const postURL = `${serverURL}/logout`;

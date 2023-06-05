@@ -39,19 +39,18 @@ function Login() {
     try {
       const res = await fetch(postURL, postOptions);
       const json = await res.json();
-      console.log(json) // prints wanted res json message
 
       // display response messages
-      // switch (json["message"]) {
-      //   case status["login-success"]: {
-      //     navigate("/");
-      //   }
-      //   default:{
-      //     setTitle(terms[`${json["message"]}`]["title"]??"")
-      //     setParag(terms[`${json["message"]}`]["parag"]??"")
-      //     break;
-      //   }
-      // }
+      switch (json["message"]) {
+        case status["login-success"]: {
+          navigate("/");
+        }
+        default:{
+          setTitle(terms[`${json["message"]}`]["title"]??"")
+          setParag(terms[`${json["message"]}`]["parag"]??"")
+          break;
+        }
+      }
     } catch (error) {
       console.log(error);
     }

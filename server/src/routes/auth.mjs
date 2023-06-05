@@ -57,7 +57,7 @@ router.post("/login", (req, res, next) => {
       if (error) {
         return res.status(502).send(info);
       }
-      return res.send({errors: false, user: user, info: info})
+      return res.send(info)
     });
   })(req ,res, next)
 });
