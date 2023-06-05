@@ -62,7 +62,6 @@ router.post("/login", (req, res, next) => {
   })(req ,res, next)
 });
 
-
 // register post
 // TODO: strengthen password
 router.post("/register", async (req, res) => {

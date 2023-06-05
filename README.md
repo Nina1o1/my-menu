@@ -80,8 +80,9 @@ backend
 2. [react routing](https://reactrouter.com/en/main/start/overview) [(link to code)](./client/src/appRoutes.jsx)
     - [tutorial](https://www.youtube.com/watch?v=Ul3y1LXxzdU&t=634s)
 3. [passport local strategy](https://www.passportjs.org/concepts/authentication) [(link to code)](./server/src/routes/auth.mjs)
-    - [passport and AJAX](https://itecnote.com/tecnote/jquery-ajax-call-to-passportjs-login-on-express-nodejs-framework/)
+    - [passport & AJAX](https://itecnote.com/tecnote/jquery-ajax-call-to-passportjs-login-on-express-nodejs-framework/)
     - [tutorial (doc arrangement)](https://www.youtube.com/watch?v=74ZsbGHsPCo)
     - [serialize & deserialize work flow](https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize)
-    - [deserializeUser is not called (credentials)](https://github.com/jaredhanson/passport/issues/446)
+    - [cors & setting cookies (credentials)](https://github.com/jaredhanson/passport/issues/446)
     - [deserializeUser is not called (manual login)](https://stackoverflow.com/questions/57293115/passport-deserializeuser-not-being-called)
+4. 

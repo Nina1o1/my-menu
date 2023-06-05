@@ -5,7 +5,7 @@ import terms from '../assets/terms.json'
 import status from "../assets/status.json"
 
 function Login() {
-  document.body.classList.add("purple-page")
+  document.body.classList.add("purple-page");
   const navigate = useNavigate();
 
   const usernameRef = useRef(null);

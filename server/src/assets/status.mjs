@@ -1,5 +1,5 @@
 // I want to manage my own status code for front-end display
-// TODO: Improve custome error message
+// TODO: Improve custom error message
 const status = {
   "reg-success": "reg-success",
   "reg-exist": "reg-exist",
