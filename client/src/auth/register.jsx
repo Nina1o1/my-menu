@@ -37,13 +37,13 @@ function Register() {
       const json = await res.json();
 
       // display response messages
-      switch (json["regStatus"]) {
+      switch (json["message"]) {
       case status["reg-success"]: {
         navigate("/login")
       }
       default:{
-        setTitle(terms[`${json["regStatus"]}-t`])
-        setParag(terms[`${json["regStatus"]}-p`])
+        setTitle(terms[`${json["message"]}`]["title"]??"")
+        setParag(terms[`${json["message"]}`]["parag"]??"")
         break;
       }
     }

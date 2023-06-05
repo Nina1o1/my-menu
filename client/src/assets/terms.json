@@ -5,19 +5,35 @@
   "edit-ingredients": "Add ingredients. Separate each by COMMA",
   "edit-description": "Describe your meal!",
   
-  "reg-success-t": "Successully Registered!",
-  "reg-success-p": "Redirecting you to Login page...",
-  "reg-exist-t": "This Username Already Exists",
-  "reg-exist-p": "Please change your username",
-  "reg-nodata-t": "Please Complete Your Information",
-  "reg-nodata-p": "",
-  "reg-error-t": "Sorry, Some Error Occurs",
-  "reg-error-p": "Please try again",
-  
-  "login-success-t": "Successul Login!",
-  "login-success-p": "Redirecting you to Home page...",
-  "login-noexist-t": "Username or Password Incorrect",
-  "login-noexist-p": "",
-  "login-error-t": "Sorry, Some Error Occurs",
-  "login-error-p": "Please try again"
+  "reg-success": {
+    "title": "Successully Registered!",
+    "parag": "Redirecting you to Login page..."
+  },
+  "reg-exist": {
+    "title": "This Username Already Exists",
+    "parag": "Please change your username"
+  },
+  "reg-nodata": {
+    "title": "Please Complete Your Information"
+  },
+  "reg-error": {
+    "title": "Sorry, Some Error Occurs",
+    "parag": "Please try again"
+  },
+
+  "login-success": {
+    "title": "Successul Login!",
+    "parag": "Redirecting you to Home page..."
+  },
+  "login-noexist": {
+    "title": "Username or Password Incorrect",
+    "parag": "Please try again"
+  },
+  "Missing credentials": {
+    "title": "Please Complete Your Information"
+  },
+  "login-error": {
+    "title": "Sorry, Some Error Occurs",
+    "parag": "Please try again"
+  }
 }

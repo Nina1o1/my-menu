@@ -3,6 +3,21 @@
 With the food left in fridge, what should I cook to fit my appetite?
 My Menu is for you to recall all your loved recipes with food in your fridge! (or vice versa, how to cook my favorate dish)
 
+## Usage
+- set up and run client
+  ```sh
+  $> cd client
+  $> npm install
+  $> npm run dev
+  ```
+
+- set up and run server
+  ```sh
+  $> cd server
+  $> npm install
+  $> npm run dev
+  ```
+
 ## Data Model
 The application will store Users and Recipes
 - users can have multiple recipes (via reference)
@@ -64,6 +79,9 @@ backend
 1. [react folder structure](https://legacy.reactjs.org/docs/faq-structure.html) [(link to code)](./client/src/)
 2. [react routing](https://reactrouter.com/en/main/start/overview) [(link to code)](./client/src/appRoutes.jsx)
     - [tutorial](https://www.youtube.com/watch?v=Ul3y1LXxzdU&t=634s)
-3. [client socket.io](https://socket.io/docs/v4/client-initialization/) [(link to code)](./client/src/socket.js)
-    - [tutorial](https://www.youtube.com/watch?v=djMy4QsPWiI&t=700s)
-    - [cors](https://socket.io/docs/v4/handling-cors/) [(link to code)](./server/app.mjs)
+3. [passport local strategy](https://www.passportjs.org/concepts/authentication) [(link to code)](./server/src/routes/auth.mjs)
+    - [passport and AJAX](https://itecnote.com/tecnote/jquery-ajax-call-to-passportjs-login-on-express-nodejs-framework/)
+    - [tutorial (doc arrangement)](https://www.youtube.com/watch?v=74ZsbGHsPCo)
+    - [serialize & deserialize work flow](https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize)
+    - [deserializeUser is not called (credentials)](https://github.com/jaredhanson/passport/issues/446)
+    - [deserializeUser is not called (manual login)](https://stackoverflow.com/questions/57293115/passport-deserializeuser-not-being-called)

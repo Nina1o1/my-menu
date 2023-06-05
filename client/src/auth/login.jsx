@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react'
 import './access.css'
 import terms from '../assets/terms.json'
@@ -6,7 +6,8 @@ import status from "../assets/status.json"
 
 function Login() {
   document.body.classList.add("purple-page")
-  
+  const navigate = useNavigate();
+
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [title, setTitle] = useState("");
@@ -20,37 +21,40 @@ function Login() {
       username: usernameRef.current.value,
       password: passwordRef.current.value
     }
+    
+    const serverURL = "http://localhost:3000";
+    const postURL = `${serverURL}/login`;
 
     const postOptions = {
       method: "POST",
+      credentials: "include",
       headers: {
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
+      mode: 'cors',
       body: JSON.stringify(userInfo)
     }
-    const serverURL = "http://localhost:3000";
-    const postURL = `${serverURL}/login`;
     
     try {
       const res = await fetch(postURL, postOptions);
-      // const json = await res.json();
+      const json = await res.json();
+      console.log(json) // prints wanted res json message
 
       // display response messages
-      // switch (json["loginStatus"]) {
-      // case status["login-success"]: {
-      //   navigate("/login");
+      // switch (json["message"]) {
+      //   case status["login-success"]: {
+      //     navigate("/");
+      //   }
+      //   default:{
+      //     setTitle(terms[`${json["message"]}`]["title"]??"")
+      //     setParag(terms[`${json["message"]}`]["parag"]??"")
+      //     break;
+      //   }
       // }
-      // default:{
-      //   setTitle(terms[`${json["loginStatus"]}-t`])
-      //   setParag(terms[`${json["loginStatus"]}-p`])
-      //   break;
-      // }
-    // }
-
     } catch (error) {
       console.log(error);
     }
-
   }
 
   return(
