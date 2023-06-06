@@ -2,49 +2,20 @@ import express from 'express';
 import passport from 'passport';
 import LocalStrategy from "passport-local"
 import bcrypt from 'bcryptjs';
-import sanitize from 'mongo-sanitize';
-import { User, Recipe } from "../database/alldb.mjs";
-import status from "../assets/status.mjs"
+import { User } from "../database/alldb.mjs";
+import * as local from "../passportAuth/localStrtg.mjs";
 
 const router = express.Router();
 
-// passport strategy
-const strategy = new LocalStrategy(async function verify(username, password, done) {
-  username = sanitize(username);
-  password = sanitize(password);
-  try {
-    const foundUser = await User.findOne({username: username});
-    if(!foundUser) {
-      return done(null, false, {message: status["login-noexist"]});
-    }
-    const compare = bcrypt.compare(password, foundUser["hash"]);
-    if(!compare){
-      return done(null, false, {message: status["login-noexist"]});
-    }
-    return done(null, foundUser, {message: status["login-success"]});
+// config passport-local strategy
+const localStrtg = new LocalStrategy((username, password, done) => local.localVerify(username, password, done))
+passport.use("local", localStrtg);
+// passport-local serialize user
+passport.serializeUser((user, done) => local.localSerializeUser(user, done));
+// deserialize user
+passport.deserializeUser((user, done) => local.localDeserializeUser(user, done));
 
-  } catch (error) {
-    return done(error, false, {message: status["login-error"]});
-  }
-});
-passport.use("local", strategy);
-
-// serialize and deserialize user
-passport.serializeUser((user, done) => {
-  // user stored in req.session.passport.user
-  done(null, user.username);
-});
-
-passport.deserializeUser((user, done) => {
-  try {
-    // user attached in req.user
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});
-
-// login post
+// passport-local login post
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (error, user, info) => {
     if (error) {
@@ -65,8 +36,8 @@ router.post("/login", (req, res, next) => {
 // register post
 // TODO: strengthen password
 router.post("/register", async (req, res) => {
-  const username = sanitize(req.body.username);
-  const password = sanitize(req.body.password);
+  const username = req.body.username;
+  const password = req.body.password;
   
   // incomplete information
   if(username=== "" || password==="") {

@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import authRouter from "./routes/auth.mjs";
 import indexRouter from "./routes/index.mjs"
+import sanitize from 'mongo-sanitize';
 const app = express();
 
 const clientURL = "http://localhost:5173";
@@ -24,7 +25,7 @@ app.use(cors({
 // form format
 app.use(express.json());
 app.use(urlencoded({extended: true}));
-// session set up
+// session & passport set up
 const options = {
 	secret: 'keyboard cat',
   resave: false,
@@ -35,10 +36,17 @@ app.use(cookieParser());
 app.use(session(options));
 app.use(passport.initialize());
 app.use(passport.session());
-// serve routes
+// sanitize input
+// TODO: urlencoded
 app.use("/",(req,res,next)=>{
-  console.log("\n======middleware\n", req.session);
-  next()
+  // check cookie
+  console.log(req.session,"\n======");
+  if(req.body){
+    for(const prop in req.body){
+      req.body[prop] = sanitize(req.body[prop]);
+    }
+  }
+  next();
 });
 // handle routes
 app.use("/", authRouter);

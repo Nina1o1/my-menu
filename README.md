@@ -76,13 +76,21 @@ backend
 - authentication
 
 ## Reference
-1. [react folder structure](https://legacy.reactjs.org/docs/faq-structure.html) [(link to code)](./client/src/)
-2. [react routing](https://reactrouter.com/en/main/start/overview) [(link to code)](./client/src/appRoutes.jsx)
+1. [React folder structure](https://legacy.reactjs.org/docs/faq-structure.html) [-- link to code](./client/src/)
+2. [React routing](https://reactrouter.com/en/main/start/overview) [-- link to code](./client/src/appRoutes.jsx)
     - [tutorial](https://www.youtube.com/watch?v=Ul3y1LXxzdU&t=634s)
-3. [passport local strategy](https://www.passportjs.org/concepts/authentication) [(link to code)](./server/src/routes/auth.mjs)
+3. [web socket (abandoned method)](https://socket.io/docs)
+    - [React showcase](https://socket.io/how-to/use-with-react)
+    - [cors](https://socket.io/docs/v4/handling-cors/)
+4. [React AJAX calling](https://legacy.reactjs.org/docs/faq-ajax.html) [-- link to code](./client/src/auth/login.jsx)
+5. [sanitizes input](https://www.npmjs.com/package/mongo-sanitize) [-- link to code](./server/src/app.mjs)
+6. [add salt via bcryptjs](https://www.npmjs.com/package/bcryptjs) [-- link to code](./server/src/routes/auth.mjs)
+7. [passport-local strategy](https://www.passportjs.org/concepts/authentication) [-- link to code](./server/src/routes/auth.mjs)
+    - [OpenSource manual](https://github.com/jwalton/passport-api-docs#intro)
     - [passport & AJAX](https://itecnote.com/tecnote/jquery-ajax-call-to-passportjs-login-on-express-nodejs-framework/)
-    - [tutorial (doc arrangement)](https://www.youtube.com/watch?v=74ZsbGHsPCo)
     - [serialize & deserialize work flow](https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize)
     - [cors & setting cookies (credentials)](https://github.com/jaredhanson/passport/issues/446)
     - [deserializeUser is not called (manual login)](https://stackoverflow.com/questions/57293115/passport-deserializeuser-not-being-called)
-4. 
+8. []()
+    - [httpOnly cookie in react](https://stackoverflow.com/questions/68970499/how-to-get-http-only-cookie-in-react)
+    - [JWT Handbook](https://auth0.com/resources/ebooks/jwt-handbook)
