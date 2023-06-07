@@ -3,32 +3,31 @@ import passport from 'passport';
 import LocalStrategy from "passport-local"
 import bcrypt from 'bcryptjs';
 import { User } from "../database/alldb.mjs";
-import * as local from "../passportAuth/localStrtg.mjs";
+import status from "../assets/status.mjs";
+import * as local from "../passportAuth/local-strategy.mjs";
 
 const router = express.Router();
 
 // config passport-local strategy
-const localStrtg = new LocalStrategy((username, password, done) => local.localVerify(username, password, done))
+const localStrtg = new LocalStrategy(local.localVerify)
 passport.use("local", localStrtg);
-// passport-local serialize user
-passport.serializeUser((user, done) => local.localSerializeUser(user, done));
-// deserialize user
-passport.deserializeUser((user, done) => local.localDeserializeUser(user, done));
+passport.serializeUser(local.localSerializeUser);
+passport.deserializeUser(local.localDeserializeUser);
 
-// passport-local login post
+// login post
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (error, user, info) => {
     if (error) {
-      return res.status(502).send(info);
+      return res.status(502).send(info);    // handle server error
     }
     else if (!user) {
-      return res.status(401).send(info);
+      return res.status(401).send(info);    // handle user mistakes
     }
     req.login(user, (error) => {
       if (error) {
-        return res.status(502).send(info);
+        return res.status(502).send(info);  // handle user mistakes
       }
-      return res.send(info)
+      return res.send(info);                // log user in
     });
   })(req ,res, next)
 });
@@ -39,39 +38,35 @@ router.post("/register", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   
-  // incomplete information
   if(username=== "" || password==="") {
-    return res.status(401).send({message: status["reg-nodata"]})
+    return res.status(401).send({message: status["reg-nodata"]});   // user mistake: incomplete information
   }
   try {
     const foundUser = await User.findOne({username: username});
-    // username exists
     if(foundUser){
-      return res.status(401).send({message: status["reg-exist"]});
+      return res.status(401).send({message: status["reg-exist"]});  //user mistake: username exists
     }
-    // store new user in database
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
     const newUser = new User({
       username: username,
       hash: hash
     });
-    await newUser.save();
-    res.send({message: status["reg-success"]});
+    await newUser.save();                                          // store new user in database
+    return res.send({message: status["reg-success"]});             // register user
 
   } catch (error) {
-    // if error, display error message
-    res.status(502).send({message: status["reg-error"]});
+    return res.status(502).send({message: status["reg-error"]});   // handle server error
   }
 });
 
-// log out post
-router.post("/logout", (req, res, next) => {
+// logout post
+router.post("/logout", (req, res) => {
   req.logout((error) => {
     if(error){
       return res.status(502).send({message: status["logout-error"]})
     }
-    res.send({message: status["logout-success"]})
+    return res.send({message: status["logout-success"]})
   });
 });
 

@@ -28,10 +28,6 @@ function Navigation() {
     const postOptions = {
       method: "POST",
       credentials: "include",
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json',
-      // },
       mode: 'cors'
     }
     const serverURL = "http://localhost:3000";
@@ -39,8 +35,6 @@ function Navigation() {
     try {
       const res = await fetch(postURL, postOptions); 
       const json = await res.json();
-
-      console.log(json)
       if(json["message"] === status["logout-success"]) {
         navigate("/login");
       }

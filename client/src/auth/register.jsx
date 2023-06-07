@@ -13,11 +13,13 @@ function Register() {
   const [title, setTitle] = useState("");
   const [parag, setParag] = useState("")  
   
-  // submit form to server
   async function handleClick (evt) {
     evt.preventDefault();
     
-    // post form
+    // post request
+    const serverURL = "http://localhost:3000";
+    const postURL = `${serverURL}/register`;
+
     const userInfo = {
       username: usernameRef.current.value,
       password: passwordRef.current.value
@@ -29,8 +31,6 @@ function Register() {
       },
       body: JSON.stringify(userInfo)
     }
-    const serverURL = "http://localhost:3000";
-    const postURL = `${serverURL}/register`;
 
     try {
       const res = await fetch(postURL, postOptions);
@@ -49,6 +49,8 @@ function Register() {
     }
 
     } catch (error) {
+      setTitle(terms["reg-error"]["title"]??"")
+      setParag(terms["reg-error"]["parag"]??"")
       console.log(error)
     }
   }

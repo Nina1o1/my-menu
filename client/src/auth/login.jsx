@@ -17,14 +17,14 @@ function Login() {
     evt.preventDefault();
 
     // post request
+    const serverURL = "http://localhost:3000";
+    const postURL = `${serverURL}/login`;
+
     const userInfo = {
       username: usernameRef.current.value,
       password: passwordRef.current.value
     }
     
-    const serverURL = "http://localhost:3000";
-    const postURL = `${serverURL}/login`;
-
     const postOptions = {
       method: "POST",
       credentials: "include",
@@ -52,6 +52,8 @@ function Login() {
         }
       }
     } catch (error) {
+      setTitle(terms["login-error"]["title"]??"")
+      setParag(terms["login-error"]["parag"]??"")
       console.log(error);
     }
   }

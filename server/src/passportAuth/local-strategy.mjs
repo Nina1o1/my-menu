@@ -22,27 +22,16 @@ async function localVerify(username, password, done){
 
 // serialize user
 function localSerializeUser (user, done) {
-  done(null, user.username); // user stored in req.session.passport.user
+  done(null, user.username); // stored in req.session.passport.user
 }
-// passport.serializeUser((user, done) => {
-//   done(null, user.username); // user stored in req.session.passport.user
-// });
 
+// deserialize user
 function localDeserializeUser (user, done) {
   try {
-    done(null, user); // user attached in req.user
+    done(null, user);       // stored in req.user
   } catch (error) {
     done(error);
   }
 }
-// deserialize user
-// passport.deserializeUser((user, done) => {
-//   console.log(user);
-//   try {
-//     done(null, user); // user attached in req.user
-//   } catch (error) {
-//     done(error);
-//   }
-// });
 
 export {localVerify, localSerializeUser, localDeserializeUser};
