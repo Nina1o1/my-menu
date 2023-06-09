@@ -39,19 +39,19 @@ function Register() {
       // display response messages
       switch (json["message"]) {
       case status["reg-success"]: {
-        navigate("/login")
+        navigate("/login");
       }
       default:{
-        setTitle(terms[`${json["message"]}`]["title"]??"")
-        setParag(terms[`${json["message"]}`]["parag"]??"")
+        setTitle(terms[`${json["message"]}`]["title"]??"");
+        setParag(terms[`${json["message"]}`]["parag"]??"");
         break;
       }
     }
 
     } catch (error) {
-      setTitle(terms["reg-error"]["title"]??"")
-      setParag(terms["reg-error"]["parag"]??"")
-      console.log(error)
+      console.log(error);
+      setTitle(terms["reg-error"]["title"]??"");
+      setParag(terms["reg-error"]["parag"]??"");
     }
   }
 

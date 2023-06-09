@@ -16,6 +16,7 @@ async function localVerify(username, password, done){
     return done(null, foundUser, {message: status["login-success"]});
 
   } catch (error) {
+    console.log(error);
     return done(error, false, {message: status["login-error"]});
   }
 }
@@ -30,6 +31,7 @@ function localDeserializeUser (user, done) {
   try {
     done(null, user);       // stored in req.user
   } catch (error) {
+    console.log(error);
     done(error);
   }
 }

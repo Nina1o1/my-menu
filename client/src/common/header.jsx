@@ -10,7 +10,6 @@ export default function Header() {
       <div className="header">
         <h1 className="big-heading">
           My Menu
-          {/* <span class="kaomoji">{kaomoji}</span> */}
         </h1>
         <Navigation />
       </div>

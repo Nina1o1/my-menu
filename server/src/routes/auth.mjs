@@ -4,7 +4,7 @@ import LocalStrategy from "passport-local"
 import bcrypt from 'bcryptjs';
 import { User } from "../database/alldb.mjs";
 import status from "../assets/status.mjs";
-import * as local from "../passportAuth/local-strategy.mjs";
+import * as local from "../utils/local-passport.mjs";
 
 const router = express.Router();
 
@@ -56,6 +56,7 @@ router.post("/register", async (req, res) => {
     return res.send({message: status["reg-success"]});             // register user
 
   } catch (error) {
+    console.log(error);
     return res.status(502).send({message: status["reg-error"]});   // handle server error
   }
 });

@@ -46,15 +46,15 @@ function Login() {
           navigate("/");
         }
         default:{
-          setTitle(terms[`${json["message"]}`]["title"]??"")
-          setParag(terms[`${json["message"]}`]["parag"]??"")
+          setTitle(terms[`${json["message"]}`]["title"]??"");
+          setParag(terms[`${json["message"]}`]["parag"]??"");
           break;
         }
       }
     } catch (error) {
-      setTitle(terms["login-error"]["title"]??"")
-      setParag(terms["login-error"]["parag"]??"")
       console.log(error);
+      setTitle(terms["login-error"]["title"]??"");
+      setParag(terms["login-error"]["parag"]??"");
     }
   }
 
