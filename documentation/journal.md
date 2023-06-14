@@ -19,7 +19,7 @@ I had a hard time debugging when the client side reported a `401 Unauthorized` e
 
 Another issue with `Passport.js` is that, when my project runs, `deserializeUser()` never runs (tested by `console.log`), but no error is printed out. When I checked online for similar issues, the solution is to set cors headers, so that they allow cross-origin cookie settings. I quickly applied the suggested headers, but the problem is not solved. I spent the next several hours rereading the issue to make sure that I did not miss anything, but there is nothing I missed about the cookies. At some point, I checked my other session headers and realized that I set `{secure: true}`, which is supposed to work only with SSL, while my project is on HTTP. I solved the issue that troubled me for days, just for my negligence, for practicing some daily habits without careful consideration. I also feel the need to learn all express-session headers. Next time when debugging, I should check all possible sections of code that might produce errors. And I should also read through a concept well, not just the more practical part of it.
 
-Then I realized, that on `{httpsOnly: true}` cookies, React js cannot read its contents. I only worked with authentication on single origin app before, I did not realize it until it happened to me. I might need to change my way for user sessions, and this will be my task for next week.
+Then I realized, that via the default `{HttpOnly: true}` cookies, React js cannot read its contents. I only worked with authentication on single origin app before, I did not realize it until it happened to me. I might need to change my way for user sessions, and this will be my task for next week.
 
 ## Week 2
 Date:

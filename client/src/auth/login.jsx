@@ -41,6 +41,7 @@ function Login() {
       const json = await res.json();
 
       // display response messages
+      console.log(json["accessToken"]);
       switch (json["message"]) {
         case status["login-success"]: {
           navigate("/");

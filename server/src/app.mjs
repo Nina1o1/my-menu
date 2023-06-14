@@ -1,55 +1,71 @@
+// modules
 import url from 'url';
 import path from 'path';
 import express, { urlencoded } from 'express';
-import passport from 'passport';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-import session from "express-session";
-import authRouter from "./routes/auth.mjs";
-import indexRouter from "./routes/index.mjs"
-import sanitize from 'mongo-sanitize';
-const app = express();
+import "dotenv/config"
+// routes
+import authJWTRouter from "./routes/authJWT.mjs";
+import registerRouter from "./routes/register.mjs";
+import indexRouter from "./routes/index.mjs";
+// middlewares
+import sanitizeInput from "./middlewares/sanitizeInput.mjs";
+import verifyJWT from './middlewares/verifyJWT.mjs';
+{ /* passport-local auth is not used in this project */
+  /* 
+  import passport from 'passport';
+  import session from "express-session"; 
+  */
+}
 
-const clientURL = "http://localhost:5173";
+const app = express();
 
 // serve static files
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'public')));
+
 // cors
 app.use(cors({
   credentials: true,
-  origin: clientURL,
+  origin: process.env.CLIENT_URL,
   allowedHeaders: ['Content-Type'],
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
 }));
+
 // form format
 app.use(express.json());
-app.use(urlencoded({extended: true}));
-// session & passport set up
-const options = {
-	secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false },
-}
+app.use(urlencoded({extended: false}));
+
 app.use(cookieParser());
-app.use(session(options));
-app.use(passport.initialize());
-app.use(passport.session());
-// sanitize input
-// TODO: urlencoded
-app.use("/",(req,res,next)=>{
-  // check cookie
-  console.log(req.session,"\n======");
-  if(req.body){
-    for(const prop in req.body){
-      req.body[prop] = sanitize(req.body[prop]);
-    }
+
+{ /* passport-local auth is not used in this project */
+  // session & passport set up
+  /*
+  const options = {
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
   }
-  next();
-});
+  app.use(session(options));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  */
+}
+
+// sanitize input
+app.use("/", sanitizeInput);
+
+app.use("/", verifyJWT);
+
 // handle routes
-app.use("/", authRouter);
+app.use("/", registerRouter);
+app.use("/", authJWTRouter);
+
+// refreshToken
+
+// verify JWT
 app.use("/", indexRouter);
 app.listen(3000, () => {
   console.log("connecting to server...")

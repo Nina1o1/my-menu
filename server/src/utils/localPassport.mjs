@@ -1,4 +1,6 @@
-import { User } from "../database/alldb.mjs";
+/* passport-local auth is not used in this project */
+
+import { User } from "../databases/alldb.mjs";
 import bcrypt from 'bcryptjs';
 import status from "../assets/status.mjs";
 
