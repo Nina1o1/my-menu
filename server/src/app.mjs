@@ -26,12 +26,13 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // cors
-app.use(cors({
+const corsOptions = {
   credentials: true,
   origin: process.env.CLIENT_URL,
   allowedHeaders: ['Content-Type'],
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
-}));
+}
+app.use(cors(corsOptions));
 
 // form format
 app.use(express.json());
@@ -42,13 +43,13 @@ app.use(cookieParser());
 { /* passport-local auth is not used in this project */
   // session & passport set up
   /*
-  const options = {
+  const sessionOptions = {
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },
   }
-  app.use(session(options));
+  app.use(session(sessionOptions));
   app.use(passport.initialize());
   app.use(passport.session());
   */
@@ -57,13 +58,12 @@ app.use(cookieParser());
 // sanitize input
 app.use("/", sanitizeInput);
 
-app.use("/", verifyJWT);
-
 // handle routes
 app.use("/", registerRouter);
 app.use("/", authJWTRouter);
 
 // refreshToken
+app.use("/", verifyJWT);
 
 // verify JWT
 app.use("/", indexRouter);

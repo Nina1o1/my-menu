@@ -1,5 +1,3 @@
-// JWT authentication method
-
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import { User } from "../databases/alldb.mjs";
@@ -9,7 +7,7 @@ import "dotenv/config";
 
 const router = express.Router();
 
-// login post, via passport-local
+// ========== login post, via passport-local ==========
 router.post("/login", async (req, res) => {
   if(!req.body.username || !req.body.password) {
     return res.status(401).send({message: status["login-nodata"]});   // incomplete information
@@ -20,20 +18,16 @@ router.post("/login", async (req, res) => {
   
   try {
     const foundUser = await User.findOne({username: username});
-    if(!foundUser) {
-      return res.status(401).send({message: status["login-noexist"]});  // handle user mistakes
-    }
+    if(!foundUser) return res.status(401).send({message: status["login-noexist"]});  // handle user mistakes
     
     const compare = bcrypt.compare(password, foundUser["hash"]);
-    if(!compare){
-      return res.status(401).send({message: status["login-noexist"]});  // handle user mistakes
-    }
+    if(!compare) return res.status(401).send({message: status["login-noexist"]});    // handle user mistakes
 
     // create JWTs
     const accessToken = jwt.sign(
       {"username": username},
       process.env.ACCESS_TOKEN_SECRET,
-      {expiresIn: "15m"}
+      {expiresIn: "3000"}
     )
     const refreshToken = jwt.sign(
       {"username": username},
@@ -43,13 +37,13 @@ router.post("/login", async (req, res) => {
     // save refreshToken in current user
     foundUser["refreshToken"] = refreshToken;
     // save refreshToken in httpOnly cookie
-    const options = {
+    const cookieOptions = {
       httpOnly: true,
       origin: process.env.CLIENT_URL,
       sameSite: false,
       maxAge: 24 * 60 * 60 * 1000
     }
-    res.cookie("jwt", refreshToken, options)
+    res.cookie("jwt", refreshToken, cookieOptions)
     // send accessToken to client
     return res.send({accessToken, message: status["login-success"]});    // log user in
   
@@ -59,12 +53,39 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// logout post, via passport-local
-router.post("/logout", (req, res) => {
+// ========== logout post, via passport-local ==========
+router.post("/logout", async (req, res) => {
+  const cookies = req.cookies;
 
-  // delete refreshToken in 
-  
+  // not logged in
+  if (!cookies?.jwt) return res.sendStatus(204);
+
+  const refreshToken = cookies.jwt;
+
+  const foundUser = await User.findOne({refreshToken: refreshToken});
+  const cookieOptions = {
+    httpOnly: true,
+    sameSite: false,
+  }
+
+  // no such user
+  if(!foundUser) {
+    res.clearCookie("jwt", cookieOptions);
+    return res.sendStatus(204);
+  }
+
+  // delete refreshToken in database
+  try {
+    foundUser["refreshToken"] = "";
+    await foundUser.save();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(502);
+  }
+
   // clear cookie
+  res.clearCookie('jwt', cookieOptions);
+  res.sendStatus(204);
 });
 
 export default router;
