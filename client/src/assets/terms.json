@@ -21,6 +21,9 @@
     "parag": "Please try again"
   },
 
+  "login-nodata": {
+    "title": "Please Complete Your Information"
+  },
   "login-success": {
     "title": "Successul Login!",
     "parag": "Redirecting you to Home page..."

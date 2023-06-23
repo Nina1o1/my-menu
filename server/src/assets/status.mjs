@@ -7,6 +7,7 @@ const status = {
   "register-error": "register-error",
 
   "login-success": "login-success",
+  "login-nodata": "login-nodata",
   "login-noexist": "login-noexist",
   // TODO: Missing credentials error
   "Missing credentials": "Missing credentials",
