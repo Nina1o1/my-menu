@@ -10,7 +10,6 @@ const router = express.Router();
 // ========== login post, via passport-local ==========
 router.post("/login", async (req, res) => {
   if(!req.body.username || !req.body.password) {
-    console.log(req.body);
     return res.status(401).send({message: status["login-nodata"]});   // incomplete information
   }
   
@@ -20,7 +19,7 @@ router.post("/login", async (req, res) => {
   try {
     const foundUser = await User.findOne({username: username});
     if(!foundUser) return res.status(401).send({message: status["login-noexist"]});  // handle user mistakes
-    
+
     const compare = await bcrypt.compare(password, foundUser["hash"]);
     if(!compare) return res.status(401).send({message: status["login-noexist"]});    // handle user mistakes
 

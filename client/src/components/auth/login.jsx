@@ -1,8 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { useRef, useState } from 'react'
-import './access.css'
-import terms from "../../assets/terms.json"
-import status from "../../assets/status.json"
+import { Link, useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { axiosProvider } from '../../api/axios';
+import './access.css';
+import terms from "../../assets/terms.json";
+import status from "../../assets/status.json";
 
 function Login() {
   document.body.classList.add("purple-page");
@@ -15,8 +16,59 @@ function Login() {
   
   async function handleClick (evt) {
     evt.preventDefault();
-
+    const action = "login";
+    
     // post request
+    try {
+      const userInfo = {
+        username: usernameRef.current.value,
+        password: passwordRef.current.value
+      }
+      const postOptions = {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const res = await axiosProvider.post(`/${action}`, JSON.stringify(userInfo), postOptions);
+
+      console.log(JSON.stringify(res?.data));
+    } catch (error) {
+      // display error messages
+      const message = error?.response?.data["message"];
+      setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
+      setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);
+  }
+    /*
+    try {
+      const serverURL = "http://localhost:3000";
+      const action = "login";
+  
+      const userInfo = {
+        username: usernameRef.current.value,
+        password: passwordRef.current.value
+      }
+      const postOptions = {
+        baseURL: `/${action}`,
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }
+
+      const res = await axios.post(
+        serverURL,
+        JSON.stringify(userInfo),
+        postOptions
+      )
+
+      console.log(res)
+    } catch(error) {
+      console.log(error)
+    }
+    */
+   /*
     const serverURL = "http://localhost:3000";
     const action = "login";
     const postURL = new URL(action, serverURL).toString();
@@ -42,8 +94,7 @@ function Login() {
       const res = await fetch(postURL, postOptions);
       const json = await res.json();
 
-      // check on response messages
-      // console.log(json["accessToken"]);
+      // console.log(json["accessToken"]); // check on response messages
 
       switch (json["message"]) {
         case status[`${action}-success`]: {
@@ -60,6 +111,7 @@ function Login() {
       setTitle(terms[`${action}-error`]?.["title"]??"");
       setParag(terms[`${action}-error`]?.["parag"]??"");
     }
+    */
   }
 
   return(

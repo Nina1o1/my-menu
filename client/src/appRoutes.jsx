@@ -8,11 +8,15 @@ import Error from './components/common/error.jsx'
 export default function AppRoutes() {
   return(
     <Routes>
+
+      {/* public routes */}
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
+      <Route path="/*" element={<Error />}/>
+
+      {/* protected routes */}
       <Route path="/" element={<Dictionary />}/>
       <Route path="/edit" element={<Edit />}/>
-      <Route path="/*" element={<Error />}/>
     </Routes>
   )
 }
