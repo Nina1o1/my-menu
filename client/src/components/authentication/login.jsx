@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { axiosProvider } from '../../api/axios';
 import './access.css';
@@ -7,10 +7,11 @@ import useAuth from "../../hooks/useAuth";
 
 function Login() {
   document.body.classList.add("purple-page");
-  const navigate = useNavigate();
 
   const { setAuth } = useAuth();
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [title, setTitle] = useState("");
@@ -41,7 +42,10 @@ function Login() {
       const accessToken = res.data?.accessToken;
       setAuth({username, accessToken});
 
-      navigate("/");
+      // redirect
+      const from = location?.state?.from?.pathname || "/";
+      navigate(from);
+
     } catch (error) {
       // display error messages
       console.log(error);
