@@ -33,85 +33,91 @@ function Login() {
 
       const res = await axiosProvider.post(`/${action}`, JSON.stringify(userInfo), postOptions);
 
-      console.log(JSON.stringify(res?.data));
+      // console.log(JSON.stringify(res?.data)); // print to test data
+
+      navigate("/")
     } catch (error) {
       // display error messages
       const message = error?.response?.data["message"];
       setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
       setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);
   }
+
+  // fetch
+      /*
+      try {
+        const serverURL = "http://localhost:3000";
+        const action = "login";
+    
+        const userInfo = {
+          username: usernameRef.current.value,
+          password: passwordRef.current.value
+        }
+        const postOptions = {
+          baseURL: `/${action}`,
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        }
+
+        const res = await axios.post(
+          serverURL,
+          JSON.stringify(userInfo),
+          postOptions
+        )
+
+        console.log(res)
+      } catch(error) {
+        console.log(error)
+      }
+      */
     /*
-    try {
       const serverURL = "http://localhost:3000";
       const action = "login";
-  
+      const postURL = new URL(action, serverURL).toString();
+
       const userInfo = {
         username: usernameRef.current.value,
         password: passwordRef.current.value
       }
+    
       const postOptions = {
-        baseURL: `/${action}`,
-        withCredentials: true,
+        method: "POST",
+        credentials: "include",
         headers: {
-          'Content-Type': 'application/json'
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        body: JSON.stringify(userInfo)
       }
 
-      const res = await axios.post(
-        serverURL,
-        JSON.stringify(userInfo),
-        postOptions
-      )
+      try {
+        
+        const res = await fetch(postURL, postOptions);
+        const json = await res.json();
 
-      console.log(res)
-    } catch(error) {
-      console.log(error)
-    }
-    */
-   /*
-    const serverURL = "http://localhost:3000";
-    const action = "login";
-    const postURL = new URL(action, serverURL).toString();
+        // console.log(json["accessToken"]); // check on response messages
 
-    const userInfo = {
-      username: usernameRef.current.value,
-      password: passwordRef.current.value
-    }
-  
-    const postOptions = {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
-      body: JSON.stringify(userInfo)
-    }
-
-    try {
-      
-      const res = await fetch(postURL, postOptions);
-      const json = await res.json();
-
-      // console.log(json["accessToken"]); // check on response messages
-
-      switch (json["message"]) {
-        case status[`${action}-success`]: {
-          navigate("/");
+        switch (json["message"]) {
+          case status[`${action}-success`]: {
+            navigate("/");
+          }
+          default:{
+            setTitle(terms[`${json["message"]}`]?.["title"]??"");
+            setParag(terms[`${json["message"]}`]?.["parag"]??"");
+            break;
+          }
         }
-        default:{
-          setTitle(terms[`${json["message"]}`]?.["title"]??"");
-          setParag(terms[`${json["message"]}`]?.["parag"]??"");
-          break;
-        }
+      } catch (error) {
+        console.log(error);
+        setTitle(terms[`${action}-error`]?.["title"]??"");
+        setParag(terms[`${action}-error`]?.["parag"]??"");
       }
-    } catch (error) {
-      console.log(error);
-      setTitle(terms[`${action}-error`]?.["title"]??"");
-      setParag(terms[`${action}-error`]?.["parag"]??"");
-    }
-    */
+      */
+
+
   }
 
   return(
