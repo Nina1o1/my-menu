@@ -1,5 +1,5 @@
 import './dictionary.css'
-import terms from '../assets/terms.json'
+import terms from '../../assets/terms.json'
 
 export default function Dictionary() {
   document.body.classList.remove("purple-page")

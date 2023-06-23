@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import './App.css'
-import Header from './common/header'
+import Header from './components/common/header'
 import AppRoutes from './appRoutes'
 
 export default function App() {

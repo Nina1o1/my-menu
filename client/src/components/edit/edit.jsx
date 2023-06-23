@@ -1,7 +1,7 @@
 // import socket from '../socket'
 import { useRef } from 'react'
 import './edit.css'
-import terms from '../assets/terms.json'
+import terms from '../../assets/terms.json'
 
 export default function Edit() {
   document.body.classList.remove("purple-page")

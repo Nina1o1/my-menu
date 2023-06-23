@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useRef } from 'react'
 import './access.css'
-import terms from '../assets/terms.json'
-import status from "../assets/status.json"
+import terms from '../../assets/terms.json'
+import status from "../../assets/status.json"
 
 function Register() {
   document.body.classList.add("purple-page")
@@ -11,14 +11,15 @@ function Register() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [title, setTitle] = useState("");
-  const [parag, setParag] = useState("")  
+  const [parag, setParag] = useState("");
   
   async function handleClick (evt) {
     evt.preventDefault();
     
     // post request
     const serverURL = "http://localhost:3000";
-    const postURL = `${serverURL}/register`;
+    const action = "register";
+    const postURL = new URL(action, serverURL).toString();
 
     const userInfo = {
       username: usernameRef.current.value,
@@ -27,6 +28,7 @@ function Register() {
     const postOptions = {
       method: "POST",
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(userInfo)
@@ -38,20 +40,20 @@ function Register() {
 
       // display response messages
       switch (json["message"]) {
-      case status["reg-success"]: {
+      case status[`${action}-success`]: {
         navigate("/login");
       }
       default:{
-        setTitle(terms[`${json["message"]}`]["title"]??"");
-        setParag(terms[`${json["message"]}`]["parag"]??"");
+        setTitle(terms[`${json["message"]}`]?.["title"]??"");
+        setParag(terms[`${json["message"]}`]?.["parag"]??"");
         break;
       }
     }
 
     } catch (error) {
       console.log(error);
-      setTitle(terms["reg-error"]["title"]??"");
-      setParag(terms["reg-error"]["parag"]??"");
+      setTitle(terms[`${action}-error`]?.["title"]??"");
+      setParag(terms[`${action}-error`]?.["parag"]??"");
     }
   }
 

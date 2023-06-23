@@ -1,10 +1,10 @@
 // I want to manage my own status code for front-end display
 // TODO: Improve custom error message
 const status = {
-  "reg-success": "reg-success",
-  "reg-exist": "reg-exist",
-  "reg-nodata": "reg-nodata",
-  "reg-error": "reg-error",
+  "register-success": "register-success",
+  "register-exist": "register-exist",
+  "register-nodata": "register-nodata",
+  "register-error": "register-error",
 
   "login-success": "login-success",
   "login-noexist": "login-noexist",

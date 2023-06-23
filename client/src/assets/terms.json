@@ -5,18 +5,18 @@
   "edit-ingredients": "Add ingredients. Separate each by COMMA",
   "edit-description": "Describe your meal!",
   
-  "reg-success": {
+  "register-success": {
     "title": "Successully Registered!",
     "parag": "Redirecting you to Login page..."
   },
-  "reg-exist": {
+  "register-exist": {
     "title": "This Username Already Exists",
     "parag": "Please change your username"
   },
-  "reg-nodata": {
+  "register-nodata": {
     "title": "Please Complete Your Information"
   },
-  "reg-error": {
+  "register-error": {
     "title": "Sorry, Some Error Occurs",
     "parag": "Please try again"
   },
