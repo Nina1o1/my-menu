@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import './access.css';
 import terms from '../../assets/terms.json';
-import status from "../../assets/status.json";
 import { axiosProvider } from '../../api/axios';
 
 function Register() {
@@ -13,7 +12,8 @@ function Register() {
   const passwordRef = useRef(null);
   const [title, setTitle] = useState("");
   const [parag, setParag] = useState("");
-  
+
+
   async function handleClick (evt) {
     evt.preventDefault();
     const action = "register";
@@ -38,46 +38,6 @@ function Register() {
       setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
       setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);
     }
-    /*
-    const serverURL = "http://localhost:3000";
-    const action = "register";
-    const postURL = new URL(action, serverURL).toString();
-
-    const userInfo = {
-      username: usernameRef.current.value,
-      password: passwordRef.current.value
-    }
-    const postOptions = {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userInfo)
-    }
-
-    try {
-      const res = await fetch(postURL, postOptions);
-      const json = await res.json();
-
-      // display response messages
-      switch (json["message"]) {
-      case status[`${action}-success`]: {
-        navigate("/login");
-      }
-      default:{
-        setTitle(terms[`${json["message"]}`]?.["title"]??"");
-        setParag(terms[`${json["message"]}`]?.["parag"]??"");
-        break;
-      }
-    }
-
-    } catch (error) {
-      console.log(error);
-      setTitle(terms[`${action}-error`]?.["title"]??"");
-      setParag(terms[`${action}-error`]?.["parag"]??"");
-    }
-    */
   }
 
   return(

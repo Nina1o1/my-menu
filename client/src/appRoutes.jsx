@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import Dictionary from './components/dictionary/dictionary'
 import Edit from './components/edit/edit'
-import Login from './components/auth/login'
-import Register from './components/auth/register'
+import Login from './components/authentication/login'
+import Register from './components/authentication/register'
 import Error from './components/common/error.jsx'
 
 export default function AppRoutes() {

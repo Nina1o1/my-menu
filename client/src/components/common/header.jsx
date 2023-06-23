@@ -1,6 +1,6 @@
 import { NavLink} from 'react-router-dom';
 import './header.css';
-import Logout from "../auth/logout";
+import Logout from "../authentication/logout";
 
 
 function Header() {

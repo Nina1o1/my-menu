@@ -1,24 +1,30 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
+import { AuthContext } from '../../context/authProvider';
 import { axiosProvider } from '../../api/axios';
 import './access.css';
 import terms from "../../assets/terms.json";
-import status from "../../assets/status.json";
+// import useAuth from "../../hooks/useAuth";
 
 function Login() {
   document.body.classList.add("purple-page");
   const navigate = useNavigate();
 
+  // test useContext
+  const { auth } = useContext(AuthContext);
+
+  console.log(auth)
+  
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [title, setTitle] = useState("");
   const [parag, setParag] = useState("");
-  
+
+  // post request
   async function handleClick (evt) {
     evt.preventDefault();
     const action = "login";
     
-    // post request
     try {
       const userInfo = {
         username: usernameRef.current.value,
@@ -35,89 +41,16 @@ function Login() {
 
       // console.log(JSON.stringify(res?.data)); // print to test data
 
-      navigate("/")
+      // set user state
+      const accessToken = res.data?.accessToken;
+
+      navigate("/");
     } catch (error) {
       // display error messages
       const message = error?.response?.data["message"];
       setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
       setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);
-  }
-
-  // fetch
-      /*
-      try {
-        const serverURL = "http://localhost:3000";
-        const action = "login";
-    
-        const userInfo = {
-          username: usernameRef.current.value,
-          password: passwordRef.current.value
-        }
-        const postOptions = {
-          baseURL: `/${action}`,
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        }
-
-        const res = await axios.post(
-          serverURL,
-          JSON.stringify(userInfo),
-          postOptions
-        )
-
-        console.log(res)
-      } catch(error) {
-        console.log(error)
-      }
-      */
-    /*
-      const serverURL = "http://localhost:3000";
-      const action = "login";
-      const postURL = new URL(action, serverURL).toString();
-
-      const userInfo = {
-        username: usernameRef.current.value,
-        password: passwordRef.current.value
-      }
-    
-      const postOptions = {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-        body: JSON.stringify(userInfo)
-      }
-
-      try {
-        
-        const res = await fetch(postURL, postOptions);
-        const json = await res.json();
-
-        // console.log(json["accessToken"]); // check on response messages
-
-        switch (json["message"]) {
-          case status[`${action}-success`]: {
-            navigate("/");
-          }
-          default:{
-            setTitle(terms[`${json["message"]}`]?.["title"]??"");
-            setParag(terms[`${json["message"]}`]?.["parag"]??"");
-            break;
-          }
-        }
-      } catch (error) {
-        console.log(error);
-        setTitle(terms[`${action}-error`]?.["title"]??"");
-        setParag(terms[`${action}-error`]?.["parag"]??"");
-      }
-      */
-
-
+    }
   }
 
   return(
