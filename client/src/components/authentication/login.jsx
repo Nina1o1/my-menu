@@ -1,19 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useRef, useState, useContext } from 'react';
-import { AuthContext } from '../../context/authProvider';
+import { useRef, useState } from 'react';
 import { axiosProvider } from '../../api/axios';
 import './access.css';
 import terms from "../../assets/terms.json";
-// import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 function Login() {
   document.body.classList.add("purple-page");
   const navigate = useNavigate();
 
-  // test useContext
-  const { auth } = useContext(AuthContext);
-
-  console.log(auth)
+  const { setAuth } = useAuth();
   
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
@@ -24,12 +20,10 @@ function Login() {
   async function handleClick (evt) {
     evt.preventDefault();
     const action = "login";
-    
+      
     try {
-      const userInfo = {
-        username: usernameRef.current.value,
-        password: passwordRef.current.value
-      }
+      const username = usernameRef.current.value;
+      const password = passwordRef.current.value
       const postOptions = {
         withCredentials: true,
         headers: {
@@ -37,16 +31,20 @@ function Login() {
         }
       }
 
-      const res = await axiosProvider.post(`/${action}`, JSON.stringify(userInfo), postOptions);
-
-      // console.log(JSON.stringify(res?.data)); // print to test data
+      const res = await axiosProvider.post(
+        `/${action}`, 
+        JSON.stringify({username, password}), 
+        postOptions
+      );
 
       // set user state
       const accessToken = res.data?.accessToken;
+      setAuth({username, accessToken});
 
       navigate("/");
     } catch (error) {
       // display error messages
+      console.log(error);
       const message = error?.response?.data["message"];
       setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
       setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);
