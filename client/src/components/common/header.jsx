@@ -2,7 +2,7 @@ import { NavLink} from 'react-router-dom';
 import './header.css';
 import Logout from "../authentication/logout";
 
-
+import useAuth from '../../hooks/useAuth';
 function Header() {
   return(
     <>
@@ -23,7 +23,7 @@ function Navigation() {
       <NavLink to="/" className="nav-item">Dictionary</NavLink>
       <NavLink to="/edit" className="nav-item">Add</NavLink>
       <span className="nav-userName">
-        UserName
+        userName
         <Logout/>
       </span>
     </nav>

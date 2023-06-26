@@ -5,28 +5,33 @@ import { User } from "../databases/alldb.mjs";
 
 const router = express.Router();
 
-router.post("/refresh", async (req, res) => {
+router.get("/refresh", async (req, res) => {
   // get refresh cookie
-  const jwt = req?.cookies?.jwt;
-  if (!jwt) return res.sendStatus(401);
+  const refreshJWT = req.cookies?.jwt;
+  if (!refreshJWT) return res.sendStatus(401);
 
   // find user
-  const foundUser = await User.findOne({refreshToken: jwt});
-  if (!foundUser) {
-    res.clearCookie("jwt", {httpOnly: true, sameSite: false});
-    return res.sendStatus(401);
+  try{
+    const foundUser = await User.findOne({refreshToken: refreshJWT});
+    if (!foundUser) {
+      res.clearCookie("jwt", { httpOnly: true, sameSite: false });
+      return res.sendStatus(401);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(502);
   }
 
   // verify refresh cookie & create new access token
   jwt.verify(
-    jwt,
+    refreshJWT,
     process.env.REFRESH_TOKEN_SECRET,
     (err, decoded) => {
       if (err || foundUser.username !== decoded.username) return res.sendStatus(402);
       const accessToken = jwt.sign(
         {username: decoded.username},
         process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn: "3s"}
+        {expiresIn: "8s"}
       )
       res.send({accessToken});
     }
