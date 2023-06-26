@@ -7,7 +7,7 @@ const AuthContext = createContext({});
 // provide authcontext to all react components, see "../../index.jsx"
 const AuthProvider = ({children}) => {
   const [auth, setAuth] = useState({});
-  return(
+  return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       { children }
     </AuthContext.Provider>

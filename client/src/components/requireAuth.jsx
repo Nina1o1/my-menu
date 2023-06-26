@@ -7,7 +7,6 @@ function RequireAuth () {
   return (
     auth?.username
       ? <Outlet />
-      // : <Navigate to="/login" state={{ msg: "hi"}}/>
       : <Navigate to="/login" state={{ from: location }} />
   )
 }

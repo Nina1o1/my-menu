@@ -14,12 +14,8 @@ export default function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/*" element={<Error />} />
 
-      {/* protected routes */}
       <Route element={ <RequireAuth /> }>
         <Route path="/" element={<Dictionary />} />
-      </Route>
-
-      <Route element={ <RequireAuth /> }>
         <Route path="/edit" element={<Edit />} />
       </Route>
 

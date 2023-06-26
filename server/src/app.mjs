@@ -12,12 +12,10 @@ import indexRouter from "./routes/index.mjs";
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
 import verifyJWT from './middlewares/verifyJWT.mjs';
-{ /* passport-local auth is not used in this project */
-  /* 
-  import passport from 'passport';
-  import session from "express-session"; 
-  */
-}
+/* passport-local auth is not used in this project
+import passport from 'passport';
+import session from "express-session"; 
+*/
 
 const app = express();
 
@@ -40,32 +38,32 @@ app.use(urlencoded({extended: false}));
 
 app.use(cookieParser());
 
-{ /* passport-local auth is not used in this project */
-  // session & passport set up
-  /*
-  const sessionOptions = {
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false },
-  }
-  app.use(session(sessionOptions));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  */
+/* passport-local auth is not used in this project
+// session & passport set up
+const sessionOptions = {
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false },
 }
+app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
+*/
 
 // sanitize input
 app.use("/", sanitizeInput);
 
-// handle routes
+// handle user login routes
 app.use("/", registerRouter);
 app.use("/", authJWTRouter);
 
 // refreshToken
-app.use("/", verifyJWT);
+
 
 // verify JWT
+app.use("/", verifyJWT);
+
 app.use("/", indexRouter);
 app.listen(3000, () => {
   console.log("connecting to server...")

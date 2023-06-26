@@ -1,5 +1,4 @@
-/* passport-local auth is not used in this project */
-/*
+/* passport-local auth is not used in this project
 import express from 'express';
 import passport from 'passport';
 import LocalStrategy from "passport-local"

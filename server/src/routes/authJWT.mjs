@@ -7,7 +7,7 @@ import "dotenv/config";
 
 const router = express.Router();
 
-// ========== login post, via passport-local ==========
+// ========== login post ==========
 router.post("/login", async (req, res) => {
   if(!req.body.username || !req.body.password) {
     return res.status(401).send({message: status["login-nodata"]});   // incomplete information
@@ -27,23 +27,24 @@ router.post("/login", async (req, res) => {
     const accessToken = jwt.sign(
       {"username": username},
       process.env.ACCESS_TOKEN_SECRET,
-      {expiresIn: "3000"}
+      {expiresIn: "3s"}
     )
     const refreshToken = jwt.sign(
       {"username": username},
       process.env.REFRESH_TOKEN_SECRET,
-      {expiresIn: "1d"}
+      {expiresIn: "10s"}
     )
-    // save refreshToken in current user
+    // save refreshToken in current user & cookie
     foundUser["refreshToken"] = refreshToken;
-    // save refreshToken in httpOnly cookie
+    await foundUser.save();
     const cookieOptions = {
       httpOnly: true,
       origin: process.env.CLIENT_URL,
       sameSite: false,
-      maxAge: 24 * 60 * 60 * 1000
+      maxAge: 10 * 1000
+      // maxAge: 24 * 60 * 60 * 1000
     }
-    res.cookie("jwt", refreshToken, cookieOptions)
+    res.cookie("jwt", refreshToken, cookieOptions);
     // send accessToken to client
     return res.send({accessToken, message: status["login-success"]});    // log user in
   
@@ -53,39 +54,31 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// ========== logout post, via passport-local ==========
+// ========== logout post ==========
 router.post("/logout", async (req, res) => {
-  const cookies = req.cookies;
 
-  // not logged in
-  if (!cookies?.jwt) return res.sendStatus(204);
-
-  const refreshToken = cookies.jwt;
-
-  const foundUser = await User.findOne({refreshToken: refreshToken});
-  const cookieOptions = {
-    httpOnly: true,
-    sameSite: false,
-  }
-
-  // no such user
+  // check refresh token
+  const jwt = req?.cookies?.jwt;
+  if(!jwt) return res.sendStatus(204);
+  
+  // target user
+  const foundUser = await User.findOne({refreshToken: jwt});
   if(!foundUser) {
-    res.clearCookie("jwt", cookieOptions);
-    return res.sendStatus(204);
+    res.clearCookie("jwt", {httpOnly: true, sameSite: false});
+    res.sendStatus(204);
   }
-
-  // delete refreshToken in database
+  
+  // delete refresh token
+  res.clearCookie("jwt", {httpOnly: true, sameSite: false});
   try {
-    foundUser["refreshToken"] = "";
+    foundUser["refreshToken"] = undefined;
     await foundUser.save();
-  } catch (error) {
+  } catch(error) {
     console.log(error);
-    return res.sendStatus(502);
+    res.sendStatus(502);
   }
 
-  // clear cookie
-  res.clearCookie('jwt', cookieOptions);
-  res.sendStatus(204);
+  return res.sendStatus(204);
 });
 
 export default router;
