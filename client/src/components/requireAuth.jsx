@@ -21,7 +21,6 @@ function RequireAuth () {
       }
     }
     auth();
-
     // clean up function
   },[])
 

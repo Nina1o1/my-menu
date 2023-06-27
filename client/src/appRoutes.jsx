@@ -16,9 +16,11 @@ export default function AppRoutes() {
 
       <Route element={ <RequireAuth /> }>
         <Route path="/" element={<Dictionary />} />
-        <Route path="/edit" element={<Edit />} />
       </Route>
 
+      <Route element={ <RequireAuth /> }>
+        <Route path="/edit" element={<Edit />} />
+      </Route>
     </Routes>
   )
 }
