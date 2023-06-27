@@ -28,8 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const corsOptions = {
   credentials: true,
   origin: process.env.CLIENT_URL,
-  allowedHeaders: ['Content-Type'],
-  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  methods: ['GET', 'PUT', 'POST', 'DELETE']
 }
 app.use(cors(corsOptions));
 
@@ -52,7 +51,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 */
 
-app.use((req,res,next) => {console.log(req);next()});
 // sanitize input
 app.use("/", sanitizeInput);
 
@@ -66,14 +64,12 @@ app.use("/", refreshTokenRouter);
 // verify access token
 app.use("/", verifyJWT);
 
-app.use((req,res,next) => {console.log(req);next()});
+app.get("/test", (req,res) => {
+  res.send({message: "move on dude"});
+});
 
 app.use("/", indexRouter);
 
-app.get("/test", (req,res) => {
-  console.log(req)
-  res.send({message: "move on dude"});
-});
 
 app.listen(3000, () => {
   console.log("connecting to server...")

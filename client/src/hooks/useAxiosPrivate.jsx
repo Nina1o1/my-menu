@@ -11,8 +11,8 @@ const useAxiosPrivate = () => {
 
     const reqIntercrpt = axiosPrivateProvider.interceptors.request.use(
       (req) => {
-        if(!req.headers?.["Authorization"]) {
-          req.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
+        if(!req.headers?.["authorization"]) {
+          req.headers["authorization"] = `Bearer ${auth?.accessToken}`;
         }
         return req;
       }, (error) => { return Promise.reject(error); }
@@ -23,14 +23,10 @@ const useAxiosPrivate = () => {
       async (error) => {
         // if access token expires, replace it and send another request
         const prevReq = error?.config;
-        
-        console.log("===========");
-        console.log(prevReq);
-
         if (error?.response?.status === 403 && !prevReq?.sent) {
           prevReq.send = true;
           const newAccessToken = await refresh();
-          prevReq.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          prevReq.headers['authorization'] = `Bearer ${newAccessToken}`;
           return axiosPrivateProvider(prevReq);
         }
         return Promise.reject(error);
@@ -41,7 +37,7 @@ const useAxiosPrivate = () => {
       axiosPrivateProvider.interceptors.request.eject(reqIntercrpt);
       axiosPrivateProvider.interceptors.response.eject(resIntercept);
     }
-  }, [auth]);
+  }, [auth, refresh]);
 
   return axiosPrivateProvider;
 }

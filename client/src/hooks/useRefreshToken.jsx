@@ -8,7 +8,7 @@ const useRefreshToken = () => {
 
     // get request for a new token
     const res = await axiosProvider.post(
-      "/refresh",
+      "/api/refresh",
       { withCredentials: true }
     );
 

@@ -20,7 +20,7 @@ function Logout() {
   }
 
   return (
-    <Link className="nav-item" onClick={handleClick}> | Logout</Link> 
+    <Link className="nav-item" onClick={handleClick}>Logout</Link> 
   )
 }
 

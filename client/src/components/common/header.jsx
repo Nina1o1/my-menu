@@ -23,7 +23,7 @@ function Navigation() {
       <NavLink to="/" className="nav-item">Dictionary</NavLink>
       <NavLink to="/edit" className="nav-item">Add</NavLink>
       <span className="nav-userName">
-        userName
+        {"userName | "}
         <Logout/>
       </span>
     </nav>

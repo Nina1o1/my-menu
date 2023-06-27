@@ -5,7 +5,7 @@ import { User } from "../databases/alldb.mjs";
 
 const router = express.Router();
 
-router.get("/refresh", async (req, res) => {
+router.get("/api/refresh", async (req, res) => {
   // get refresh cookie
   const refreshJWT = req.cookies?.jwt;
   if (!refreshJWT) return res.sendStatus(401);
