@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 
-
 // create a global context to log user to protected routes
 const AuthContext = createContext({});
 

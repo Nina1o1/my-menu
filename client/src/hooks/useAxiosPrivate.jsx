@@ -23,6 +23,7 @@ const useAxiosPrivate = () => {
       async (error) => {
         // if access token expires, replace it and send another request
         const prevReq = error?.config;
+        console.log(error.config);
         if (error?.response?.status === 403 && !prevReq?.sent) {
           prevReq.send = true;
           const newAccessToken = await refresh();
