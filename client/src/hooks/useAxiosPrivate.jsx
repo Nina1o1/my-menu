@@ -18,16 +18,18 @@ const useAxiosPrivate = () => {
       }, (error) => { return Promise.reject(error); }
     );
 
+    // TODO
     const resIntercept = axiosPrivateProvider.interceptors.response.use(
       (res) => res, 
       async (error) => {
         // if access token expires, replace it and send another request
         const prevReq = error?.config;
-        console.log(error.config);
         if (error?.response?.status === 403 && !prevReq?.sent) {
           prevReq.send = true;
           const newAccessToken = await refresh();
           prevReq.headers['authorization'] = `Bearer ${newAccessToken}`;
+          console.log(newAccessToken);
+          console.log("=====================");
           return axiosPrivateProvider(prevReq);
         }
         return Promise.reject(error);

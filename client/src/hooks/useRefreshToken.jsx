@@ -2,7 +2,7 @@ import { axiosProvider } from "../api/axios";
 import useAuth from "./useAuth";
 
 const useRefreshToken = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   async function refresh () {
 
@@ -14,9 +14,9 @@ const useRefreshToken = () => {
 
     // overwrite auth state
     setAuth(prev => { return {...prev, accessToken: res.data.accessToken} });
-
-    return refresh;
+    return res.data.accessToken;
   }
+  return refresh;
 }
 
 export default useRefreshToken;

@@ -31,7 +31,7 @@ router.get("/api/refresh", async (req, res) => {
       const accessToken = jwt.sign(
         {username: decoded.username},
         process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn: "8s"}
+        {expiresIn: "3s"}
       )
       res.send({accessToken});
     }
