@@ -7,7 +7,9 @@ const axiosProvider = axios.create({
 
 const axiosPrivateProvider = axios.create({
   baseURL: serverURL,
-  headers: { 'Content-Type': 'application/json' },
+  headers: { 
+    'Content-Type': 'application/json' 
+  },
   withCredentials: true
 });
 

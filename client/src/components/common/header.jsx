@@ -1,8 +1,8 @@
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './header.css';
 import Logout from "../authentication/logout";
-
 import useAuth from '../../hooks/useAuth';
+import terms from "../../assets/terms.json";
 function Header() {
   return(
     <>
@@ -17,15 +17,24 @@ function Header() {
 }
 
 function Navigation() {
+  const { auth } = useAuth();
 
   return(
     <nav className="nav-container">
       <NavLink to="/" className="nav-item">Dictionary</NavLink>
       <NavLink to="/edit" className="nav-item">Add</NavLink>
       <span className="nav-userName">
-        {"userName | "}
-        <Logout/>
+        { auth?.username
+          ? ( 
+            <> 
+              {`${auth.username || "username"} | `} 
+              <Logout/>
+            </> 
+          )
+          : ( `${terms["unlogged-user"]}` )
+        }
       </span>
+      
     </nav>
   )
 }

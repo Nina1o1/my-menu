@@ -1,8 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosProvider } from '../../api/axios';
+import useAuth from "../../hooks/useAuth"
 
 function Logout() {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   async function handleClick(evt) {
     evt.preventDefault();
@@ -12,7 +14,8 @@ function Logout() {
       const postOptions = {
         withCredentials: true
       }
-      const res = axiosProvider.post(`/${action}`, null, postOptions);
+      await axiosProvider.post(`/${action}`, null, postOptions);
+      setAuth({});
       navigate("/login");
     } catch (error) {
       console.log(error);

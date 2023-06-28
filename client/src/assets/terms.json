@@ -1,6 +1,8 @@
 {
   "dict-search" : "What do you wanna have for the next meal?",
 
+  "unlogged-user":"Hello my friend !",
+
   "edit-name": "Dish Name",
   "edit-ingredients": "Add ingredients. Separate each by COMMA",
   "edit-description": "Describe your meal!",
