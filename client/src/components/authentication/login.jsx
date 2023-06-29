@@ -42,12 +42,11 @@ function Login() {
       const accessToken = res.data?.accessToken;
       setAuth({username, accessToken});
 
-      // redirect
       const from = location?.state?.from?.pathname || "/";
       navigate(from);
 
     } catch (error) {
-      // display error messages
+      // handle user errors
       console.log(error);
       const message = error?.response?.data["message"];
       setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);

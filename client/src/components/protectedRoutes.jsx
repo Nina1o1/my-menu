@@ -4,8 +4,8 @@ import { useEffect} from "react";
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-function RequireAuth () {
-  const { auth } = useAuth();
+function ProtectedRoutes () {
+  const { auth, setAuth } = useAuth();
   const location = useLocation();
   const axiosPrivateProvider = useAxiosPrivate();
   const navigate = useNavigate();
@@ -14,9 +14,10 @@ function RequireAuth () {
     let mounted = true;
     async function auth () {
       try {
-        await axiosPrivateProvider.get("/test");
+        await axiosPrivateProvider.get("/api/checkAuth");
       } catch (error) {
         console.log(error);
+        setAuth({});
         navigate("/login", {state: {from: location}});
       }
     }
@@ -33,4 +34,4 @@ function RequireAuth () {
   )
 }
 
-export default RequireAuth;
+export default ProtectedRoutes;

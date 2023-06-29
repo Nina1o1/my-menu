@@ -34,6 +34,8 @@ function Register() {
 
       navigate("/login");
     } catch (error) {
+      // handle user errors
+      console.log(error);
       const message = error?.response?.data["message"];
       setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
       setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);

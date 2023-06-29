@@ -54,10 +54,6 @@ app.use(passport.session());
 // sanitize input
 app.use("/", sanitizeInput);
 
-app.use("/", (req,res,next) => {
-  next();
-})
-
 // handle user login routes
 app.use("/", registerRouter);
 app.use("/", authJWTRouter);
@@ -68,8 +64,8 @@ app.use("/", refreshTokenRouter);
 // verify access token
 app.use("/", verifyJWT);
 
-app.get("/test", (req,res) => {
-  res.send({message: "move on dude"});
+app.get("/api/checkAuth", (req,res) => {
+  res.sendStatus(200);
 });
 
 app.use("/", indexRouter);

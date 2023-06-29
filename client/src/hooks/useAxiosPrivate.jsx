@@ -18,7 +18,6 @@ const useAxiosPrivate = () => {
       }, (error) => { return Promise.reject(error); }
     );
 
-    // TODO
     const resIntercept = axiosPrivateProvider.interceptors.response.use(
       (res) => res, 
       async (error) => {

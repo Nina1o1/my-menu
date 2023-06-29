@@ -4,7 +4,7 @@ import Edit from './components/edit/edit';
 import Login from './components/authentication/login';
 import Register from './components/authentication/register';
 import Error from './components/common/error.jsx';
-import RequireAuth from './components/requireAuth';
+import ProtectedRoutes from './components/protectedRoutes';
 
 export default function AppRoutes() {
   return(
@@ -14,7 +14,7 @@ export default function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/*" element={<Error />} />
 
-      <Route element={ <RequireAuth /> }>
+      <Route element={ <ProtectedRoutes /> }>
         <Route path="/" element={<Dictionary />} />
         <Route path="/edit" element={<Edit />} />
       </Route>
