@@ -9,7 +9,6 @@ function verifyJWT (req, res, next) {
     return res.sendStatus(401);
   }
   const token = authHeader.split(" ")[1];
-  
   jwt.verify(
     // verify access token
     token,

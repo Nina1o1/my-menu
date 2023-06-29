@@ -42,9 +42,5 @@
   "login-error": {
     "title": "Sorry, Some Error Occurs",
     "parag": "Please try again"
-  },
-  "expire-session" : {
-    "title": "Your Session Has Expired",
-    "parag": "Just login again :)"
   }
 }

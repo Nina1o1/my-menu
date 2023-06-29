@@ -25,7 +25,7 @@ async function refreshTokenRouter (req, res) {
           process.env.ACCESS_TOKEN_SECRET,
           {expiresIn: "15m"}
         )
-        res.send({accessToken});
+        return res.send({accessToken});
       }
     )
   } catch (err) {

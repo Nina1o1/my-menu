@@ -2,19 +2,19 @@ import { useLocation, Outlet, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect} from "react";
 import useAuth from "../hooks/useAuth";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosTooken from "../hooks/useAxiosTooken";
 
 function ProtectedRoutes () {
   const { auth, setAuth } = useAuth();
   const location = useLocation();
-  const axiosPrivateProvider = useAxiosPrivate();
+  const axiosTookenProvider = useAxiosTooken();
   const navigate = useNavigate();
 
   useEffect(() => {
     let mounted = true;
     async function auth () {
       try {
-        await axiosPrivateProvider.get("/api/verifyAuth");
+        await axiosTookenProvider.get("/api/verifyAuth");
       } catch (error) {
         console.log(error);
         setAuth({});

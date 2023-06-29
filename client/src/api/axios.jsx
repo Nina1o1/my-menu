@@ -5,7 +5,7 @@ const axiosProvider = axios.create({
   baseURL: serverURL
 });
 
-const axiosPrivateProvider = axios.create({
+const axiosTookenProvider = axios.create({
   baseURL: serverURL,
   headers: { 
     'Content-Type': 'application/json' 
@@ -13,4 +13,4 @@ const axiosPrivateProvider = axios.create({
   withCredentials: true
 });
 
-export { axiosProvider, axiosPrivateProvider };
+export { axiosProvider, axiosTookenProvider };
