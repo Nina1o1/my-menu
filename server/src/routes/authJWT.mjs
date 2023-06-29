@@ -16,7 +16,7 @@ async function loginRouter (req, res) {
     const foundUser = await User.findOne({username: username});
     if(!foundUser) return res.status(401).send({message: status["login-noexist"]});  // handle user mistakes
     
-    const compare = bcrypt.compare(password, foundUser["hash"]);
+    const compare = await bcrypt.compare(password, foundUser["hash"]);
     if(!compare) return res.status(401).send({message: status["login-noexist"]});    // handle user mistakes
 
     // create JWTs
