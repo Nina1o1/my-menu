@@ -54,6 +54,10 @@ app.use(passport.session());
 // sanitize input
 app.use("/", sanitizeInput);
 
+app.use("/", (req,res,next) => {
+  next();
+})
+
 // handle user login routes
 app.use("/", registerRouter);
 app.use("/", authJWTRouter);

@@ -11,8 +11,8 @@ const useAxiosPrivate = () => {
 
     const reqIntercrpt = axiosPrivateProvider.interceptors.request.use(
       (req) => {
-        if(!req.headers?.["authorization"]) {
-          req.headers["authorization"] = `Bearer ${auth?.accessToken}`;
+        if(!req.headers?.["Authorization"]) {
+          req.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
         }
         return req;
       }, (error) => { return Promise.reject(error); }
@@ -27,9 +27,7 @@ const useAxiosPrivate = () => {
         if (error?.response?.status === 403 && !prevReq?.sent) {
           prevReq.send = true;
           const newAccessToken = await refresh();
-          prevReq.headers['authorization'] = `Bearer ${newAccessToken}`;
-          console.log(newAccessToken);
-          console.log("=====================");
+          prevReq.headers['Authorization'] = `Bearer ${newAccessToken}`;
           return axiosPrivateProvider(prevReq);
         }
         return Promise.reject(error);

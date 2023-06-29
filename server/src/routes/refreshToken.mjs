@@ -17,25 +17,24 @@ router.get("/api/refresh", async (req, res) => {
       res.clearCookie("jwt", { httpOnly: true, sameSite: false });
       return res.sendStatus(401);
     }
+    // verify refresh cookie & create new access token
+    jwt.verify(
+      refreshJWT,
+      process.env.REFRESH_TOKEN_SECRET,
+      (err, decoded) => {
+        if (err || foundUser.username !== decoded.username) return res.sendStatus(402);
+        const accessToken = jwt.sign(
+          {username: decoded.username},
+          process.env.ACCESS_TOKEN_SECRET,
+          {expiresIn: "3s"}
+        )
+        res.send({accessToken});
+      }
+    )
   } catch (err) {
     console.log(err);
     return res.sendStatus(502);
   }
-
-  // verify refresh cookie & create new access token
-  jwt.verify(
-    refreshJWT,
-    process.env.REFRESH_TOKEN_SECRET,
-    (err, decoded) => {
-      if (err || foundUser.username !== decoded.username) return res.sendStatus(402);
-      const accessToken = jwt.sign(
-        {username: decoded.username},
-        process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn: "3s"}
-      )
-      res.send({accessToken});
-    }
-  )
 
 /*
   const cookies = req.cookies;
