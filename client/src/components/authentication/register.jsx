@@ -30,7 +30,11 @@ function Register() {
         }
       }
       
-      const res = axiosProvider.post(`/${action}`, JSON.stringify(userInfo), postOptions);
+      await axiosProvider.post(
+        `/${action}`, 
+        JSON.stringify(userInfo), 
+        postOptions
+      );
 
       navigate("/login");
     } catch (error) {

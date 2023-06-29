@@ -15,11 +15,16 @@ function verifyJWT (req, res, next) {
     token,
     process.env.ACCESS_TOKEN_SECRET,
     (err, decoded) => {
-      if (err) return res.sendStatus(403); // invalid user
+      // expired access token
+      if (err) return res.sendStatus(403);
       req.user = decoded.user;
       next();
     }
   )
 }
 
-export default verifyJWT;
+function verifyAuthRouter (req, res, next) {
+  res.sendStatus(200);
+}
+
+export {verifyJWT, verifyAuthRouter};

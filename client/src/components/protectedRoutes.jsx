@@ -14,7 +14,7 @@ function ProtectedRoutes () {
     let mounted = true;
     async function auth () {
       try {
-        await axiosPrivateProvider.get("/api/checkAuth");
+        await axiosPrivateProvider.get("/api/verifyAuth");
       } catch (error) {
         console.log(error);
         setAuth({});

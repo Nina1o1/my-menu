@@ -1,14 +1,10 @@
-import express from 'express';
 import bcrypt from 'bcryptjs';
-import { User } from "../databases/alldb.mjs";
-import status from "../assets/status.mjs";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import { User } from "../databases/alldb.mjs";
+import status from "../assets/status.mjs";
 
-const router = express.Router();
-
-// ========== login post ==========
-router.post("/login", async (req, res) => {
+async function loginRouter (req, res) {
   if(!req.body.username || !req.body.password) {
     return res.status(401).send({message: status["login-nodata"]});   // incomplete information
   }
@@ -52,11 +48,9 @@ router.post("/login", async (req, res) => {
     console.log(error);
     return res.status(502).send({message: status["login-error"]});      // handle server error
   }
-});
+}
 
-// ========== logout post ==========
-router.post("/logout", async (req, res) => {
-
+async function logoutRouter (req,res) {
   // check refresh token
   const jwt = req?.cookies?.jwt;
   if(!jwt) return res.sendStatus(204);
@@ -79,6 +73,7 @@ router.post("/logout", async (req, res) => {
   }
 
   return res.sendStatus(204);
-});
 
-export default router;
+}
+
+export {loginRouter, logoutRouter};

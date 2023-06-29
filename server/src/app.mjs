@@ -6,13 +6,12 @@ import cors from 'cors';
 import cookieParser from "cookie-parser";
 import "dotenv/config"
 // routes
-import authJWTRouter from "./routes/authJWT.mjs";
+import { loginRouter, logoutRouter } from "./routes/authJWT.mjs";
 import registerRouter from "./routes/register.mjs";
 import refreshTokenRouter from "./routes/refreshToken.mjs"
-import indexRouter from "./routes/index.mjs";
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
-import verifyJWT from './middlewares/verifyJWT.mjs';
+import { verifyJWT, verifyAuthRouter } from './middlewares/verifyJWT.mjs';
 /* passport-local auth is not used in this project
 import passport from 'passport';
 import session from "express-session"; 
@@ -54,22 +53,16 @@ app.use(passport.session());
 // sanitize input
 app.use("/", sanitizeInput);
 
-// handle user login routes
-app.use("/", registerRouter);
-app.use("/", authJWTRouter);
+app.post("/register", registerRouter);
+app.post("/login", loginRouter);
+app.post("/logout", logoutRouter);
 
 // refresh access token
-app.use("/", refreshTokenRouter);
+app.get("/api/refresh", refreshTokenRouter);
 
-// verify access token
+// verify access token and serve protected routes
 app.use("/", verifyJWT);
-
-app.get("/api/checkAuth", (req,res) => {
-  res.sendStatus(200);
-});
-
-app.use("/", indexRouter);
-
+app.get("/api/verifyAuth", verifyAuthRouter);
 
 app.listen(3000, () => {
   console.log("connecting to server...")
