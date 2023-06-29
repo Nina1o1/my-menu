@@ -23,7 +23,7 @@ function verifyJWT (req, res, next) {
   )
 }
 
-function verifyAuthRouter (req, res, next) {
+function verifyAuthRouter (req, res) {
   res.sendStatus(200);
 }
 

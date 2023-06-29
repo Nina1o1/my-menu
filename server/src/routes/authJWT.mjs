@@ -23,12 +23,12 @@ async function loginRouter (req, res) {
     const accessToken = jwt.sign(
       {"username": username},
       process.env.ACCESS_TOKEN_SECRET,
-      {expiresIn: "3s"}
+      {expiresIn: "15m"}
     )
     const refreshToken = jwt.sign(
       {"username": username},
       process.env.REFRESH_TOKEN_SECRET,
-      {expiresIn: "10s"}
+      {expiresIn: "1d"}
     )
     // save refreshToken in current user & cookie
     foundUser["refreshToken"] = refreshToken;
@@ -37,8 +37,7 @@ async function loginRouter (req, res) {
       httpOnly: true,
       origin: process.env.CLIENT_URL,
       sameSite: false,
-      maxAge: 10 * 1000
-      // maxAge: 24 * 60 * 60 * 1000
+      maxAge: 24 * 60 * 60 * 1000
     }
     res.cookie("jwt", refreshToken, cookieOptions);
     // send accessToken to client
