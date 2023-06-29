@@ -1,5 +1,3 @@
-// I want to manage my own status code for front-end display
-// TODO: Improve custom error message
 const status = {
   "register-success": "register-success",
   "register-exist": "register-exist",
@@ -9,8 +7,6 @@ const status = {
   "login-success": "login-success",
   "login-nodata": "login-nodata",
   "login-noexist": "login-noexist",
-  // TODO: Missing credentials error
-  "Missing credentials": "Missing credentials",
   "login-error": "login-error",
 
   "logout-success":  "logout-success",

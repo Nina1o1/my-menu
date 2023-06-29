@@ -35,10 +35,6 @@
     "title": "Username or Password Incorrect",
     "parag": "Please try again"
   },
-  "Missing credentials": {
-    "title": "Please Complete Your Information",
-    "parag":""
-  },
   "login-error": {
     "title": "Sorry, Some Error Occurs",
     "parag": "Please try again"

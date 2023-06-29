@@ -99,9 +99,9 @@ A Sample Recipe
 6. Passport.js
     - an authentication middleware which provides various strategies
 7. JWT
-    - 
+    - a method to encode data to transfer between parties
 8. axios
-    - 
+    - a promised baesd library to send HTTP requests
 
 ## Reference
 1. [React]
@@ -124,7 +124,7 @@ A Sample Recipe
     - [cors & setting cookies (credentials)](https://github.com/jaredhanson/passport/issues/446) [-- link to client code](./client/src/auth/login.jsx) [-- link to server code](./server/src/app.mjs)
     - [deserializeUser is not called (manual login)](https://stackoverflow.com/questions/57293115/passport-deserializeuser-not-being-called) [-- link to code](./server/src/utils/localPassport.mjs)
 8. [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) [-- link to code](./server/src/routes/authJWT.mjs)
-    - [httpOnly cookie in react](https://stackoverflow.com/questions/68970499/how-to-get-http-only-cookie-in-react)
+    - [httpOnly cookie and react](https://stackoverflow.com/questions/68970499/how-to-get-http-only-cookie-in-react)
     - [tutorial on server](https://www.youtube.com/watch?v=f2EqECiTBL8)
     - [tutorial on client](https://www.youtube.com/watch?v=nI8PYZNFtac)
     - [JWT handbook](https://auth0.com/resources/ebooks/jwt-handbook)
@@ -133,6 +133,6 @@ A Sample Recipe
 9. [dotenv](https://www.npmjs.com/package/dotenv)
 10. [axios](https://github.com/axios/axios) [-- link to code](./client/src/api/axios.jsx)
     - [axios interceptor](https://stackoverflow.com/questions/52737078/how-can-you-use-axios-interceptors) [-- link to code](./client/src/hooks/useAxiosPrivate.jsx)
-    - [preflight Request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)
+    - [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)
 ## [Project Journal](./documentation/journal.md)
 This journal is dedicated to record my learning progress when doing this project.

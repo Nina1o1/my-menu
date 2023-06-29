@@ -6,7 +6,8 @@ import status from "../assets/status.mjs";
 
 async function loginRouter (req, res) {
   if(!req.body.username || !req.body.password) {
-    return res.status(401).send({message: status["login-nodata"]});   // incomplete information
+    // user mistake: incomplete information
+    return res.status(401).send({message: status["login-nodata"]});
   }
   
   const username = req.body.username;
@@ -14,10 +15,12 @@ async function loginRouter (req, res) {
   
   try {
     const foundUser = await User.findOne({username: username});
-    if(!foundUser) return res.status(401).send({message: status["login-noexist"]});  // handle user mistakes
+    // user mistake: usename incorrect
+    if(!foundUser) return res.status(401).send({message: status["login-noexist"]});
     
     const compare = await bcrypt.compare(password, foundUser["hash"]);
-    if(!compare) return res.status(401).send({message: status["login-noexist"]});    // handle user mistakes
+    // user mistake: password incorrect
+    if(!compare) return res.status(401).send({message: status["login-noexist"]});
 
     // create JWTs
     const accessToken = jwt.sign(
@@ -40,12 +43,13 @@ async function loginRouter (req, res) {
       maxAge: 24 * 60 * 60 * 1000
     }
     res.cookie("jwt", refreshToken, cookieOptions);
-    // send accessToken to client
-    return res.send({accessToken, message: status["login-success"]});    // log user in
+    // uselogin, send accessToken to client
+    return res.send({accessToken, message: status["login-success"]});
   
   } catch (error) {
     console.log(error);
-    return res.status(502).send({message: status["login-error"]});      // handle server error
+    // server error
+    return res.status(502).send({message: status["login-error"]});
   }
 }
 

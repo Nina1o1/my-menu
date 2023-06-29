@@ -3,7 +3,7 @@ import "dotenv/config";
 import { User } from "../databases/alldb.mjs";
 
 async function refreshTokenRouter (req, res) {
-  // get refresh cookie
+  // get refresh token
   const refreshJWT = req.cookies?.jwt;
   if (!refreshJWT) return res.sendStatus(401);
 
@@ -14,7 +14,8 @@ async function refreshTokenRouter (req, res) {
       res.clearCookie("jwt", { httpOnly: true, sameSite: false });
       return res.sendStatus(401);
     }
-    // verify refresh cookie & create new access token
+
+    // verify refresh token & send new access token
     jwt.verify(
       refreshJWT,
       process.env.REFRESH_TOKEN_SECRET,
