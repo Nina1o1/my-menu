@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { axiosProvider } from '../../api/axios';
 import './access.css';
+import terms from "../../assets/terms.json";
 import useAuth from "../../hooks/useAuth";
 import findTerm from "../../utils/findTerms";
 
@@ -54,6 +55,7 @@ function Login() {
       // handle user errors
       const message = error?.response?.data["message"];
       setTerm(findTerm(action, message));
+      return;
     }
 
   }
@@ -80,7 +82,7 @@ function Login() {
           </div>
         </form>
         <p className="access-switch">
-          Do not have an account? 
+          {terms["no-account"]}
           <Link to="/register"> Register</Link>
         </p>
       </div>

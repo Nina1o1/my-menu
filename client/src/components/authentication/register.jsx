@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import './access.css';
+import terms from "../../assets/terms.json";
 import { axiosProvider } from '../../api/axios';
 import findTerm from "../../utils/findTerms";
 
@@ -39,7 +40,6 @@ function Register() {
       navigate("/login");
     } catch (error) {
       // handle user errors
-      console.log(error);
       const message = error?.response?.data["message"];
       setTerm(findTerm(action, message));
       return;
@@ -68,7 +68,7 @@ function Register() {
           </div>
         </form>
         <p className="access-switch">
-          Already have an account?
+          {terms["have-account"]}
           <Link to="/login"> Login</Link>
         </p>
       </div>

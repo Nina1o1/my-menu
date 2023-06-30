@@ -1,7 +1,10 @@
 {
-  "dict-search" : "What do you wanna have for the next meal?",
-
+  
   "unlogged-user":"Hello my friend !",
+  "have-account":"Already have an account?",
+  "no-account":"Do not have an account?",
+  
+  "dict-search" : "What do you wanna have for the next meal?",
 
   "edit-name": "Dish Name",
   "edit-ingredients": "Add ingredients. Separate each by COMMA",
@@ -24,7 +27,7 @@
     "title": "Sorry, Some Error Occurs",
     "parag": "Please try again"
   },
-  
+
   "login-success": {
     "title": "Successul Login!",
     "parag": "Redirecting you to Home page..."
