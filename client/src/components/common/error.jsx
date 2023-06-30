@@ -8,8 +8,7 @@ function Error() {
 
   const kmj = useRef("( • ᴖ • ｡)");
   const kmjs = new Kaomojis();
-  kmj.current = kmjs.findSad()
-
+  kmj.current = kmjs.findSad();
 
   return(
     <>

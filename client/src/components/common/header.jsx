@@ -4,12 +4,11 @@ import Logout from "../authentication/logout";
 import useAuth from '../../hooks/useAuth';
 import terms from "../../assets/terms.json";
 function Header() {
-  const { auth } = useAuth();
   return(
-    <div className="header">
+    <header className="header">
       <h1 className="big-heading">My Menu</h1>
       <Navigate />
-    </div>
+    </header>
   )
 }
 
