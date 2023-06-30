@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import './access.css';
 import { axiosProvider } from '../../api/axios';
-import useTerms from '../../hooks/useTerms';
+import findTerm from "../../utils/findTerms";
 
 function Register() {
   document.body.classList.add("purple-page");
@@ -10,9 +10,7 @@ function Register() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
-
   const [term, setTerm] = useState("");
-  const findTerm = useTerms();
 
   async function handleClick (evt) {
     evt.preventDefault();
@@ -45,7 +43,7 @@ function Register() {
       const message = error?.response?.data["message"];
       setTerm(findTerm(action, message));
       return;
-  }
+    }
   }
 
   return(

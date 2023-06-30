@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { axiosProvider } from '../../api/axios';
 import './access.css';
 import useAuth from "../../hooks/useAuth";
-import useTerms from '../../hooks/useTerms';
+import findTerm from "../../utils/findTerms";
 
 function Login() {
   document.body.classList.add("purple-page");
@@ -14,9 +14,7 @@ function Login() {
 
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-  
   const [term, setTerm] = useState("");
-  const findTerm = useTerms();
   
   // post request
   async function handleClick (evt) {
