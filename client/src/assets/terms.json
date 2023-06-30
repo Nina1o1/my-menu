@@ -7,6 +7,11 @@
   "edit-ingredients": "Add ingredients. Separate each by COMMA",
   "edit-description": "Describe your meal!",
   
+  "nodata": {
+    "title": "Please Complete Your Information",
+    "parag": ""
+  },
+
   "register-success": {
     "title": "Successully Registered!",
     "parag": "Redirecting you to Login page..."
@@ -15,18 +20,11 @@
     "title": "This Username Already Exists",
     "parag": "Please change your username"
   },
-  "register-nodata": {
-    "title": "Please Complete Your Information"
-  },
   "register-error": {
     "title": "Sorry, Some Error Occurs",
     "parag": "Please try again"
   },
   
-  "login-nodata": {
-    "title": "Please Complete Your Information",
-    "parag":""
-  },
   "login-success": {
     "title": "Successul Login!",
     "parag": "Redirecting you to Home page..."

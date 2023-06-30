@@ -8,7 +8,7 @@ import "dotenv/config"
 // routes
 import { loginRouter, logoutRouter } from "./routes/authJWT.mjs";
 import registerRouter from "./routes/register.mjs";
-import refreshTokenRouter from "./routes/refreshToken.mjs"
+import refreshTokenRouter from "./routes/refreshToken.mjs";
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
 import { verifyJWT, verifyAuthRouter } from './middlewares/verifyJWT.mjs';
@@ -49,6 +49,12 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 */
+
+import t from './middlewares/t.mjs';
+app.use("/", (req, res, next) => {
+  t(req,res);
+  next();
+})
 
 // sanitize input
 app.use("/", sanitizeInput);

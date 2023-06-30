@@ -1,8 +1,8 @@
 /* passport-local auth is not used in this project
 import express from 'express';
 import passport from 'passport';
+import fs from "fs";
 import LocalStrategy from "passport-local"
-import status from "../assets/status.mjs";
 import * as local from "../utils/local-passport.mjs";
 
 const router = express.Router();
@@ -33,6 +33,14 @@ router.post("/login", (req, res, next) => {
 
 // logout post, via passport-local
 router.post("/logout", (req, res) => {
+  let status;
+  try {
+    const data = fs.readFileSync("./src/assets/statusData.json", { encoding: "utf8"});
+    status = JSON.parse(data);
+  } catch (error) { 
+    console.log(error);
+    return res.sendStatus(502);
+  }
   req.logout((error) => {
     if(error){
       return res.status(502).send({message: status["logout-error"]})

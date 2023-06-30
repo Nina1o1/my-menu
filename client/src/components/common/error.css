@@ -5,10 +5,13 @@
 .redirect-msg{
   font-size: 1.2rem;
   color: #fff;
-  margin-top: 30vh;
   border-bottom: solid;
+  margin-top: 30vh;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .redirect-msg:hover{
   color: #3E54AC;
+}
+.redirect-kmj {
+  font-family: 'Courier New', Courier, monospace;
 }

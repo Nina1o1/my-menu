@@ -4,7 +4,7 @@ import './edit.css'
 import terms from '../../assets/terms.json'
 
 export default function Edit() {
-  document.body.classList.remove("purple-page")
+  document.body.classList.remove("purple-page");
   
   // access DOM elements via useRef
   const nameRef = useRef(null);

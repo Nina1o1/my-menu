@@ -1,10 +1,16 @@
 import bcrypt from 'bcryptjs';
 import { User } from "../databases/alldb.mjs";
-import status from "../assets/status.mjs";
+import readData from '../utils/readData.mjs';
 
 async function registerRouter (req, res) {
-  // user mistake: incomplete information
-  if(!req.body.username || !req.body.password) return res.status(401).send({message: status["register-nodata"]});
+  let status;
+  try {
+    const statusPath = "./src/assets/statusData.json";
+    status = await readData(statusPath);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(502);
+  }
 
   const username = req.body.username;
   const password = req.body.password;

@@ -2,7 +2,7 @@ import './dictionary.css'
 import terms from '../../assets/terms.json'
 
 export default function Dictionary() {
-  document.body.classList.remove("purple-page")
+  document.body.classList.remove("purple-page");
   const testItems=[
     {name: "test",
     ingredients: [1,2,3,4,5]

@@ -11,9 +11,7 @@ function Logout() {
     const action = "logout";
 
     try {
-      const postOptions = {
-        withCredentials: true
-      }
+      const postOptions = { withCredentials: true };
       await axiosProvider.post(`/${action}`, null, postOptions);
       setAuth({});
       navigate("/login");

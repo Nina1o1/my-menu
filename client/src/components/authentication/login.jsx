@@ -2,29 +2,36 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { axiosProvider } from '../../api/axios';
 import './access.css';
-import terms from "../../assets/terms.json";
 import useAuth from "../../hooks/useAuth";
+import useTerms from '../../hooks/useTerms';
 
 function Login() {
   document.body.classList.add("purple-page");
 
-  const { setAuth } = useAuth();
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
   const location = useLocation();
 
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-  const [title, setTitle] = useState("");
-  const [parag, setParag] = useState("");
-
+  
+  const [term, setTerm] = useState("");
+  const findTerm = useTerms();
+  
   // post request
   async function handleClick (evt) {
     evt.preventDefault();
     const action = "login";
-      
+    
     try {
       const username = usernameRef.current.value;
-      const password = passwordRef.current.value
+      const password = passwordRef.current.value;
+      
+      if(!username || !password) {
+        setTerm(findTerm(action, "nodata"));
+        return;
+      }
+
       const postOptions = {
         withCredentials: true,
         headers: {
@@ -47,19 +54,18 @@ function Login() {
 
     } catch (error) {
       // handle user errors
-      console.log(error);
       const message = error?.response?.data["message"];
-      setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
-      setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);
+      setTerm(findTerm(action, message));
     }
+
   }
 
   return(
     <>
       <div className="access-container">
         <div className="access-alerts">
-          <h1 className="access-msg-title">{title}</h1>
-          <p className="access-msg-p">{parag}</p>
+          <h1 className="access-msg-title">{term["title"]}</h1>
+          <p className="access-msg-p">{term["parag"]}</p>
         </div>
 
         <form>

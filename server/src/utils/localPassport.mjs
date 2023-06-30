@@ -1,10 +1,19 @@
 /* passport-local auth is not used in this project
 import { User } from "../databases/alldb.mjs";
 import bcrypt from 'bcryptjs';
-import status from "../assets/status.mjs";
+import fs from "fs";
 
 // ========== passport-local strategy ==========
 async function localVerify(username, password, done){
+  let status;
+  try {
+    const data = fs.readFileSync("./src/assets/statusData.json", { encoding: "utf8"});
+    status = JSON.parse(data);
+  } catch (error) { 
+    console.log(error);
+    return res.sendStatus(502);
+  }
+
   try {
     const foundUser = await User.findOne({username: username});
     if(!foundUser) {

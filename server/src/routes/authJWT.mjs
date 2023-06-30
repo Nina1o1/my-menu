@@ -2,12 +2,16 @@ import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { User } from "../databases/alldb.mjs";
-import status from "../assets/status.mjs";
+import readData from '../utils/readData.mjs';
 
 async function loginRouter (req, res) {
-  if(!req.body.username || !req.body.password) {
-    // user mistake: incomplete information
-    return res.status(401).send({message: status["login-nodata"]});
+  let status;
+  try {
+    const statusPath = "./src/assets/statusData.json";
+    status = await readData(statusPath);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(502);
   }
   
   const username = req.body.username;

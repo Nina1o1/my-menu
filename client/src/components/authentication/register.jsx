@@ -1,18 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import './access.css';
-import terms from '../../assets/terms.json';
 import { axiosProvider } from '../../api/axios';
+import useTerms from '../../hooks/useTerms';
 
 function Register() {
   document.body.classList.add("purple-page");
-  const navigate = useNavigate();
-
+  
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-  const [title, setTitle] = useState("");
-  const [parag, setParag] = useState("");
+  const navigate = useNavigate();
 
+  const [term, setTerm] = useState("");
+  const findTerm = useTerms();
 
   async function handleClick (evt) {
     evt.preventDefault();
@@ -20,19 +20,21 @@ function Register() {
 
     // post request
     try {
-      const userInfo = {
-        username: usernameRef.current.value,
-        password: passwordRef.current.value
+      const username = usernameRef.current.value;
+      const password = passwordRef.current.value;
+
+      if(!username || !password) {
+        setTerm(findTerm(action, "nodata"));
+        return;
       }
+
       const postOptions = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json'}
       }
       
       await axiosProvider.post(
         `/${action}`, 
-        JSON.stringify(userInfo), 
+        JSON.stringify({username, password}),
         postOptions
       );
 
@@ -41,17 +43,17 @@ function Register() {
       // handle user errors
       console.log(error);
       const message = error?.response?.data["message"];
-      setTitle(terms[message]?.["title"] ?? terms[`${action}-error`]["title"]);
-      setParag(terms[message]?.["parag"] ?? terms[`${action}-error`]["parag"]);
-    }
+      setTerm(findTerm(action, message));
+      return;
+  }
   }
 
   return(
     <>
       <div className="access-container">
         <div className="access-alerts">
-          <h1 className="access-msg-title">{title}</h1>
-          <p className="access-msg-p">{parag}</p>
+          <h1 className="access-msg-title">{term["title"]}</h1>
+          <p className="access-msg-p">{term["parag"]}</p>
         </div>
 
         <form>
