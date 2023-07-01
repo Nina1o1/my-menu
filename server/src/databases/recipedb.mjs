@@ -1,23 +1,38 @@
 import mongoose from "mongoose";
+import IngredientSchema from "./ingredientdb.mjs";
+import StepSchema from "./stepdb.mjs";
+import { Schema } from "mongoose";
 
-const RecipesSchema = new mongoose.Schema({
-  name: {
-    type: String, 
-    required: true
+const RecipeSchema = new mongoose.Schema({
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
   },
 
-  ingredients: [{
-    type: String, required: true
-  }],
-
-  description: {
+  name: {
+    type: String,
+    required: true
+  },
+  
+  note: {
     type: String
   },
 
   image: {
-    type:String
-  }// TODO: Mongoose imageg
+    type: String // TODO: Mongoose image
+    // required: true
+  },
+
+  steps: [{
+    type: StepSchema,
+    required: true
+  }],
+
+  ingredients: [{
+    type: IngredientSchema,
+    required: true
+  }],
+
 });
 
-export default RecipesSchema
-
+export default RecipeSchema;

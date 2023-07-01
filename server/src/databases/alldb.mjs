@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import UserSchema from "./userdb.mjs";
-import RecipesSchema from "./recipedb.mjs";
+import RecipeSchema from "./recipedb.mjs";
+import "dotenv/config";
 
-// TODO: connect to server
-mongoose.connect("mongodb://localhost/myRecipe");
+mongoose.connect(process.env.DATABASE_URL);
 
 const User = mongoose.model('User', UserSchema);
-const Recipe = mongoose.model('Recipe', RecipesSchema);
+const Recipe = mongoose.model('Recipe', RecipeSchema);
 
 export {User, Recipe};

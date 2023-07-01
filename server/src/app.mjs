@@ -4,7 +4,7 @@ import path from 'path';
 import express, { urlencoded } from 'express';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-import "dotenv/config"
+import "dotenv/config";
 // routes
 import { loginRouter, logoutRouter } from "./routes/authJWT.mjs";
 import registerRouter from "./routes/register.mjs";
@@ -12,6 +12,8 @@ import refreshTokenRouter from "./routes/refreshToken.mjs";
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
 import { verifyJWT, verifyAuthRouter } from './middlewares/verifyJWT.mjs';
+
+import t from './middlewares/t.mjs';
 /* passport-local auth is not used in this project
 import passport from 'passport';
 import session from "express-session"; 
@@ -50,11 +52,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 */
 
-import t from './middlewares/t.mjs';
 app.use("/", (req, res, next) => {
   t(req,res);
   next();
-})
+});
 
 // sanitize input
 app.use("/", sanitizeInput);

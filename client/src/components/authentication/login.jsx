@@ -48,6 +48,9 @@ function Login() {
       const accessToken = res.data?.accessToken;
       setAuth({username, accessToken});
 
+      const recipes = res.data?.recipes;
+      console.log(recipes);
+
       const from = location?.state?.from?.pathname || "/";
       navigate(from);
 

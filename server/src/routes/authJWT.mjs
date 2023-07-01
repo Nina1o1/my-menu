@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import { User } from "../databases/alldb.mjs";
+import { User, Recipe } from "../databases/alldb.mjs";
 import readData from '../utils/readData.mjs';
+import findRecipes from '../utils/findRecipes.mjs';
 
 async function loginRouter (req, res) {
   let status;
@@ -37,9 +38,12 @@ async function loginRouter (req, res) {
       process.env.REFRESH_TOKEN_SECRET,
       {expiresIn: "1d"}
     )
-    // save refreshToken in current user & cookie
+
+    // save refreshToken in current user
     foundUser["refreshToken"] = refreshToken;
     await foundUser.save();
+
+    // save refreshToken in cookie
     const cookieOptions = {
       httpOnly: true,
       origin: process.env.CLIENT_URL,
@@ -47,9 +51,12 @@ async function loginRouter (req, res) {
       maxAge: 24 * 60 * 60 * 1000
     }
     res.cookie("jwt", refreshToken, cookieOptions);
-    // uselogin, send accessToken to client
-    return res.send({accessToken, message: status["login-success"]});
-  
+
+    // read user recipes
+    const recipes = await findRecipes(foundUser);
+
+    // user login, send accessToken and recipe data to client
+    return res.send({accessToken, recipes, message: status["login-success"]});
   } catch (error) {
     console.log(error);
     // server error

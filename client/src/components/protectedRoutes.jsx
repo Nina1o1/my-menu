@@ -1,6 +1,6 @@
 import { useLocation, Outlet, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import useAxiosTooken from "../hooks/useAxiosTooken";
 
@@ -13,6 +13,7 @@ function ProtectedRoutes () {
   useEffect(() => {
     let mounted = true;
     async function auth () {
+      if (mounted === false) return;
       try {
         await axiosTookenProvider.get("/api/verifyAuth");
       } catch (error) {
@@ -25,7 +26,7 @@ function ProtectedRoutes () {
     return () => {
       mounted = false;
     }
-  })
+  });
 
   return (
     auth?.username

@@ -10,13 +10,13 @@ export default function AppRoutes() {
   return(
     <Routes>
 
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/*" element={<Error />} />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="*" element={<Error />} />
 
       <Route element={ <ProtectedRoutes /> }>
-        <Route path="/" element={<Dictionary />} />
-        <Route path="/edit" element={<Edit />} />
+        <Route path="" element={<Dictionary />} />
+        <Route path="edit" element={<Edit />} />
       </Route>
 
     </Routes>

@@ -5,7 +5,6 @@ import Kaomojis from "../../utils/readKaomojis";
 
 function Error() {
   document.body.classList.add("purple-page");
-
   const kmj = useRef("( • ᴖ • ｡)");
   const kmjs = new Kaomojis();
   kmj.current = kmjs.findSad();

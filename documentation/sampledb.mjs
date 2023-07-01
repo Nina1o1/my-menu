@@ -1,19 +1,28 @@
 // sample data model
 import mongoose, { mongo } from "mongoose";
 
-// site requires authentication, so users need username and password
-// user can have 0 or more list of recipes
 const UserSchema = new mongoose.Schema({
-  // username provided by authentication plugin
-  // password hash provided by authentication plugin
-  lists: [{type: mongoose.Schema.Types.ObjectId, ref: 'List'}]
+  username: String,
+  hash: String,
+  recipes: [RecipeSchema] // array of references to recipe
 })
 
-// each recipe have a name, and according ingredients
-const RecipesSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  ingredients: [{type: String, required: true}],
+const StepSchema = new mongoose.Schema({
   description: {type: String},
-  image: String// TODO: Mongoose imageg
-})
+  image: String // TODO: Mongoose image
+});
+
+const IngredientSchema = new mongoose.Schema({
+  item: {type: String, require: true},
+  amount: {type: String}
+});
+
+const RecipeSchema = new mongoose.Schema({
+  author: UserSchema, // an user id
+  name: {type: String, required: true},
+  note: {type: String},
+  image: String, // TODO: Mongoose image
+  steps: [StepSchema], // embedded step schema
+  ingredients: [IngredientSchema], // embedded ingredient schema
+});
 

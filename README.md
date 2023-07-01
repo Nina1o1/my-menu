@@ -19,26 +19,50 @@ My Menu is for you to recall all your loved recipes with food in your fridge! (o
   ```
 
 ## Data Model
-The application will store Users and Recipes
-- users can have multiple recipes (via reference)
+The application will store Users and their Recipes
+- Users can have multiple Recipes (via reference)
+- Recipes can have multiple Steps (via embedded)
+- Recipes can have multiple Ingredients (via embedded)
 
 A Sample User: 
 ```json
 {
+  "_id": "abc",
   "username": "Nina", // unique username
-  "hash": ,// a hashed password
-  "menus": ,// an array of references to List documents
+  "hash": "938u2rhgfkj", // a hashed password
+  "recipes": ["123", "345"] // an array of references to recipe document id
 }
 ```
 A Sample Recipe 
 ```json
 {
-  "name": "hand-torn chicken",
-  "ingredients": ["chicken", "delicious sause"],
-  "description": "boil the chicken, then dip it in to sause",
-  "image": // TODO: store image in mongoose
+  "_id": "123",
+  "author": "abc", // reference to author id
+  "name": "boiled egg", // name of recipe
+  "note": "Heathy and easy!", // quick note for recipe
+  "image": "", // TODO: link to dish image
+  "steps": [ // all steps in sequence
+    {
+      "description": "boil the water till bubbling", // describe this step
+      "image": "" // TODO: link to step image
+    },
+    {
+      "description": "boil the egg for 5 minutes"
+    },
+  ],
+  "ingredients": [ // all ingredients
+    {
+      "item": "egg", // ingredient name
+      "amount": "as you want" // amount of ingredient
+    },
+    {
+      "item": "water",
+      "amount": "pour until eggs aresubmerged"
+    }
+  ]
 }
 ```
+
 [Link to Sample Database](./documentation/sampledb.mjs)
 
 ## Wireframes
@@ -62,13 +86,12 @@ A Sample Recipe
 ```
 |-  /              
 |                  
-|-  /edit          
-|                  
-|-  /:recipe_name
-|                  
 |-  /login         
 |                  
 |-  /register      
+|                  |- /
+|-  /:recipe_name -| 
+                   |- /edit
 ```
 
 ## User Stories
@@ -86,57 +109,62 @@ A Sample Recipe
 - As a user, I can search recipes that include the same ingredients.
 
 ## Research Topics
-1. React Router
-    - an api that creates single page application in React applications
-2. CORS
-    - optional HTTP headers set by server to tell the client to read resources from another protocol/ host/ port
-3. Fetch
-    - an AJAX api that creates single page application
-4. mongo-sanitize
-    - a module that sanitizes user input to defend against query selector injection attacks
-5. bcryptjs
-    - a module that salts and hashes raw password to protect user accounts
-6. Passport.js
-    - an authentication middleware which provides various strategies
-7. JWT
-    - a method to encode data to transfer between parties
-8. axios
-    - a promised baesd library to send HTTP requests
+- React
+- React Router : an api that creates single page application in React applications
+- CORS : optional HTTP headers set by server to tell the client to read resources from another protocol/ host/ port
+- axios : a promised baesd library to send HTTP requests
+- dotenv : a module that loads environment variables seperate from code
+- Passport.js : an authentication middleware which provides various strategies
+- JWT : a method to encode data to transfer between parties
+- mocha 
+
 
 ## Reference
-1. [Vanilla Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-    - [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) [-- link to code](./server/src/utils/readData.mjs)
+- [Vanilla Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+    - [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) [-- link to code](./server/src/utils/findRecipes.mjs)
     - [Class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) [-- link to code](./client/src/utils/readKaomojis.jsx)
     - [React folder structure](https://legacy.reactjs.org/docs/faq-structure.html)
     - [Context](https://react.dev/learn/passing-data-deeply-with-context) [-- link to code](./client/src/context/authProvider.jsx)
-    - [custom Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks) [-- link to code](./client/src/hooks/) 
-3. [React Router](https://reactrouter.com/en/main/start/overview) [-- link to code](./client/src/appRoutes.jsx)
+    - [custom Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks) [-- link to code](./client/src/hooks/)
+
+client
+- [React Router](https://reactrouter.com/en/main/start/overview) [-- link to code](./client/src/appRoutes.jsx)
     - [tutorial](https://www.youtube.com/watch?v=Ul3y1LXxzdU&t=634s)
     - [Location](https://v5.reactrouter.com/web/api/location) [-- link to code](./client/src/components/protectedRoutes.jsx)
     - [Navigate](https://reactrouter.com/en/main/components/navigate) [-- link to code](./client/src/components/protectedRoutes.jsx)
     - [Outlet](https://reactrouter.com/en/main/components/outlet) [-- link to code](./client/src/components/protectedRoutes.jsx)
-4. [socket.IO (decided not to implement)](https://socket.io/docs)
+- [socket.IO (decided not to implement)](https://socket.io/docs)
     - [React showcase](https://socket.io/how-to/use-with-react)
     - [cors](https://socket.io/docs/v4/handling-cors/)
-5. [axios](https://github.com/axios/axios) [-- link to code](./client/src/api/axios.jsx)
+- [axios](https://github.com/axios/axios) [-- link to code](./client/src/api/axios.jsx)
     - [axios interceptor](https://stackoverflow.com/questions/52737078/how-can-you-use-axios-interceptors) [-- link to code](./client/src/hooks/useAxiosTooken.jsx)
     - [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)
-6. [mongo-sanitize](https://www.npmjs.com/package/mongo-sanitize) [-- link to code](./server/src/middlewares/sanitizeInput.mjs)
-7. [bcryptjs](https://www.npmjs.com/package/bcryptjs) [-- link to code](./server/src/routes/authJWT.mjs)
-8. [passport-local (decided not to implement)](https://www.passportjs.org/concepts/authentication) [-- link to code](./server/src/routes/authLocal.mjs)
+
+server
+- [mongo-sanitize](https://www.npmjs.com/package/mongo-sanitize) [-- link to code](./server/src/middlewares/sanitizeInput.mjs)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs) [-- link to code](./server/src/routes/authJWT.mjs)
+- [dotenv](https://www.npmjs.com/package/dotenv) [-- link to code](./server/src/routes/authJWT.mjs)
+<!-- working -->
+- [mongoose](https://mongoosejs.com/docs/guide.html) 
+    - [embedded document](https://mongoosejs.com/docs/subdocs.html) [-- link to code](./server/src/databases/recipedb.mjs)
+    - [reference document](https://mongoosejs.com/docs/populate.html#population) [-- link to code](./server/src/databases/userdb.mjs)
+- [passport-local (decided not to implement)](https://www.passportjs.org/concepts/authentication) [-- link to code](./server/src/routes/authLocal.mjs)
     - [passport manual](https://github.com/jwalton/passport-api-docs#intro)
     - [serialize & deserialize work flow](https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize)
     - [passport-local & AJAX](https://itecnote.com/tecnote/jquery-ajax-call-to-passportjs-login-on-express-nodejs-framework/)
     - [cors & setting cookies (credentials)](https://github.com/jaredhanson/passport/issues/446)
     - [deserializeUser is not called (manual login)](https://stackoverflow.com/questions/57293115/passport-deserializeuser-not-being-called) [-- link to code](./server/src/utils/localPassport.mjs)
-9. [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) [-- link to code](./server/src/routes/authJWT.mjs)
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) [-- link to code](./server/src/routes/authJWT.mjs)
     - [httpOnly cookie and react](https://stackoverflow.com/questions/68970499/how-to-get-http-only-cookie-in-react)
     - [tutorial on server](https://www.youtube.com/watch?v=f2EqECiTBL8)
     - [tutorial on client](https://www.youtube.com/watch?v=nI8PYZNFtac)
     - [JWT handbook](https://auth0.com/resources/ebooks/jwt-handbook)
     - [token intro](https://auth0.com/docs/secure/tokens)
     - [cookie headers](https://expressjs.com/en/api.html#res.cookie)
-10. [dotenv](https://www.npmjs.com/package/dotenv) [-- link to code](./server/src/routes/authJWT.mjs)
+
+<!-- working -->
+testing
+- [Mocha](https://mochajs.org/)
 
 ## [Project Journal](./documentation/journal.md)
 This journal is dedicated to record my learning progress when doing this project.
