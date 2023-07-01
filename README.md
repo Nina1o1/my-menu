@@ -19,10 +19,14 @@ My Menu is for you to recall all your loved recipes with food in your fridge! (o
   ```
 
 ## Data Model
-The application will store Users and their Recipes
+The application will store Users, Recipes, and Filters
 - Users can have multiple Recipes (via reference)
+- Users can have multiple Filters (via reference)
+- Filters must have one User (via reference)
+- Recipes must have one User (via reference)
 - Recipes can have multiple Steps (via embedded)
 - Recipes can have multiple Ingredients (via embedded)
+- Recipes can have miltiple Filters (via reference)
 
 A Sample User: 
 ```json
@@ -30,15 +34,25 @@ A Sample User:
   "_id": "abc",
   "username": "Nina", // unique username
   "hash": "938u2rhgfkj", // a hashed password
-  "recipes": ["123", "345"] // an array of references to recipe document id
+  "filters": ["xx", "yy"], // an array of references to filter id
+  "recipes": ["123", "345"] // an array of references to recipe id
 }
 ```
-A Sample Recipe 
+A Sample Filter:
+```json
+{
+  "_id": "xx",
+  "username": "abc", // reference to author id
+  "category": "fav" // name of filter category
+}
+```
+A Sample Recipe;
 ```json
 {
   "_id": "123",
   "author": "abc", // reference to author id
   "name": "boiled egg", // name of recipe
+  "categories": ["xx"], // reference to filter id
   "note": "Heathy and easy!", // quick note for recipe
   "image": "", // TODO: link to dish image
   "steps": [ // all steps in sequence
@@ -109,10 +123,11 @@ A Sample Recipe
 - As a user, I can search recipes that include the same ingredients.
 
 ## Research Topics
-- React
+- React : a front-end user library
 - React Router : an api that creates single page application in React applications
 - CORS : optional HTTP headers set by server to tell the client to read resources from another protocol/ host/ port
 - axios : a promised baesd library to send HTTP requests
+- Redux : a library to store global state on client-side
 - dotenv : a module that loads environment variables seperate from code
 - Passport.js : an authentication middleware which provides various strategies
 - JWT : a method to encode data to transfer between parties
@@ -139,12 +154,13 @@ client
 - [axios](https://github.com/axios/axios) [-- link to code](./client/src/api/axios.jsx)
     - [axios interceptor](https://stackoverflow.com/questions/52737078/how-can-you-use-axios-interceptors) [-- link to code](./client/src/hooks/useAxiosTooken.jsx)
     - [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)
+<!-- TODO -->
+- [Redux](https://redux.js.org/tutorials/fundamentals/part-1-overview#how-to-read-this-tutorial)
 
 server
 - [mongo-sanitize](https://www.npmjs.com/package/mongo-sanitize) [-- link to code](./server/src/middlewares/sanitizeInput.mjs)
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) [-- link to code](./server/src/routes/authJWT.mjs)
 - [dotenv](https://www.npmjs.com/package/dotenv) [-- link to code](./server/src/routes/authJWT.mjs)
-<!-- working -->
 - [mongoose](https://mongoosejs.com/docs/guide.html) 
     - [embedded document](https://mongoosejs.com/docs/subdocs.html) [-- link to code](./server/src/databases/recipedb.mjs)
     - [reference document](https://mongoosejs.com/docs/populate.html#population) [-- link to code](./server/src/databases/userdb.mjs)
@@ -162,7 +178,7 @@ server
     - [token intro](https://auth0.com/docs/secure/tokens)
     - [cookie headers](https://expressjs.com/en/api.html#res.cookie)
 
-<!-- working -->
+<!-- TODO -->
 testing
 - [Mocha](https://mochajs.org/)
 

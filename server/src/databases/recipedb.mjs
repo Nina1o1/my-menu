@@ -1,19 +1,24 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import IngredientSchema from "./ingredientdb.mjs";
 import StepSchema from "./stepdb.mjs";
-import { Schema } from "mongoose";
 
 const RecipeSchema = new mongoose.Schema({
   author: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    require: true
   },
 
   name: {
     type: String,
     required: true
   },
-  
+
+  categories: [{
+    type: Schema.Types.ObjectId,
+    ref: "Filter"
+  }],
+
   note: {
     type: String
   },

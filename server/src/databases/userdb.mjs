@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -16,6 +15,11 @@ const UserSchema = new mongoose.Schema({
     type: String
   },
   
+  filters: [{
+    type: Schema.Types.ObjectId,
+    ref: "Filter"
+  }],
+
   recipes: [{
     type: Schema.Types.ObjectId,
     ref: "Recipe"
