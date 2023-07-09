@@ -21,11 +21,11 @@ async function loginRouter (req, res) {
   try {
     const foundUser = await User.findOne({username: username});
     // user mistake: usename incorrect
-    if(!foundUser) return res.status(401).send({message: status["login-noexist"]});
+    if(!foundUser) return res.status(401).send({msg: status["login-noexist"]});
     
     const compare = await bcrypt.compare(password, foundUser["hash"]);
     // user mistake: password incorrect
-    if(!compare) return res.status(401).send({message: status["login-noexist"]});
+    if(!compare) return res.status(401).send({msg: status["login-noexist"]});
 
     // create JWTs
     const accessToken = jwt.sign(
@@ -56,11 +56,11 @@ async function loginRouter (req, res) {
     const recipes = await findRecipes(foundUser);
 
     // user login, send accessToken and recipe data to client
-    return res.send({accessToken, recipes, message: status["login-success"]});
+    return res.send({accessToken, recipes, msg: status["login-success"]});
   } catch (error) {
     console.log(error);
     // server error
-    return res.status(502).send({message: status["login-error"]});
+    return res.status(502).send({msg: status["login-error"]});
   }
 }
 

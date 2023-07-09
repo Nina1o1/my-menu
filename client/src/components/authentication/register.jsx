@@ -17,20 +17,18 @@ function Register() {
     evt.preventDefault();
     const action = "register";
 
-    // post request
     try {
       const username = usernameRef.current.value;
       const password = passwordRef.current.value;
-
-      if(!username || !password) {
-        setTerm(findTerm(action, "nodata"));
-        return;
-      }
-
+      
+      // custom error: incomplete input
+      if(!username || !password) throw {msg: "nodata"};
+      
       const postOptions = {
         headers: { 'Content-Type': 'application/json'}
       }
       
+      // post request
       await axiosProvider.post(
         `/${action}`, 
         JSON.stringify({username, password}),
@@ -38,10 +36,12 @@ function Register() {
       );
 
       navigate("/login");
+
     } catch (error) {
-      // handle user errors
-      const message = error?.response?.data["message"];
-      setTerm(findTerm(action, message));
+      console.log(error);
+      // read custom error / error of user response
+      const message = error.msg || error?.response?.data["msg"];
+      setTerm(findTerm(message));
       return;
     }
   }

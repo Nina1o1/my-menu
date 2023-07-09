@@ -43,9 +43,9 @@ router.post("/logout", (req, res) => {
   }
   req.logout((error) => {
     if(error){
-      return res.status(502).send({message: status["logout-error"]})
+      return res.status(502).send({msg: status["logout-error"]})
     }
-    return res.send({message: status["logout-success"]})
+    return res.send({msg: status["logout-success"]})
   });
 });
 

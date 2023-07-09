@@ -14,6 +14,10 @@
     "title": "Please Complete Your Information",
     "parag": ""
   },
+  "error": {
+    "title": "Sorry, Some Error Occurs",
+    "parag": "Please try again"
+  },
 
   "register-success": {
     "title": "Successully Registered!",
@@ -23,10 +27,6 @@
     "title": "This Username Already Exists",
     "parag": "Please change your username"
   },
-  "register-error": {
-    "title": "Sorry, Some Error Occurs",
-    "parag": "Please try again"
-  },
 
   "login-success": {
     "title": "Successul Login!",
@@ -34,10 +34,6 @@
   },
   "login-noexist": {
     "title": "Username or Password Incorrect",
-    "parag": "Please try again"
-  },
-  "login-error": {
-    "title": "Sorry, Some Error Occurs",
     "parag": "Please try again"
   }
 }

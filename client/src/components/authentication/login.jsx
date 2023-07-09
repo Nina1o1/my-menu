@@ -17,19 +17,16 @@ function Login() {
   const passwordRef = useRef(null);
   const [term, setTerm] = useState("");
   
-  // post request
   async function handleClick (evt) {
     evt.preventDefault();
     const action = "login";
-    
+
     try {
       const username = usernameRef.current.value;
       const password = passwordRef.current.value;
       
-      if(!username || !password) {
-        setTerm(findTerm(action, "nodata"));
-        return;
-      }
+      // custom error: incomplete input
+      if(!username || !password) throw {msg: "nodata"};
 
       const postOptions = {
         withCredentials: true,
@@ -38,26 +35,34 @@ function Login() {
         }
       }
 
+      // post request
       const res = await axiosProvider.post(
         `/${action}`, 
         JSON.stringify({username, password}), 
         postOptions
       );
 
-      // set user state
       const accessToken = res.data?.accessToken;
+
+      // custom error: no access token
+      if(!accessToken) throw {msg: "error"};
+
+      // set user in react context
       setAuth({username, accessToken});
 
+      // retrieve relevant user data
       const recipes = res.data?.recipes;
       console.log(recipes);
 
+      // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";
       navigate(from);
 
     } catch (error) {
-      // handle user errors
-      const message = error?.response?.data["message"];
-      setTerm(findTerm(action, message));
+      console.log(error);
+      // read custom error / error of user response
+      const message = error.msg || error?.response?.data["msg"];
+      setTerm(findTerm(message));
       return;
     }
 

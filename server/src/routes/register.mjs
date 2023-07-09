@@ -18,7 +18,7 @@ async function registerRouter (req, res) {
   try {
     const foundUser = await User.findOne({username: username});
     // user mistake: username already exists
-    if(foundUser) return res.status(401).send({message: status["register-exist"]});
+    if(foundUser) return res.status(401).send({msg: status["register-exist"]});
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
     // register new user
@@ -27,12 +27,12 @@ async function registerRouter (req, res) {
       hash: hash
     });
     await newUser.save();
-    return res.send({message: status["register-success"]}); 
+    return res.send({msg: status["register-success"]}); 
 
   } catch (error) {
     // server error
     console.log(error);
-    return res.status(502).send({message: status["register-error"]});
+    return res.status(502).send({msg: status["register-error"]});
   }
 }
 

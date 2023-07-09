@@ -6,28 +6,28 @@ function categoriesSlice (state = initialState, action) {
   switch(action.type) {
 
     case "category/addCategory" : {
-      const inputCat = action.payload;
-      if (state.categoties.includes(inputCat)) return state;
+      const input = action.payload;
+      if (state.categoties.includes(input)) return state;
       return {
         ...state,
-        categoties : [... state.categoties, inputCat]
+        categoties : [... state.categoties, input]
       }
     }
 
     case "category/updateCategory" : {
-      const targetCat = action.payload?.["target"];
-      const inputCat = action.payload?.["input"];
+      const target = action.payload?.["target"];
+      const input = action.payload?.["input"];
       return {
         ...state,
-        categoties : state.categoties.map((cat) => (cat === targetCat) ? inputCat : cat)
+        categoties : state.categoties.map((cat) => (cat === target) ? input : cat)
       }
     }
 
     case "category/deleteCategory" : {
-      const inputCat = action.payload;
+      const target = action.payload;
       return { 
         ...state, 
-        categoties : state.categoties.filter((cat) => cat !== inputCat)
+        categoties : state.categoties.filter((cat) => cat !== target)
       };
     }
     
