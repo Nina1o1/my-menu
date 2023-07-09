@@ -19,43 +19,44 @@ My Menu is for you to recall all your loved recipes with food in your fridge! (o
   ```
 
 ## Data Model
-The application will store Users, Recipes, and Filters
+The application will store Users, Recipes, and Categories
 - Users can have multiple Recipes (via reference)
-- Users can have multiple Filters (via reference)
-- Filters must have one User (via reference)
+- Users must have one Category (via reference)
+- Category must have one User (via reference)
 - Recipes must have one User (via reference)
 - Recipes can have multiple Steps (via embedded)
 - Recipes can have multiple Ingredients (via embedded)
-- Recipes can have miltiple Filters (via reference)
+- Recipes can have miltiple Categories (via reference)
 
 A Sample User: 
 ```json
 {
   "_id": "abc",
-  "username": "Nina", // unique username
+  "username": "Nina", // username, unique (TODO)
   "hash": "938u2rhgfkj", // a hashed password
-  "filters": ["xx", "yy"], // an array of references to filter id
+  "categories": "xx", // a reference to category, unique
   "recipes": ["123", "345"] // an array of references to recipe id
 }
 ```
-A Sample Filter:
+A Sample Category:
 ```json
 {
   "_id": "xx",
-  "username": "abc", // reference to author id
-  "category": "fav" // name of filter category
+  "username": "abc", // reference to author id, unique
+  "categories": ["fav", "easy"] // name of category, each unique
 }
 ```
 A Sample Recipe;
 ```json
 {
   "_id": "123",
-  "author": "abc", // reference to author id
-  "name": "boiled egg", // name of recipe
-  "categories": ["xx"], // reference to filter id
+  "author": "abc", // reference to author id, unique
+  "name": "boiled egg", // name of recipe, unique for each user
+  "serveSize": "1 ppl", // size for recipe
+  "categories": ["xx"], // reference to category ids
   "note": "Heathy and easy!", // quick note for recipe
   "image": "", // TODO: link to dish image
-  "steps": [ // all steps in sequence
+  "steps": [ // all steps, in certain order (TODO)
     {
       "description": "boil the water till bubbling", // describe this step
       "image": "" // TODO: link to step image
@@ -116,7 +117,11 @@ A Sample Recipe;
 
 - As a user, I can create a new recipe.
 - As a user, I can edit my recipe.
+- As a user, I can create category filter.
+- As a user, I can edit category filter.
+- As a user, I can filter my recipe via category.
 - As a user, I can delete my recipe.
+- As a user, I can delete category filter.
 
 - As a user, I can view all my recipes.
 - As a user, I can search a recipe via dish name.

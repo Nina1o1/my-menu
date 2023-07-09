@@ -15,10 +15,10 @@ const UserSchema = new mongoose.Schema({
     type: String
   },
   
-  filters: [{
+  categories: {
     type: Schema.Types.ObjectId,
-    ref: "Filter"
-  }],
+    ref: "Category"
+  },
 
   recipes: [{
     type: Schema.Types.ObjectId,

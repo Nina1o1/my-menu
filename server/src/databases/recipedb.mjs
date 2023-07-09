@@ -9,14 +9,18 @@ const RecipeSchema = new mongoose.Schema({
     require: true
   },
 
-  name: {
+  name: { // TODO: unique for each user
     type: String,
     required: true
   },
 
+  serveSize: {
+    type: String
+  },
+
   categories: [{
     type: Schema.Types.ObjectId,
-    ref: "Filter"
+    ref: "Category"
   }],
 
   note: {
@@ -28,7 +32,7 @@ const RecipeSchema = new mongoose.Schema({
     // required: true
   },
 
-  steps: [{
+  steps: [{ // TODO: in order
     type: StepSchema,
     required: true
   }],

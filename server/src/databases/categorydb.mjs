@@ -1,16 +1,16 @@
 import mongoose, { Schema } from "mongoose";
 
-const FilterSchema = new mongoose.Schema({
+const CategorySchema = new mongoose.Schema({
   author: {
     type: Schema.Types.ObjectId,
     ref: "User",
     require: true
   },
 
-  category: {
+  categories: [{ // TODO : unique for each user
     type: String,
-    require: true
-  }
+    require: false
+  }]
 });
 
-export default FilterSchema;
+export default CategorySchema;

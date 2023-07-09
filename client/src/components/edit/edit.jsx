@@ -20,9 +20,9 @@ export default function Edit() {
       ingredients: ingredientsRef.current.value,
       description: descriptionRef.current.value,
       image: imageRef.current.value // TODO: deal with image
+
     }
     console.log(newData);
-    // socket.emit("send data", newData)
   }
 
   return (
