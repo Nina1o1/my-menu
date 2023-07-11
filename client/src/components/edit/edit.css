@@ -1,50 +1,205 @@
-/* ==== Editor Page ==== */
-
-/* general input styles */
-.edit-container-rows{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.form-container{
   width: 100%;
-  gap: 5vw;
-  margin-bottom: 70px;
-}
-
-.edit-col{
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
 }
 
-.edit-row{
-  position: relative;
-  width: 44.5vw;
+.side-container{
+  width: 45vw; 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
-.edit-label{
+.label-container{
+  width: 135px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 30px;
+  
   text-align: left;
-  padding-top: 15px;
-  min-width: 135px;
   color: #3E54AC;
 }
 
+.edit-label{
+  height: 25px;
+  padding-top: 12px;
+}
+
+.text-container{
+  
+  width: calc(45vw - 135px);
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 30px;
+  position: relative;
+}
 .edit-text{
-  width: 100%;
+  min-width: 100%;
+  height: 15.5px;
+  padding: 13px 5px 5px;
+
   font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  border-color: #BFACE2;
+  border-width: 0.1rem;
   border-style: none;
   border-bottom-style: solid;
-  border-color: #BFACE2;
-  border-radius: 0;
-  border-width: 0.1rem;
-  padding: 13px;
-  height: 15px;
 }
 
 .edit-text:hover{
   background-color: #ECF2FF;
   border-color: #ECF2FF;
   border-radius: 0.3rem;
+}
+
+.edit-text::placeholder {
+  color: #BFACE2;
+}
+/* note */
+.edit-note{
+  height: 116px;
+}
+
+/* image */
+.image-container{
+  display: block;
+  position: relative;
+}
+
+.edit-img{
+  height: 290px;
+
+  border-color: #3E54AC;  
+  border-style: solid;
+}
+
+.edit-imgText{
+  width: calc(45vw - 4px);
+  height: 35px;
+
+  text-align: center;
+  border-style: none;
+  background-color: #3E54AC;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+}
+
+.edit-imgText::placeholder {
+  color: #ECF2FF;
+}
+
+/* step */
+.edit-container {
+  position: relative;
+}
+
+.edit-step:focus{
+  height: 80px;
+}
+
+/* ingredient */
+.ingdt-container {
+  position: relative;
+  width: calc(45vw - 135px);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.edit-ingdt {
+  min-width: auto;
+  flex-grow: 2;
+}
+
+.edit-ingdt-amount {
+  min-width: auto;
+  flex-grow: 1;
+}
+
+.edit-ingdt-amount::placeholder {
+  color: #BFACE2;
+  font-size: 1rem;
+}
+/* button */
+.add-btn{
+  position: relative;
+  bottom: 0;
+  width: calc(45vw - 135px);
+  height: 40px;
+  
+  border-color: #3E54AC;
+  border-width: 0.1rem;
+  border-radius: 0;
+  border-style: none;
+  border-bottom-style: solid;
+  background-color: #fff;
+  color: #3E54AC;
+}
+.add-btn:hover{
+  border-radius: 0.3rem;
+  background-color: #fff;
+  border-style: solid;
+}
+
+.add-step-btn{
+  width: calc(45vw - 126px);
+}
+
+/* edit button */
+.edit-btn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+
+  border-radius: 0.5rem;
+  background-color: transparent;
+  border-width: 0.1rem;
+  color: #BFACE2;
+}
+.edit-btn:hover {
+  border-color: #3E54AC;
+  border-style: solid;
+  background-color: transparent;
+  color: #3E54AC;
+}
+
+.edit-step-btn {
+  right: -8px;
+  top: 2px;
+}
+.edit-ingdt-btn {
+  right: 2px;
+  top: 2px;
+}
+/* form button */
+.btn-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 3vw;
+}
+
+.btn-delete {
+  width: 15vw;
+
+  border-color: #3E54AC;
+  border-width: 0.1rem;
+  border-radius: 0;
+  border-style: none;
+  border-bottom-style: solid;
+  background-color: #fff;
+  color: #3E54AC;
+}
+
+.btn-delete:hover {
+  border-radius: 0.3rem;
+  background-color: #fff;
+  border-style: solid;
+}
+.btn-submit {
+  width: 15vw;
 }
