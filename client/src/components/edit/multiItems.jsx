@@ -1,10 +1,4 @@
-// import socket from '../socket'
-import { useRef, useState } from 'react'
-import './edit.css';
-// import xMark from "./x-mark.png";
-
-export default function Edit() {
-  document.body.classList.remove("purple-page");
+function MultiItems() {
   const [addedStep, setStep] = useState([]);
   const [stepNum, setStepNum] = useState(1);
   const [addedIngredient, setIngredient] = useState([]);
@@ -19,44 +13,8 @@ export default function Edit() {
     setItem(prev => [...prev, itemComponent]);
   }
 
-  return (
-    <form>
-      <div className='edit-container-rows'>
-
-        <div className="edit-col">
-          <EditRow>
-            <label className='edit-label'>Dish Name: </label>
-            <input className="edit-text" type="text" name="username"/>
-          </EditRow>
-
-          <EditRow>
-            <label className='edit-label'>Categories: </label>
-            <select className="edit-text edit-select" name="categories">
-              {/* load options */}
-            </select>
-          </EditRow>
-          
-          <EditRow>
-            <label className='edit-label'>Serve Size: </label>
-            <input className="edit-text" type="text" name="serveSize"/>
-          </EditRow>
-
-          <EditRow>
-            <label className='edit-label'>Note: </label>
-            <textarea className="edit-text edit-note" name="note"/>
-          </EditRow>
-        </div>
-
-        <div className='edit-img-row'>
-          <div className='edit-img'>
-          {/* load image */}
-          </div>
-
-          {/* load image note */}
-          <input className='edit-img-note' type="text" name="imageNote" placeholder='Image Description'/>
-        </div>
-      </div> 
-
+  return(
+    <>
       <div className='edit-container-rows'>
         <div className='edit-col'>
           
@@ -96,21 +54,7 @@ export default function Edit() {
           </div>
         </EditRow>
       </div>
-
-      <div className="edit-btn-container">
-        <button className="edit-delete-btn">Delete</button>
-        <button className="edit-submit-btn">Submit</button>
-      </div>
-
-    </form>
-  )
-}
-
-function EditRow({children}) {
-  return (
-    <div className='edit-row'>
-      {children}
-    </div>
+    </>
   )
 }
 
@@ -136,3 +80,5 @@ function Ingredient({num}) {
 function ItemBtn({img}) {
   return<a className='item-btn'>{img}</a>
 }
+
+return MultiItems;

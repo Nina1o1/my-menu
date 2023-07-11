@@ -11,7 +11,7 @@ function Error() {
 
   return(
     <>
-      <h1 className="msg error-msg">This Page Does Not Exist</h1>
+      <h1 className="error-msg">This Page Does Not Exist</h1>
       <Link to="/" className="redirect-msg">
         {"Back to Home Page "}
         <span className="redirect-kmj"> {kmj.current}</span>

@@ -14,9 +14,6 @@ class Kaomojis {
   constructor() {
     this.data = kaomojis.map(k => new Kaomoji(k["emotions"], k["value"]));
   }
-  getData() {
-    this.data = kaomojis.map(k => new Kaomoji(k["emotions"], k["value"]));
-  }
   findEmotion(emotion) {
     const foundKmjs = this.data.filter(k => k.isEmotion(emotion));
     const randKmj = foundKmjs[Math.floor(Math.random()*foundKmjs.length)]["value"];
@@ -24,9 +21,6 @@ class Kaomojis {
   }
   findSad() {    
     return this.findEmotion("sad");
-  }
-  findHappy() {    
-    return this.findEmotion("happy");
   }
 }
 

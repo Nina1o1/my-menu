@@ -1,12 +1,8 @@
 /* styles shared by both input page and register page */
 .access-container{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 3%;
   display: flex;
   flex-flow: column;
-  font-family: 'Courier New', Courier, monospace;
 }
 .access-row{
   padding: 1rem 0;
@@ -24,10 +20,11 @@
   font-weight: 400;
   font-size: 1.2rem;
 }
-.access-msg-p{
+.access-msg-parag{
   font-size: 0.9rem;
 }
-/* form and button*/
+
+/* form*/
 .access-label{
   display: inline-block;
   color: #3E54AC;
@@ -38,6 +35,8 @@
 .access-bar{
   width: 14rem
 }
+
+/* button */
 .access-btn{
   margin-top: 30px;
   width: 24.5rem;
@@ -56,6 +55,8 @@
   border-style: solid;
   border-radius: 0.5rem;
 }
+
+/* switch reg / login text */
 .access-switch{
   color: #ECF2FF;
 }

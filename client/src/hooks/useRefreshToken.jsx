@@ -11,6 +11,7 @@ const useRefreshToken = () => {
       "/api/refresh",
       { withCredentials: true }
     );
+    
     // overwrite auth state
     setAuth(prev => { return {...prev, accessToken: res.data.accessToken} });
     return res.data.accessToken;

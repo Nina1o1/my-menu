@@ -1,5 +1,5 @@
-/* ==== General Layout ==== */
 body{
+  font-family: 'Courier New', Courier, monospace;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -7,39 +7,44 @@ body{
 .purple-page {
   background-color: #BFACE2;
 }
-/* style all list */
+
+/* style all lists */
 ul, li{
   margin:0;
   padding:0;
   list-style-type: none;
 }
-/* style all button and link */
+
+/* style all links */
 a{
   text-decoration: none;
-  font-family: 'Courier New', Courier, monospace;
 }
+
+/* style all buttons */
 button{
   background-color: #BFACE2;
   color:white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
   border-style: none;
   border-radius: 0.5rem;
   width: 100px;
   height: 55px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
 }
+
 button:hover{
   background-color: #ECF2FF;
   color: #3E54AC;
 }
-/* style all input */
+
+/* style all input texts */
 .text{
-  padding: 13px;
   font-family: 'Courier New', Courier, monospace;
   border-style: solid;
   border-color: #BFACE2;
-  border-width: 1px;
+  border-width: 0.1rem;
   border-radius: 0.3rem;
+  padding: 13px;
 }
 .text:hover{
   background-color:#ECF2FF;

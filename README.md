@@ -51,20 +51,12 @@ A Sample Recipe;
 {
   "_id": "123",
   "author": "abc", // reference to author id, unique
-  "name": "boiled egg", // name of recipe, unique for each user
+  "dishname": "boiled egg", // name of recipe, unique for each user
   "serveSize": "1 ppl", // size for recipe
   "categories": ["xx"], // reference to category ids
   "note": "Heathy and easy!", // quick note for recipe
   "image": "", // TODO: link to dish image
-  "steps": [ // all steps, in certain order (TODO)
-    {
-      "description": "boil the water till bubbling", // describe this step
-      "image": "" // TODO: link to step image
-    },
-    {
-      "description": "boil the egg for 5 minutes"
-    },
-  ],
+  "imageNote": "a well done egg", // note for image
   "ingredients": [ // all ingredients
     {
       "item": "egg", // ingredient name
@@ -74,6 +66,15 @@ A Sample Recipe;
       "item": "water",
       "amount": "pour until eggs aresubmerged"
     }
+  ],
+  "steps": [ // all steps, in certain order (TODO)
+    {
+      "description": "boil the water till bubbling", // describe this step
+      "image": "" // TODO: link to step image
+    },
+    {
+      "description": "boil the egg for 5 minutes"
+    },
   ]
 }
 ```

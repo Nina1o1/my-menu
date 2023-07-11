@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosProvider } from '../../api/axios';
-import useAuth from "../../hooks/useAuth"
+import useAuth from "../../hooks/useAuth";
 
 function Logout() {
   const navigate = useNavigate();

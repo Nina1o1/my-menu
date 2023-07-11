@@ -76,7 +76,8 @@ async function logoutRouter (req,res) {
     res.sendStatus(204);
   }
   
-  // delete refresh token
+  // TODO : delete EXPIRED refresh token in cookie & user db (also access token)
+  // delete refresh token in cookie & in user db
   res.clearCookie("jwt", {httpOnly: true, sameSite: false});
   try {
     foundUser["refreshToken"] = undefined;

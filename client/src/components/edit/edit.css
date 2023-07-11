@@ -1,32 +1,169 @@
 /* ==== Editor Page ==== */
-.edit-container{
+
+/* general input styles */
+.edit-container-rows{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 0 15%;
+  justify-content: space-between;
+  width: 100%;
+  gap: 5vw;
+  margin-bottom: 70px;
 }
-.displayImg{
-  width: 280px;
-  height: 280px;
-}
-.input-container{
-  width: 80%;
+
+.edit-col{
   display: flex;
   flex-direction: column;
-  gap: 30px 0;
+  gap: 30px;
 }
-.addName{
-  height: 1rem;
+
+.edit-row{
+  position: relative;
+  width: 44.5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.addIngredients{
-  height: 3rem;
+
+.edit-label{
+  text-align: left;
+  padding-top: 15px;
+  min-width: 135px;
+  color: #3E54AC;
 }
-.addDescription{
-  height: 6rem;
+
+.edit-text{
+  width: 100%;
+  font-family: 'Courier New', Courier, monospace;
+  border-style: none;
+  border-bottom-style: solid;
+  border-color: #BFACE2;
+  border-radius: 0;
+  border-width: 0.1rem;
+  padding: 13px;
+  height: 15px;
 }
-.displayImg{
-  background-color: gray;
+
+.edit-text:hover{
+  background-color: #ECF2FF;
+  border-color: #ECF2FF;
+  border-radius: 0.3rem;
 }
-.edit-btn{
-  margin-top: 7%;
+
+/* specific input styles */
+/* - note */
+.edit-note{
+  height: 100px;
+}
+
+/* - select */
+.edit-select{
+  height: 40px;
+}
+
+/* - image */
+.edit-img-row{
+  width: 44.5vw;
+  height: 342px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.edit-img{
+  height: 100%;
+  border: solid;
+}
+
+.edit-img-note{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  border-style: none;
+  background-color: #3E54AC;
+  color: #fff;
+  padding: 13px;
+  text-align: center;
+}
+
+.edit-img-note::placeholder{
+  color: #fff;
+}
+
+/* - steps */
+
+/* - ingredients  */
+.edit-allIngredients {
+  width: 100%;
+}
+
+.edit-ingt{
+  width: auto;
+  height: 15px;
+}
+.edit-ingt::placeholder{
+  font-size: 1rem;
+}
+
+/* buttons */
+.item-btn {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #BFACE2;
+}
+.item-btn:hover {
+  border-style: solid;
+  border-color: #BFACE2;
+  border-radius: 0.5rem;
+  color: #BFACE2;
+}
+
+.edit-add-btn {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #ECF2FF;
+  color: #3E54AC;
+  text-align: left;
+  padding: 13px;
+}
+
+.edit-add-btn:hover {
+  background-color: #fff;
+  border-color: #3E54AC;
+  border-style: solid;
+  border-width: 0.08rem;
+}
+.edit-btn-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 5vw;
+}
+
+.edit-delete-btn{
+  width: 200px;
+  background-color: #fff;
+  color: #3E54AC;
+  border-style: none;
+  border-bottom-style: solid;
+  border-width: 0.1rem;
+  border-color: #3E54AC;
+  border-radius: 0;
+}
+.edit-delete-btn:hover{
+  color:#3E54AC;
+  font-weight: 100;
+  border-style: none;
+  border-radius: 0.5rem;
+}
+
+.edit-submit-btn{
+  width: 200px;
+}
+.edit-submit-btn:hover{
+  background-color: #3E54AC;
+  color: #fff;
 }

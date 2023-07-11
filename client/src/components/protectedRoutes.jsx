@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import useAxiosTooken from "../hooks/useAxiosTooken";
 
+// TODO: delete expired access token in auth
 function ProtectedRoutes () {
   const { auth, setAuth } = useAuth();
   const location = useLocation();
@@ -15,8 +16,12 @@ function ProtectedRoutes () {
     async function auth () {
       if (mounted === false) return;
       try {
+        // verify access token in authorization header, and request for a new 
+        // one if expired
         await axiosTookenProvider.get("/api/verifyAuth");
       } catch (error) {
+        // when error, or expired refresh token, log user out and memorize 
+        // current location for user convenience
         console.log(error);
         setAuth({});
         navigate("/login", {state: {from: location}});

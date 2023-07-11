@@ -25,10 +25,11 @@ const IngredientSchema = new mongoose.Schema({
 
 const RecipeSchema = new mongoose.Schema({
   author: UserSchema, // an user id
-  name: {type: String, required: true},
+  dishname: {type: String, required: true},
   categories: [CategorySchema], // array of referenced to index
   note: {type: String},
   image: String, // TODO: Mongoose image
+  imageNote: String,
   steps: [StepSchema], // embedded step schema
   ingredients: [IngredientSchema], // embedded ingredient schema
 });s

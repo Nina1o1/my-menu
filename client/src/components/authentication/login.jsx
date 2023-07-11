@@ -60,7 +60,7 @@ function Login() {
 
     } catch (error) {
       console.log(error);
-      // read custom error / error of user response
+      // read custom error / error from user response
       const message = error.msg || error?.response?.data["msg"];
       setTerm(findTerm(message));
       return;
@@ -73,7 +73,7 @@ function Login() {
       <div className="access-container">
         <div className="access-alerts">
           <h1 className="access-msg-title">{term["title"]}</h1>
-          <p className="access-msg-p">{term["parag"]}</p>
+          <p className="access-msg-parag">{term["parag"]}</p>
         </div>
 
         <form>
