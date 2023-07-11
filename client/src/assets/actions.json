@@ -1,0 +1,25 @@
+{
+  "add_recipe" : "recipes/add",
+  "delete_recipe" : "recipes/deleteRecipe",
+
+  "update_recipe_name" : "recipes/updateName",
+
+  "add_recipe_category" : "recipes/addCategory",
+  "delete_recipe_category": "recipes/deleteCategory",
+  
+  "update_recipe_note" : "recipes/updateNote",
+
+  "update_recipe_image" : "recipes/updateImage",
+
+  "add_recipe_step" : "recipes/addStep",
+  "update_recipe_step" : "recipes/updateStep",
+  "delete_recipe_step" : "recipes/deleteStep",
+
+  "add_recipe_ingredient" : "recipes/addIngredient",
+  "update_recipe_ingredient" : "recipes/updateIngredient",
+  "delete_recipe_ingredient" : "recipes/deleteIngredient",
+
+  "add_category" : "filter/addCategory",
+  "update_category" : "filter/updateCategory",
+  "delete_category" : "filter/deleteCategory"
+}

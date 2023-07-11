@@ -1,0 +1,44 @@
+/* ==== Dictionary Page ==== */
+.search-container{
+  margin-bottom: 4%;
+  height: 2.5rem;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.search-btn{
+  height: 60px;
+  min-width: 136px;
+}
+.search-bar{
+  margin-left: 30px;
+  width: 100%;
+  height: 2rem;
+  border-color: #BFACE2;
+}
+
+/* list of dishes */
+.dict-container{
+    display: flex;
+    flex-flow: column;
+    font-family: 'Courier New', Courier, monospace;
+}
+.dict-row{
+    padding: 1rem 0;
+    border-bottom: solid;
+    border-color: #BFACE2;
+}
+.dict-item{
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0 30px;
+}
+.dict-item:hover{
+    color: #3E54AC;
+}
+.item-each{
+    width: 45%;
+}
