@@ -1,0 +1,32 @@
+.edit-btn-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 5vw;
+}
+
+.edit-delete-btn{
+  width: 200px;
+  background-color: #fff;
+  color: #3E54AC;
+  border-style: none;
+  border-bottom-style: solid;
+  border-width: 0.1rem;
+  border-color: #3E54AC;
+  border-radius: 0;
+}
+.edit-delete-btn:hover{
+  color:#3E54AC;
+  font-weight: 100;
+  border-style: none;
+  border-radius: 0.5rem;
+}
+
+.edit-submit-btn{
+  width: 200px;
+}
+.edit-submit-btn:hover{
+  background-color: #3E54AC;
+  color: #fff;
+}

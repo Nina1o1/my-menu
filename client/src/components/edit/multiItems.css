@@ -1,0 +1,49 @@
+/* - steps */
+.edit-step {
+  padding-right: 40px;
+}
+/* - ingredients  */
+.edit-allIngredients {
+  width: 100%;
+}
+
+.edit-ingt{
+  width: auto;
+  height: 15px;
+}
+.edit-ingt::placeholder{
+  font-size: 1rem;
+}
+
+/* buttons */
+.item-btn {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #BFACE2;
+}
+.item-btn:hover {
+  border-style: solid;
+  border-color: #BFACE2;
+  border-radius: 0.5rem;
+  color: #BFACE2;
+}
+
+.edit-add-btn {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #ECF2FF;
+  color: #3E54AC;
+  text-align: left;
+  padding: 13px;
+}
+
+.edit-add-btn:hover {
+  background-color: #fff;
+  border-color: #3E54AC;
+  border-style: solid;
+  border-width: 0.08rem;
+}

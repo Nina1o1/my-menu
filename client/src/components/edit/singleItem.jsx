@@ -1,5 +1,7 @@
 import "./edit.css";
+import "./singleItem.css";
 import { EditRow } from "./editHelper";
+
 function SingleItem() {
   return (
     <>

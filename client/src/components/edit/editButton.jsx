@@ -1,4 +1,5 @@
-import "./edit.css"
+import "./edit.css";
+import "./editButton.css";
 function EditButton() {
   return (
     <>
@@ -6,7 +7,6 @@ function EditButton() {
         <button className="edit-delete-btn">Delete</button>
         <button className="edit-submit-btn">Submit</button>
       </div>
-
     </>
   )
 }

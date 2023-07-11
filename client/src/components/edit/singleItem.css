@@ -1,0 +1,37 @@
+/* - note */
+.edit-note{
+  height: 100px;
+}
+
+/* - select */
+.edit-select{
+  height: 40px;
+}
+
+/* - image */
+.edit-img-row{
+  width: 44.5vw;
+  height: 342px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.edit-img{
+  height: 100%;
+  border: solid;
+}
+
+.edit-img-note{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  border-style: none;
+  background-color: #3E54AC;
+  color: #fff;
+  padding: 13px;
+  text-align: center;
+}
+
+.edit-img-note::placeholder{
+  color: #fff;
+}
