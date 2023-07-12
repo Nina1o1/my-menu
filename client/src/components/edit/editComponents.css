@@ -1,0 +1,60 @@
+/* step */
+.edit-container {
+  position: relative;
+}
+
+.edit-step:focus{
+  height: 80px;
+}
+
+/* ingredient */
+.ingdt-container {
+  position: relative;
+  width: calc(45vw - 135px);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.edit-ingdt {
+  min-width: auto;
+  flex-grow: 2;
+}
+
+.edit-ingdt-amount {
+  min-width: auto;
+  flex-grow: 1;
+}
+
+.edit-ingdt-amount::placeholder {
+  color: #BFACE2;
+  font-size: 1rem;
+}
+
+/* edit button */
+.edit-btn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+
+  border-radius: 0.5rem;
+  background-color: transparent;
+  border-width: 0.1rem;
+  color: #BFACE2;
+}
+.edit-btn:hover {
+  border-color: #3E54AC;
+  border-style: solid;
+  background-color: transparent;
+  color: #3E54AC;
+}
+
+.edit-step-btn {
+  right: -8px;
+  top: 2px;
+}
+.edit-ingdt-btn {
+  right: 2px;
+  top: 2px;
+}

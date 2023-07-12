@@ -1,3 +1,4 @@
+/* general style containers */
 .form-container{
   width: 100%;
   display: flex;
@@ -22,19 +23,20 @@
   color: #3E54AC;
 }
 
-.edit-label{
-  height: 25px;
-  padding-top: 12px;
-}
-
 .text-container{
-  
   width: calc(45vw - 135px);
   display: flex;
   flex-flow: column nowrap;
   gap: 30px;
   position: relative;
 }
+
+/* general style for label & input */
+.edit-label{
+  height: 25px;
+  padding-top: 12px;
+}
+
 .edit-text{
   min-width: 100%;
   height: 15.5px;
@@ -56,6 +58,14 @@
 
 .edit-text::placeholder {
   color: #BFACE2;
+}
+
+/* select */
+.edit-select {
+  width: calc(100% + 10px);
+  height: 35px;
+  padding-left: 0;
+  padding-bottom: 5px;
 }
 /* note */
 .edit-note{
@@ -91,40 +101,7 @@
   color: #ECF2FF;
 }
 
-/* step */
-.edit-container {
-  position: relative;
-}
-
-.edit-step:focus{
-  height: 80px;
-}
-
-/* ingredient */
-.ingdt-container {
-  position: relative;
-  width: calc(45vw - 135px);
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.edit-ingdt {
-  min-width: auto;
-  flex-grow: 2;
-}
-
-.edit-ingdt-amount {
-  min-width: auto;
-  flex-grow: 1;
-}
-
-.edit-ingdt-amount::placeholder {
-  color: #BFACE2;
-  font-size: 1rem;
-}
-/* button */
+/* add button */
 .add-btn{
   position: relative;
   bottom: 0;
@@ -149,32 +126,6 @@
   width: calc(45vw - 126px);
 }
 
-/* edit button */
-.edit-btn {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-
-  border-radius: 0.5rem;
-  background-color: transparent;
-  border-width: 0.1rem;
-  color: #BFACE2;
-}
-.edit-btn:hover {
-  border-color: #3E54AC;
-  border-style: solid;
-  background-color: transparent;
-  color: #3E54AC;
-}
-
-.edit-step-btn {
-  right: -8px;
-  top: 2px;
-}
-.edit-ingdt-btn {
-  right: 2px;
-  top: 2px;
-}
 /* form button */
 .btn-container {
   display: flex;
