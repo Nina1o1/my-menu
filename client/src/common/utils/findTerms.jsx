@@ -1,4 +1,4 @@
-import terms from "../assets/terms.json";
+import terms from "../../assets/terms.json";
 
 function findTerm(message) {
   if (!message) message = "error";

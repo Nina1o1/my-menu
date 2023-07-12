@@ -1,4 +1,4 @@
-import kaomojis from "../assets/kaomojis.json";
+import kaomojis from "../../assets/kaomojis.json";
 
 class Kaomoji {
   constructor(emotions, value) {

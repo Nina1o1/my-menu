@@ -1,10 +1,10 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
-import { axiosProvider } from '../../api/axios';
+import { axiosProvider } from '../../common/api/axios';
 import './access.css';
 import terms from "../../assets/terms.json";
-import useAuth from "../../hooks/useAuth";
-import findTerm from "../../utils/findTerms";
+import useAuth from "../../common/hooks/useAuth";
+import findTerm from "../../common/utils/findTerms";
 
 function Login() {
   document.body.classList.add("purple-page");

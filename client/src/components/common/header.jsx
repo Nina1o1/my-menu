@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import './header.css';
 import Logout from "../authentication/logout";
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../common/hooks/useAuth';
 import terms from "../../assets/terms.json";
 function Header() {
   return(

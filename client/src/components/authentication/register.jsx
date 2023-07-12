@@ -2,8 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import './access.css';
 import terms from "../../assets/terms.json";
-import { axiosProvider } from '../../api/axios';
-import findTerm from "../../utils/findTerms";
+import { axiosProvider } from '../../common/api/axios';
+import findTerm from "../../common/utils/findTerms";
 
 function Register() {
   document.body.classList.add("purple-page");

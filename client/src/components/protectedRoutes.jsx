@@ -1,8 +1,8 @@
 import { useLocation, Outlet, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import useAuth from "../hooks/useAuth";
-import useAxiosTooken from "../hooks/useAxiosTooken";
+import useAuth from "../common/hooks/useAuth";
+import useAxiosTooken from "../common/hooks/useAxiosTooken";
 
 // TODO: delete expired access token in auth
 function ProtectedRoutes () {

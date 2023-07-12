@@ -3,15 +3,13 @@ A Sample Recipe Reducer
 // create a new recipe
 {"type": "recipes/add", "payload": "recipeObj"} // Object
 // delete a recipe
-{"type": "recipes/deleteRecipe", "payload": "recipeId"} // String (id)
+{"type": "recipes/delete", "payload": "recipeId"} // String (id)
 
 // update a name
 {"type": "recipes/updateName", "payload": "recipeName"} // String
 
-// add a category
-{"type": "recipes/addCategory", "payload": "categoryName"} // String
-// remove a category
-{"type": "recipes/deleteCategory", "payload": "categoryId"} // String (id)
+// update category
+{"type": "recipes/updateCategory", "payload": ["categoryName"]} // List of string
 
 // update note
 {"type": "recipes/updateNote", "payload": "recipeNote"} // String
@@ -41,7 +39,7 @@ A Sample Recipe
     "note": "Heathy and easy!",
     "image": "", // TODO: link to dish image
     "steps": [
-      {
+      { // TODO: ID to each of the step
         "description": "boil the water till bubbling",
         "image": ""
       },
@@ -50,7 +48,7 @@ A Sample Recipe
       },
     ],
     "ingredients": [
-      {
+      { // TODO: ID to each of ingredient
         "item": "egg",
         "amount": "as you want"
       },

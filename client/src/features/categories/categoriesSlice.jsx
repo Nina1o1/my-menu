@@ -12,7 +12,7 @@ const categoriesSlice = createSlice({
       if (!action?.payload) return;
       const input = action.payload;
       if (state.category.includes(input)) return;
-      state.category = [... state.category, input]
+      state.category = [... state.category, input];
     },
 
     updateCategory: (state, action) => {
