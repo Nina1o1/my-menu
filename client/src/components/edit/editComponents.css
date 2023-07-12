@@ -3,8 +3,11 @@
   position: relative;
 }
 
-.edit-step:focus{
-  height: 80px;
+.edit-step-label{
+  padding-bottom: 63px;
+}
+.edit-step {
+  height:76px;
 }
 
 /* ingredient */

@@ -38,7 +38,7 @@ function Edit() {
         <div className="side-container">
 
           <div className="label-container">
-            <div className="edit-label">Dish Name: </div>
+            <div className="edit-label" >Dish Name: </div>
             <div className="edit-label">Serve Size: </div>
             <div className="edit-label">Categories: </div>
             <div className="edit-label">Note: </div>

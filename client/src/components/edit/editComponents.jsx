@@ -2,9 +2,10 @@ import "./edit.css";
 import "./editComponents.css";
 
 function Step({keyVal, delProps}) {
+  const dragMe = keyVal === 1 ? "Hold And Drag!" : "";
   return (
     <div className="edit-container" id={`step-${keyVal}`}>
-      <textarea type="text" className="edit-text edit-step"/>
+      <textarea type="text" className="edit-text edit-step" placeholder={dragMe}/>
       <EditBtn 
         display={"-"}
         btnType={"edit-step-btn"}
@@ -17,14 +18,15 @@ function Step({keyVal, delProps}) {
 
 function StepCount({num}) {
   return (
-    <div className="edit-label">{`Step ${num}: `}</div>
+    <div className="edit-label edit-step-label">{`Step ${num}: `}</div>
   )
 }
 
 function Ingredient({keyVal, delProps}) {
+  const dragMe = keyVal === 1 ? "Drag Me!" : "";
   return (
     <div className="ingdt-container" id={`ingredient-${keyVal}`}>
-      <input type="text" className="edit-text edit-ingdt"/>
+      <input type="text" className="edit-text edit-ingdt" placeholder={dragMe}/>
       <input type="text" className="edit-text edit-ingdt-amount" placeholder="Amount"/>
       <EditBtn 
         display={"-"} 
