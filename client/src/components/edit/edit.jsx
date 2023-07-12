@@ -80,18 +80,11 @@ function Edit() {
               onClick={evt => 
                 handleAddItem(
                   evt, 
-                  <Step 
-                    key={stepCount[1]}
-                    keyVal={stepCount[1]} 
-                    delProps={stepDelProps}
-                  />,
+                  <Step key={stepCount[1]} keyVal={stepCount[1]} delProps={stepDelProps}/>,
                   setStepComp, 
                   setStepCount, 
                   setStepCountComp, 
-                  <StepCount 
-                    key={stepCount[1]} 
-                    num={stepCount[0]}
-                  />
+                  <StepCount key={stepCount[1]} num={stepCount[0]}/>
                 )}>
               Add Step
             </button>
@@ -106,16 +99,12 @@ function Edit() {
           </div>
           
           <div className="text-container">
-            {ingredientComp}
+            { ingredientComp }
             <button className="add-btn"
               onClick={evt => 
                 handleAddItem(
                   evt, 
-                  <Ingredient 
-                    key={IngredientCount[1]}
-                    keyVal={IngredientCount[1]}
-                    delProps={ingredientDelProps}
-                  />,
+                  <Ingredient key={IngredientCount[1]} keyVal={IngredientCount[1]} delProps={ingredientDelProps} />,
                   setIngredientComp, 
                   setIngredientCount, 
               )}>

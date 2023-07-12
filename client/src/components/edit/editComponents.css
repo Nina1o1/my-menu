@@ -10,7 +10,7 @@
 /* ingredient */
 .ingdt-container {
   position: relative;
-  width: calc(45vw - 135px);
+  width: calc(40vw - 135px);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
