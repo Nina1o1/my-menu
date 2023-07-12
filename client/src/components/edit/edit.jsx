@@ -1,16 +1,18 @@
 import "./edit.css";
 import { useState } from "react";
-import { Step, StepCount, Ingredient} from "./editComponents";
+import { Step, StepCount, Ingredient} from "./textComponents";
+import { ItemLabel, BlockItemLabel, ItemSelect, TextInput, BlockItemInput,  
+  FormContainer, LabelContainer, TextContainer} from "./editComponents";
 
 function Edit() {
   document.body.classList.remove("purple-page");
 
-  // step component & step count component
+  // array of components
   const [stepComp, setStepComp] = useState([]);
   const [stepCountComp, setStepCountComp] = useState([]);
-  // ingredient component
   const [ingredientComp, setIngredientComp] = useState([]);
-  // [0] # displayed step, [1] # total steps (including deleted ones, serve as kay & id) 
+
+  // [0] # displayed item, [1] # total items (including deleted ones, serve as kay & id) 
   const [stepCount, setStepCount] = useState([1, 1]);
   const [IngredientCount, setIngredientCount] = useState([1, 1]);
 
@@ -31,96 +33,84 @@ function Edit() {
     setExtraItem(prev => [...prev, extraComp]);
   }
 
-
   return(
     <form>
-      <div className="form-container">
-        <div className="side-container">
 
-          <div className="label-container">
-            <div className="edit-label" >Dish Name: </div>
-            <div className="edit-label">Serve Size: </div>
-            <div className="edit-label">Categories: </div>
-            <div className="edit-label">Note: </div>
-          </div>
-
-          <div className="text-container">
-            <input type="text" className="edit-text" name="dishname" placeholder="Press Tab To Proceed ->"/>
-            <input type="text" className="edit-text" name="serveSize"/>
-            <select className="edit-text edit-select" name="categories">
-              {/* options */}
-            </select>
-            <textarea className="edit-text edit-note" name="note"/>
-          </div>
-
+      <FormContainer>
+        <div className="img-container">
+          image
         </div>
+      </FormContainer>
 
-        <div className="side-container image-container">
+      <FormContainer>
+        <LabelContainer>
+          <ItemLabel label="Dish Name: "/>
+          <ItemLabel label="Serve Size: "/>
+          <ItemLabel label="Categories: "/>
+          <BlockItemLabel label="Note: "/>
+        </LabelContainer>
 
-          <div className="edit-img">
-            <img className="load-img" src="" alt="dish image" />
-          </div>
-          <input type="text" className="edit-imgText" placeholder="Image Side Note"/>
-        
-        </div>
-      </div>
+        <TextContainer>
+          <TextInput name="dishname"/>
+          <TextInput name="serveSize"/>
+          <ItemSelect name="categories"/>
+          <BlockItemInput />
+        </TextContainer>
+      </FormContainer>
 
-      <div className="form-container">
-        <div className="side-container">
+      <FormContainer>
+        <LabelContainer>
+          <ItemLabel label="Ingredients: "/>
+        </LabelContainer>
 
-          <div className="label-container">
-            {stepCount[0] <= 1
-              ? <div className="edit-label">Steps: </div>
-              : <>{stepCountComp}</>}
-          </div>
+        <TextContainer>
+          { ingredientComp }
+          <button className="add-btn"
+            onClick={evt => 
+              handleAddItem(
+                evt, 
+                <Ingredient key={IngredientCount[1]} keyVal={IngredientCount[1]} delProps={ingredientDelProps} />,
+                setIngredientComp, 
+                setIngredientCount, 
+            )}>
+            Add Ingredient
+          </button>
+        </TextContainer>
+      </FormContainer>
 
-          <div className="text-container">
-            { stepComp }
-            <button className="add-btn add-step-btn"
-              onClick={evt => 
-                handleAddItem(
-                  evt, 
-                  <Step key={stepCount[1]} keyVal={stepCount[1]} delProps={stepDelProps}/>,
-                  setStepComp, 
-                  setStepCount, 
-                  setStepCountComp, 
-                  <StepCount key={stepCount[1]} num={stepCount[0]}/>
-                )}>
-              Add Step
-            </button>
-          </div>
+      <FormContainer>
+        <LabelContainer>
+           {stepCount[0] <= 1
+             ? <ItemLabel label="Steps: "/>
+             : <>{stepCountComp}</>}        
+        </LabelContainer>
 
-        </div>
-
-        <div className="side-container">
-        
-          <div className="label-container">
-            <div className="edit-label">Ingredients: </div>
-          </div>
-          
-          <div className="text-container">
-            { ingredientComp }
-            <button className="add-btn"
-              onClick={evt => 
-                handleAddItem(
-                  evt, 
-                  <Ingredient key={IngredientCount[1]} keyVal={IngredientCount[1]} delProps={ingredientDelProps} />,
-                  setIngredientComp, 
-                  setIngredientCount, 
+        <TextContainer>
+          { stepComp }
+          <button className="add-btn"
+            onClick={evt => 
+              handleAddItem(
+                evt, 
+                <Step key={stepCount[1]} keyVal={stepCount[1]} delProps={stepDelProps}/>,
+                setStepComp, 
+                setStepCount, 
+                setStepCountComp, 
+                <StepCount key={stepCount[1]} num={stepCount[0]}/>
               )}>
-              Add Ingredient
-            </button>
-          </div>
+            Add Step
+          </button>
+        </TextContainer>
+      </FormContainer>
 
+      <FormContainer>
+        <LabelContainer />
+
+        <div className="btn-container">
+          <button className="form-btn form-delete">Delete</button>
+          <button className="form-btn form-submit">Submit</button>
         </div>
-      </div>
-
-      <div className="btn-container">
-        <button className="btn-delete">Delete</button>
-        <button className="btn-submit">Submit</button>
-      </div>
+      </FormContainer>
     </form>
   )
 }
-
 export default Edit;

@@ -1,46 +1,38 @@
 /* general style containers */
 .form-container{
-  width: 100%;
+  margin: 0 165px 3rem 165px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  margin-bottom: 60px;
-}
-
-.side-container{
-  width: 40vw; 
-  display: flex;
-  flex-direction: row;
 }
 
 .label-container{
-  width: 135px;
+  width: 230px;
   display: flex;
   flex-flow: column nowrap;
-  gap: 30px;
-  
+  gap: 2px;
   text-align: left;
   color: #3E54AC;
 }
-
 .text-container{
-  width: calc(40vw - 135px);
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  gap: 30px;
   position: relative;
 }
 
 /* general style for label & input */
 .edit-label{
-  height: 25px;
-  padding-top: 12px;
+  padding: 1rem 1rem 1rem 0;
+}
+
+.edit-label-block{
+  padding: 1rem 1rem 8rem 0;
 }
 
 .edit-text{
-  min-width: 100%;
-  height: 15.5px;
-  padding: 13px 5px 5px;
+  width: calc(100% - 4rem);
+  padding: 1rem 3rem 1rem 1rem;
 
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
@@ -60,97 +52,92 @@
   color: #BFACE2;
 }
 
-/* select */
-.edit-select {
-  width: calc(100% + 10px);
-  height: 35px;
-  padding-left: 0;
-  padding-bottom: 5px;
-}
-/* note */
-.edit-note{
-  height: 116px;
+.edit-text-block{
+  padding: 1rem 3rem 1rem 1rem;
+  height: 8rem;
 }
 
 /* image */
-.image-container{
-  display: block;
-  position: relative;
-}
-
-.edit-img{
-  height: 290px;
-
-  border-color: #3E54AC;  
+.img-container{
+  width: 100%;
+  min-height: 40vh;
   border-style: solid;
 }
 
-.edit-imgText{
-  width: calc(40vw - 4px);
-  height: 35px;
-
-  text-align: center;
-  border-style: none;
-  background-color: #3E54AC;
-  color: #fff;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
+/* select */
+.edit-select {
+  width: 100%;
 }
 
-.edit-imgText::placeholder {
-  color: #ECF2FF;
-}
-
-/* add button */
-.add-btn{
+/* ingredient */
+.multi-container{
   position: relative;
-  bottom: 0;
-  width: calc(40vw - 135px);
-  height: 40px;
-  
-  border-color: #3E54AC;
+  width: 100%;
+}
+
+/* edit button */
+.edit-btn {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  right: 0.5rem;
+  top: 0.5rem;
+
+  background-color: transparent;
   border-width: 0.1rem;
-  border-radius: 0;
-  border-style: none;
-  border-bottom-style: solid;
-  background-color: #fff;
+  color: #BFACE2;
+}
+.edit-btn:hover {
+  border-color: #3E54AC;
+  border-style: solid;
   color: #3E54AC;
 }
-.add-btn:hover{
-  border-radius: 0.3rem;
+/* add button */
+.add-btn {
+  padding: 1rem;
+  width: 100%;
+
   background-color: #fff;
-  border-style: solid;
+  color: #3E54AC;
+  border-radius: 0;
+  font-size: 1rem;
+  border-color: #3E54AC;
+  border-width: 0.1rem;
+  border-style: none;
+  border-bottom-style: solid;
 }
 
-.add-step-btn{
-  width: calc(100% + 10px);
+.add-btn:hover {
+  border-radius: 0.3rem;
+  background-color: #ECF2FF;
+  border-color: #ECF2FF;
 }
 
 /* form button */
 .btn-container {
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
-  gap: 6vw;
+  justify-content: space-between;
+  gap: 6rem
+}
+.form-btn {
+  width: 100%;
 }
 
-.btn-delete {
-  width: 15vw;
-
-  border-color: #3E54AC;
-  border-width: 0.1rem;
-  border-radius: 0;
-  border-style: none;
-  border-bottom-style: solid;
+.form-delete {
   background-color: #fff;
   color: #3E54AC;
+  border-radius: 0;
+  font-size: 1rem;
+  border-color: #3E54AC;
+  border-width: 0.1rem;
+  border-style: none;
+  border-bottom-style: solid;
 }
 
-.btn-delete:hover {
+.form-delete:hover {
   border-radius: 0.3rem;
-  background-color: #fff;
-  border-style: solid;
-}
-.btn-submit {
-  width: 15vw;
+  background-color: #ECF2FF;
+  border-color: #ECF2FF;
 }
