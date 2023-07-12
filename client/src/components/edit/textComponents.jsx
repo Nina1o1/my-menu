@@ -23,7 +23,10 @@ function Ingredient({keyVal, delProps}) {
   const dragMe = keyVal === 1 ? "Drag Me!" : "";
   return (
     <div className="multi-container" id={`ingredient-${keyVal}`}>
-      <TextInput placeholder={dragMe}/>
+      <div className="ingdt-container">
+        <TextInput placeholder={dragMe} specifyPurpose="ingdt"/>
+        <TextInput placeholder="Amount"/>
+      </div>
       {/* <input type="text" className="edit-text edit-ingdt-amount" placeholder="Amount"/> */}
       <EditBtn 
         display={"-"} 

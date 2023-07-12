@@ -1,39 +1,41 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
-  categoties: []
-}
+  category: []
+};
 
-function categoriesSlice (state = initialState, action) {
-  switch(action.type) {
-
-    case "category/addCategory" : {
+const categoriesSlice = createSlice({
+  name: "categories",
+  initialState,
+  reducers: {
+    addCategory: (state, action) => {
+      if (!action?.payload) return;
       const input = action.payload;
-      if (state.categoties.includes(input)) return state;
-      return {
-        ...state,
-        categoties : [... state.categoties, input]
-      }
-    }
+      if (state.category.includes(input)) return;
+      state.category = [... state.category, input]
+    },
 
-    case "category/updateCategory" : {
-      const target = action.payload?.["target"];
-      const input = action.payload?.["input"];
-      return {
-        ...state,
-        categoties : state.categoties.map((cat) => (cat === target) ? input : cat)
-      }
-    }
+    updateCategory: (state, action) => {
+      const { target, input } = action?.payload;
+      if(!target || !input) return;
+      if (!state.category.includes(target) || state.category.includes(input)) return;
+      state.category = state.category.map((cat) => {
+        return (cat == target) ? input : cat;
+      });
+    },
 
-    case "category/deleteCategory" : {
+    deleteCategory: (state, action) => {
+      if (!action?.payload) return;
       const target = action.payload;
-      return { 
-        ...state, 
-        categoties : state.categoties.filter((cat) => cat !== target)
-      };
+      if (!state.category.includes(target)) return;
+      state.category = state.category.filter((cat) => cat !== target);
     }
-    
-    default : 
-      return state;
   }
-}
+});
 
-export default categoriesSlice;
+export { categoriesSlice };
+export const { addCategory, updateCategory, deleteCategory } = categoriesSlice.actions;
+
+export const readCategories = (state) => state.categories.category;
+
+export default categoriesSlice.reducer;

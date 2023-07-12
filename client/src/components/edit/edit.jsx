@@ -33,14 +33,15 @@ function Edit() {
     setExtraItem(prev => [...prev, extraComp]);
   }
 
+  // TODO: image, image for each step, ingredient portion, drag feature
   return(
     <form>
 
-      <FormContainer>
+      {/* <FormContainer>
         <div className="img-container">
-          image
+          TODO: image
         </div>
-      </FormContainer>
+      </FormContainer> */}
 
       <FormContainer>
         <LabelContainer>

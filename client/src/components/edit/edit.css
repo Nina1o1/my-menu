@@ -69,10 +69,22 @@
   width: 100%;
 }
 
-/* ingredient */
+/* multiple inputs */
 .multi-container{
   position: relative;
   width: 100%;
+}
+/* ingredient */
+.ingdt-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ingdt{
+  padding: 1rem;
+  width: 130%;
 }
 
 /* edit button */

@@ -1,15 +1,16 @@
 import "./edit.css";
 
-function ItemLabel({label, placeholder}) {
-  return <div className="edit-label" placeholder={placeholder}>{label}</div>
+function ItemLabel({label}) {
+  return <div className="edit-label" >{label}</div>
 }
 
 function BlockItemLabel({label}) {
   return <div className="edit-label-block">{label}</div>
 }
 
-function TextInput({name}) {
-  return <input type="text" className="edit-text" name={name}/>
+function TextInput({name, placeholder, specifyPurpose}) {
+  const className = ["edit-text", specifyPurpose].join(" ");
+  return <input type="text" className={className} name={name} placeholder={placeholder}/>
 }
 
 function ItemSelect({name}) {
