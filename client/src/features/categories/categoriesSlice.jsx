@@ -8,6 +8,10 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
+    loadCategory: (state, action) => {
+
+    },
+
     addCategory: (state, action) => {
       if (!action?.payload) return;
       const input = action.payload;
@@ -34,7 +38,7 @@ const categoriesSlice = createSlice({
 });
 
 export { categoriesSlice };
-export const { addCategory, updateCategory, deleteCategory } = categoriesSlice.actions;
+export const { loadCategory, addCategory, updateCategory, deleteCategory } = categoriesSlice.actions;
 
 export const readCategories = (state) => state.categories.category;
 

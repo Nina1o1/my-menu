@@ -1,14 +1,17 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { axiosProvider } from '../../common/api/axios';
 import './access.css';
 import terms from "../../assets/terms.json";
 import useAuth from "../../common/hooks/useAuth";
 import findTerm from "../../common/utils/findTerms";
+import { loadRecipe } from '../../features/recipes/recipesSlice';
 
 function Login() {
   document.body.classList.add("purple-page");
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { setAuth } = useAuth();
   const location = useLocation();
@@ -50,9 +53,19 @@ function Login() {
       // set user in react context
       setAuth({username, accessToken});
 
-      // retrieve relevant user data
+      // retrieve and read user recipes to redux store
       const recipes = res.data?.recipes;
-      console.log("Load Recipe:", recipes);
+      recipes.forEach(recipe => {
+        const filtered = {
+          _id: recipe["_id"], 
+          categories: recipe["categories"], 
+          dishname: recipe["dishname"],
+          ingredients: recipe["ingredients"].map(ingdt => ingdt["item"])
+        };
+        dispatch(loadRecipe(filtered));
+      });
+
+      
 
       // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";
