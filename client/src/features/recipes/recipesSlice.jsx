@@ -9,27 +9,36 @@ const recipesSlice = createSlice({
   name: "recipe",
   initialState,
   reducers: {
-    loadRecipe: (store, action) => {
-      store = action.type;
+    loadRecipe: (state, action) => {
+      state.push(action.payload);
     },
     
-    addRecipe: (store, action) => {
+    addRecipe: (state, action) => {
 
     },
 
-    updateRecipe: (store, action) => {
+    updateRecipe: (state, action) => {
 
     },
 
-    deleteRecipe: (store, action) => {
+    deleteRecipe: (state, action) => {
 
-    },
-
-    // more
+    }
   }
 });
 
 export { recipesSlice };
 export const { loadRecipe, addRecipe, updateRecipe, deleteRecipe } = recipesSlice.actions;
 
+const readRecipes =  (state)  => {
+  const currRecipes = state?.recipes.map(ele => {
+    return {
+      dishname: ele["dishname"],
+      ingredients: ele["ingredients"]
+    }
+  })
+  return currRecipes;
+}
+
+export { readRecipes };
 export default recipesSlice.reducer;

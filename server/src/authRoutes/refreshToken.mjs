@@ -16,7 +16,6 @@ async function refreshTokenRouter (req, res) {
       return res.sendStatus(401);
     }
 
-    console.log("hi bitch");
     // verify refresh token & send new access token
     jwt.verify(
       refreshToken,

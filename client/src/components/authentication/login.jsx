@@ -65,7 +65,7 @@ function Login() {
         dispatch(loadRecipe(filtered));
       });
 
-      
+      // console.log(store.getState());
 
       // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";
