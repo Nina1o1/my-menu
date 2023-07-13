@@ -3,20 +3,16 @@ import { TextInput } from "./editComponents";
 import EditBtn from "./editBtn";
 
 function Ingredient({keyVal, delProps}) {
-  const dragMe = keyVal === 1 ? "Drag Me!" : "";
+  // const dragMe = keyVal === 1 ? "Drag Me!" : "";
   return (
-    <div className="multi-container" id={`ingredient-${keyVal}`}>
+    <div className="multi-container" id={`ingdtItem-${keyVal}`}>
       
       <div className="ingdt-container">
-        <TextInput placeholder={dragMe} specifyPurpose="ingdt"/>
-        <TextInput placeholder="Amount"/>
+        <TextInput id={`ingredient-item-${keyVal}`} specifyPurpose="ingdt"/>
+        <TextInput id={`ingredient-amount-${keyVal}`} placeholder="Amount"/>
       </div>
 
-      <EditBtn 
-        display={"-"} 
-        delProps={delProps}
-        keyVal={keyVal}
-      />
+      <EditBtn display={"-"} delProps={delProps} keyVal={keyVal}/>
     </div>
   )
 }

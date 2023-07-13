@@ -3,9 +3,9 @@ import { LabelContainer,
   BlockItemLabel, 
   TextContainer, 
   TextInput, 
-  ItemSelect, 
+  ItemSelect,
   BlockItemInput } from "./editComponents";
-  
+
 function EditInfo() {
   return(
     <>
@@ -17,10 +17,10 @@ function EditInfo() {
       </LabelContainer>
 
       <TextContainer>
-        <TextInput name="dishname"/>
-        <TextInput name="serveSize"/>
-        <ItemSelect name="categories"/>
-        <BlockItemInput />
+        <TextInput id="dishname"/>
+        <TextInput id="serveSize"/>
+        <ItemSelect id="categories"/>
+        <BlockItemInput id="note" />
       </TextContainer>
     </>
   )

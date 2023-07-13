@@ -1,18 +1,19 @@
 import "./edit.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Step, StepCount } from "./step";
 import Ingredient from "./ingredient";
 import EditInfo from "./editInfo";
+import FormBtn from "./formBtn";
 import { ItemLabel, FormContainer, LabelContainer, TextContainer} from "./editComponents";
 
 function Edit() {
   document.body.classList.remove("purple-page");
 
+  const formRef = useRef(null);
   // array of components
   const [stepComp, setStepComp] = useState([]);
   const [stepCountComp, setStepCountComp] = useState([]);
   const [ingredientComp, setIngredientComp] = useState([]);
-
   // [0] # displayed item, [1] # total items (including deleted ones, serve as kay & id) 
   const [stepCount, setStepCount] = useState([1, 1]);
   const [IngredientCount, setIngredientCount] = useState([1, 1]);
@@ -37,7 +38,7 @@ function Edit() {
 
   // TODO: image, image for each step, ingredient portion, drag feature
   return(
-    <form>
+    <form ref={formRef}>
 
       {/* <FormContainer>
         <div className="img-container">
@@ -94,12 +95,7 @@ function Edit() {
       </FormContainer>
 
       <FormContainer>
-        <LabelContainer />
-
-        <div className="btn-container">
-          <button className="form-btn form-delete">Delete</button>
-          <button className="form-btn form-submit">Submit</button>
-        </div>
+        <FormBtn formItems={formRef.current}/>
       </FormContainer>
     </form>
   )

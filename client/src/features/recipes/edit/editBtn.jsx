@@ -1,7 +1,8 @@
 import "./edit.css";
 
-// delete specific item (step / ingredient), specified via "delProps" & "keyVal"
+// delete item (step / ingredient), specified via "delProps" & "keyVal"
 function EditBtn({display, delProps, keyVal}) {
+
   function handleDelBtn (evt, delProps) {
     evt.preventDefault();
     const [setItemComp, itemCount, setItemCount, setExtraItem] = [...delProps];
@@ -10,6 +11,7 @@ function EditBtn({display, delProps, keyVal}) {
     setItemCount(prev => [--prev[0], prev[1]]);
     setItemComp(prev => prev.filter(ele => !(ele.key == keyVal)));
     if(!setExtraItem) return;
+    // set step count component
     setExtraItem(prev => {
       prev.pop()
       return prev;
@@ -17,9 +19,7 @@ function EditBtn({display, delProps, keyVal}) {
   }
 
   return (
-    <button
-      className={`edit-btn`}
-      onClick={evt => handleDelBtn(evt, delProps)}>
+    <button className={`edit-btn`} onClick={evt => handleDelBtn(evt, delProps)}>
       {display}
     </button>
   )

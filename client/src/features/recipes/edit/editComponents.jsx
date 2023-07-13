@@ -1,5 +1,27 @@
 import "./edit.css";
 
+function TextInput({id, name, placeholder, specifyPurpose}) {
+  let className;
+  if(specifyPurpose?.length > 1) {
+    className = ["edit-text", ...specifyPurpose].join(" ");  
+  }
+  className = ["edit-text", specifyPurpose].join(" ");
+  return <input id={id} type="text" className={className} name={name} placeholder={placeholder}/>
+}
+
+function ItemSelect({id}) {
+  return(
+    <select id={id} className="edit-text edit-select">
+      {/* options */}
+    </select>
+  )
+}
+
+function BlockItemInput({id}){
+  return <textarea id={id} className="edit-text edit-text-block"/>
+}
+
+// labels
 function ItemLabel({label}) {
   return <div className="edit-label" >{label}</div>
 }
@@ -8,23 +30,7 @@ function BlockItemLabel({label}) {
   return <div className="edit-label-block">{label}</div>
 }
 
-function TextInput({name, placeholder, specifyPurpose}) {
-  const className = ["edit-text", specifyPurpose].join(" ");
-  return <input type="text" className={className} name={name} placeholder={placeholder}/>
-}
-
-function ItemSelect({name}) {
-  return(
-    <select className="edit-text edit-select" name={name}>
-      {/* options */}
-    </select>
-  )
-}
-
-function BlockItemInput({name}){
-  return <textarea className="edit-text edit-text-block" name={name}/>
-}
-
+// containers
 function FormContainer({children}) {
   return(
     <div className="form-container">
