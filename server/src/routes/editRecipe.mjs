@@ -1,6 +1,6 @@
 import { Recipe } from "../databases/alldb.mjs";
 
-function editRecipeRouter (req, res) {
+async function editRecipeRouter (req, res) {
 
   const jwt = req.cookies?.jwt;
   if (!jwt) return res.sendStatus(401);
@@ -8,7 +8,12 @@ function editRecipeRouter (req, res) {
 
   // identify recipe_id to decide EDIT / ADD
   try {
-    
+    const newRecipe = new Recipe({
+      author: userid,
+      ...req.body
+    });
+    console.log(newRecipe);
+    await newRecipe.save();
     return res.sendStatus(200);
   } catch (error) {
     console.log(error);

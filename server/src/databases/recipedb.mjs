@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import slug from "mongoose-slug-updater";
 import IngredientSchema from "./ingredientdb.mjs";
 import StepSchema from "./stepdb.mjs";
 
@@ -44,7 +45,14 @@ const RecipeSchema = new mongoose.Schema({
   steps: [{ // TODO: in order
     type: StepSchema,
     required: true
-  }]
+  }],
+
+  slug: {
+    type: String,
+    slug: ["author", "dishname"],
+    unique: true,
+    slugPaddingSize: 4
+  }
 
 });
 
