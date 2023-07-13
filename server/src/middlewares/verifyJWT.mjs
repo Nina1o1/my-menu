@@ -5,6 +5,7 @@ import "dotenv/config";
 function verifyJWT (req, res, next) {
   // check "authorization" header for refresh token
   const authHeader = req.headers["authorization"];
+
   if (!authHeader) {
     return res.sendStatus(401);
   }

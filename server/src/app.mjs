@@ -5,15 +5,16 @@ import express, { urlencoded } from 'express';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import "dotenv/config";
-// routes
-import { loginRouter, logoutRouter } from "./routes/authJWT.mjs";
-import registerRouter from "./routes/register.mjs";
-import refreshTokenRouter from "./routes/refreshToken.mjs";
+// authentication routes
+import { loginRouter, logoutRouter } from "./authRoutes/authJWT.mjs";
+import registerRouter from "./authRoutes/register.mjs";
+import refreshTokenRouter from "./authRoutes/refreshToken.mjs";
+// protected routes
+import editRecipeRouter from './routes/editRecipe.mjs';
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
 import { verifyJWT, verifyAuthRouter } from './middlewares/verifyJWT.mjs';
 
-import t from './middlewares/t.mjs';
 /* passport-local auth is not used in this project
 import passport from 'passport';
 import session from "express-session"; 
@@ -52,10 +53,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 */
 
-app.use("/", (req, res, next) => {
-  t(req,res);
-  next();
-});
 
 // sanitize input
 app.use("/", sanitizeInput);
@@ -70,6 +67,9 @@ app.get("/api/refresh", refreshTokenRouter);
 // verify access token and serve protected routes
 app.use("/", verifyJWT);
 app.get("/api/verifyAuth", verifyAuthRouter);
+
+// protected routes
+app.post("/editRecipe", editRecipeRouter);
 
 app.listen(3000, () => {
   console.log("connecting to server...")

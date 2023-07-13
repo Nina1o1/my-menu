@@ -50,7 +50,9 @@ async function loginRouter (req, res) {
       sameSite: false,
       maxAge: 24 * 60 * 60 * 1000
     }
-    res.cookie("jwt", refreshToken, cookieOptions);
+    const cookieData = JSON.stringify({refreshToken, userid: foundUser._id.toString()});
+    res.cookie("jwt", cookieData, cookieOptions);
+    // res.cookie("jwt", refreshToken, cookieOptions);
 
     // read user recipes
     const recipes = await findRecipes(foundUser);
@@ -66,11 +68,12 @@ async function loginRouter (req, res) {
 
 async function logoutRouter (req,res) {
   // check refresh token
-  const jwt = req?.cookies?.jwt;
-  if(!jwt) return res.sendStatus(204);
-  
+  const jwtCookie = req?.cookies?.jwt;
+  if(!jwtCookie) return res.sendStatus(204);
+  const refreshToken = JSON.parse(jwtCookie)["refreshToken"];
+
   // target user
-  const foundUser = await User.findOne({refreshToken: jwt});
+  const foundUser = await User.findOne({refreshToken});
   if(!foundUser) {
     res.clearCookie("jwt", {httpOnly: true, sameSite: false});
     res.sendStatus(204);
@@ -79,6 +82,7 @@ async function logoutRouter (req,res) {
   // TODO : delete EXPIRED refresh token in cookie & user db (also access token)
   // delete refresh token in cookie & in user db
   res.clearCookie("jwt", {httpOnly: true, sameSite: false});
+
   try {
     foundUser["refreshToken"] = undefined;
     await foundUser.save();

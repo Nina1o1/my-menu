@@ -42,7 +42,6 @@ function Register() {
       // read custom error / error from server response
       const message = error.msg || error?.response?.data["msg"];
       setTerm(findTerm(message));
-      return;
     }
   }
 

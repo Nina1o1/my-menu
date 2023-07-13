@@ -1,5 +1,6 @@
 import "./edit.css";
 
+// inputs, id must be consistent with database
 function TextInput({id, name, placeholder, specifyPurpose}) {
   let className;
   if(specifyPurpose?.length > 1) {

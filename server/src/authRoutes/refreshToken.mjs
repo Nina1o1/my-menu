@@ -4,20 +4,22 @@ import { User } from "../databases/alldb.mjs";
 
 async function refreshTokenRouter (req, res) {
   // get refresh token
-  const refreshJWT = req.cookies?.jwt;
-  if (!refreshJWT) return res.sendStatus(401);
+  const jwtCookie = req.cookies?.jwt;
+  if (!jwtCookie) return res.sendStatus(401);
+  const refreshToken = JSON.parse(jwtCookie)["refreshToken"];
 
   // find user
   try{
-    const foundUser = await User.findOne({refreshToken: refreshJWT});
+    const foundUser = await User.findOne({refreshToken});
     if (!foundUser) {
       res.clearCookie("jwt", { httpOnly: true, sameSite: false });
       return res.sendStatus(401);
     }
 
+    console.log("hi bitch");
     // verify refresh token & send new access token
     jwt.verify(
-      refreshJWT,
+      refreshToken,
       process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
         if (err || foundUser.username !== decoded.username) return res.sendStatus(402);

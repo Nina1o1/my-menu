@@ -52,7 +52,7 @@ function Login() {
 
       // retrieve relevant user data
       const recipes = res.data?.recipes;
-      console.log(recipes);
+      console.log("Load Recipe:", recipes);
 
       // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";
