@@ -9,7 +9,7 @@ export default function Dictionary() {
 
   // TODO: handle rerenders
   const currRecipes = useSelector(readRecipes);
-  console.log(currRecipes);
+  // console.log(currRecipes);
 
   return(
     <>

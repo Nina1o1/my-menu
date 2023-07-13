@@ -10,7 +10,11 @@ const recipesSlice = createSlice({
   initialState,
   reducers: {
     loadRecipe: (state, action) => {
-      state.push(action.payload);
+      return [...state, action.payload];
+    },
+
+    resetRecipe: (state) => {
+      return initialState;
     },
     
     addRecipe: (state, action) => {
@@ -28,7 +32,7 @@ const recipesSlice = createSlice({
 });
 
 export { recipesSlice };
-export const { loadRecipe, addRecipe, updateRecipe, deleteRecipe } = recipesSlice.actions;
+export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, deleteRecipe } = recipesSlice.actions;
 
 const readRecipes =  (state)  => {
   const currRecipes = state?.recipes.map(ele => {
@@ -37,6 +41,7 @@ const readRecipes =  (state)  => {
       ingredients: ele["ingredients"]
     }
   })
+  console.log("current recipes:", currRecipes);
   return currRecipes;
 }
 
