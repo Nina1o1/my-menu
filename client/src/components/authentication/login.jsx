@@ -16,9 +16,9 @@ function Login() {
   const { setAuth } = useAuth();
   const location = useLocation();
 
+  const [term, setTerm] = useState("");
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-  const [term, setTerm] = useState("");
   const action = "login";
   
   async function handleClick (evt) {
@@ -45,7 +45,7 @@ function Login() {
         postOptions
       );
 
-      const accessToken = res.data?.accessToken;
+      const { accessToken, recipes } = res.data;
 
       // custom error: no access token
       if(!accessToken) throw {msg: "error"};
@@ -53,16 +53,15 @@ function Login() {
       // set user in react context
       setAuth({username, accessToken});
 
-      // retrieve and read user recipes to redux store
-      const recipes = res.data?.recipes;
+      // retrieve and load user recipes to redux store
       recipes.forEach(recipe => {
-        const filtered = {
+        const filterRecipe = {
           _id: recipe["_id"], 
           categories: recipe["categories"], 
           dishname: recipe["dishname"],
           ingredients: recipe["ingredients"].map(ingdt => ingdt["item"])
         };
-        dispatch(loadRecipe(filtered));
+        dispatch(loadRecipe(filterRecipe));
       });
 
       // redirect user to protected route of last visit
@@ -75,7 +74,6 @@ function Login() {
       const message = error.msg || error?.response?.data["msg"];
       setTerm(findTerm(message));
     }
-
   }
 
   return(

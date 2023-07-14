@@ -8,10 +8,10 @@ import AccessForm from './accessForm';
 function Register() {
   document.body.classList.add("purple-page");
   
+  const [term, setTerm] = useState("");
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
-  const [term, setTerm] = useState("");
   const action = "register";
 
   async function handleClick (evt) {
