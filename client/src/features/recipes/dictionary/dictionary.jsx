@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { useRef } from 'react';
 import './dictionary.css';
 import ItemList from './itemList';
 import SearchBar from './searchBar';
@@ -7,14 +8,18 @@ import { readRecipes } from '../recipesSlice';
 export default function Dictionary() {
   document.body.classList.remove("purple-page");
 
+  const currRecipes = useRef([]);
+  const selectedCategories = useRef([]);
+  const inputText = useRef("testme");
+
   // TODO: handle rerenders
-  const currRecipes = useSelector(readRecipes);
-  // console.log(currRecipes);
+  currRecipes.current = useSelector(readRecipes);
+  console.log(inputText.current);
 
   return(
     <>
-      <SearchBar />
-      <ItemList items={currRecipes}/>
+      <SearchBar inputText = {inputText}/>
+      <ItemList items={currRecipes.current}/>
     </>
   )
 }

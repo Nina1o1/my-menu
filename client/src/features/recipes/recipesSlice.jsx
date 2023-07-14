@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = [];
 
-// _id
-// recipe name
-// recipe ingredient
-
 const recipesSlice = createSlice({
   name: "recipe",
   initialState,
@@ -41,7 +37,6 @@ const readRecipes =  (state)  => {
       ingredients: ele["ingredients"]
     }
   })
-  console.log("current recipes:", currRecipes);
   return currRecipes;
 }
 

@@ -1,9 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosProvider } from '../../common/api/axios';
 import useAuth from "../../common/hooks/useAuth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { resetRecipe } from '../../features/recipes/recipesSlice';
-import { readRecipes } from '../../features/recipes/recipesSlice';
 
 function Logout() {
   const navigate = useNavigate();

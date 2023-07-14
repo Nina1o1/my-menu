@@ -91,12 +91,12 @@ function Login() {
 
         <form>
           <div className="access-row">
-            <label className="access-label" htmlFor="username">Username:</label>
+            <label className="access-label">Username:</label>
             <input className="access-bar text" type="text" name="username" ref={usernameRef} required/>
           </div>
           <div className="access-row">
-            <label className="access-label" htmlFor="password">Password:</label>
-            <input className="access-bar text" type="text" name="password" ref={passwordRef} required/>
+            <label className="access-label">Password:</label>
+            <input className="access-bar text" type="password" name="password" ref={passwordRef} required/>
           </div>
           <div className="access-row">
             <button className="access-btn" type="submit" onClick={handleClick}>Login</button>

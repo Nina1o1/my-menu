@@ -8,7 +8,7 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    loadCategory: (state, action) => {
+    loadCategory: (state) => {
       state.category = initialState;
     },
 
