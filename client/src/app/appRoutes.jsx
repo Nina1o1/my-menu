@@ -14,12 +14,10 @@ export default function AppRoutes() {
       <Route path="register" element={<Register />} />
       <Route path="*" element={<Error />} />
 
-      <Route path="" element={<Dictionary />} />
       
       <Route element={ <ProtectedRoutes /> }>
         <Route path="edit" element={<Edit />} />
-        {/* <Route path="" element={<Dictionary />} /> */}
-        {/* <Route path="edit" element={<Edit />} /> */}
+        <Route path="" element={<Dictionary />} />
       </Route>
 
     </Routes>

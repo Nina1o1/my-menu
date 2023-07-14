@@ -6,8 +6,10 @@ import terms from "../../assets/terms.json";
 function Header() {
   return(
     <header className="header">
-      <h1 className="big-heading">My Menu</h1>
-      <Navigate />
+      <div className='header-container'>
+        <h1 className="big-heading">My Menu</h1>
+        <Navigate />
+      </div>
     </header>
   )
 }
@@ -20,13 +22,13 @@ function Navigate() {
         <NavLink to="/edit" className="nav-item">Add</NavLink>
         <span className="nav-userName">
           { auth?.username
-            ? ( 
+            ? (
               <> 
                 {`${auth.username || "username"} | `} 
                 <Logout/>
               </> 
             )
-            : ( 
+            : (
               <> 
                 {`${terms["unlogged-user"]} | `}
                 <Link to="/login" className="nav-login">Login</Link>
