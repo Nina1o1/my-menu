@@ -2,11 +2,7 @@ import "./edit.css";
 
 // inputs, id must be consistent with database
 function TextInput({id, name, placeholder, specifyPurpose}) {
-  let className;
-  if(specifyPurpose?.length > 1) {
-    className = ["edit-text", ...specifyPurpose].join(" ");  
-  }
-  className = ["edit-text", specifyPurpose].join(" ");
+  const className = extraClasses("edit-text", specifyPurpose);
   return <input id={id} type="text" className={className} name={name} placeholder={placeholder}/>
 }
 
@@ -27,8 +23,9 @@ function ItemLabel({label}) {
   return <div className="edit-label" >{label}</div>
 }
 
-function BlockItemLabel({label}) {
-  return <div className="edit-label-block">{label}</div>
+function BlockItemLabel({label, specifyPurpose}) {
+  const className = extraClasses("edit-label-block", specifyPurpose);
+  return <div className={className}> {label} </div>
 }
 
 // containers
@@ -54,6 +51,15 @@ function TextContainer({children}) {
       {children}
     </div>
   )
+}
+
+function extraClasses(defaultClassName, specifyPurpose) {
+  let className;
+  if(specifyPurpose?.length > 1) {
+    className = [defaultClassName, ...specifyPurpose].join(" ");  
+  }
+  className = [defaultClassName, specifyPurpose].join(" ");
+  return className;
 }
 
 export {

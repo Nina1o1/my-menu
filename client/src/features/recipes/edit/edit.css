@@ -10,7 +10,7 @@
   width: 230px;
   display: flex;
   flex-flow: column nowrap;
-  gap: 2px;
+  /* gap:2px; */
   text-align: left;
   color: #3E54AC;
 }
@@ -73,6 +73,11 @@
 .multi-container{
   position: relative;
   width: 100%;
+}
+
+/* step */
+.step-labels{
+  margin: 2px
 }
 /* ingredient */
 .ingdt-container{
