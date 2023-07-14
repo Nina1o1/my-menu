@@ -20,25 +20,35 @@
 
 /* list of dishes */
 .dict-container{
-    display: flex;
-    flex-flow: column;
-    font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex-flow: column;
+  font-family: 'Courier New', Courier, monospace;
 }
 .dict-row{
-    padding: 1rem 0;
-    border-bottom: solid;
-    border-color: #BFACE2;
+  padding: 1rem 0;
+  border-bottom: solid;
+  border-color: #BFACE2;
 }
 .dict-item{
-    color: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 0 30px;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 1.4rem;
+  overflow: hidden;
+  gap: 0 30px;
 }
 .dict-item:hover{
-    color: #3E54AC;
+  color: #3E54AC;
+  max-height: fit-content;
 }
 .item-each{
-    width: 45%;
+  display: inline-block;
+  width: 45%;
+  margin-right: 0.7rem;
+}
+
+.item-ingdt{
+  display: inline-block;
+  margin-right: 0.7rem;
 }

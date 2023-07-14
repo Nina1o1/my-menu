@@ -11,7 +11,7 @@ function ItemList (props) {
 
 function Item (props) {
   const ingredientList = props.ingredients.map((ingred, i) => {
-    return (<span key={i}>{ingred} </span>)
+    return (<span key={i} className="item-ingdt">{ingred}</span>)
   })
 
   return(

@@ -49,6 +49,7 @@ const readRecipes =  (state, inputText, categories)  => {
         return true;
       });
     }
+    // TODO: check category
     if(!isFound) return;
     currRecipes.push({
       dishname: recipe["dishname"],

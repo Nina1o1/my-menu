@@ -11,17 +11,21 @@ export default function Dictionary() {
   // re-render found recipes upon state change
   const [displayRecipes, setDisplayRecipes] = useState([]);
   const [searchCount, setSearchCount] = useState(0);
-  const selectedCategories = useRef([]);
   const inputText = useRef("");
+  // TODO: search by category
+  const selectedCategories = useRef([]);
 
   useEffect(() => {
-    const foundRecipes = recipeDictionary(store.getState(), inputText.current.value);
+    const foundRecipes = recipeDictionary(
+      store.getState(), 
+      inputText.current.value
+      );
     setDisplayRecipes(foundRecipes);
   }, [searchCount]);
 
   return(
     <>
-    <SearchBar setSearchCount={setSearchCount} inputText = {inputText}/>
+      <SearchBar setSearchCount={setSearchCount} inputText = {inputText}/>
       {/* <SearchBar inputText = {inputText}/> */}
       <ItemList items={displayRecipes}/>
     </>
