@@ -3,8 +3,6 @@
 With the food left in fridge, what should I cook to fit my appetite?
 My Menu is for you to recall all your loved recipes with food in your fridge! (or, how to cook my favorate dish)
 
-testtesttest
-
 ## Usage on Local
 - set up and run client on localhost 5173
   ```sh
