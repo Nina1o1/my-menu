@@ -162,7 +162,8 @@ client
     - [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)
 <!-- TODO -->
 - [Redux](https://redux.js.org/tutorials/fundamentals/part-1-overview#how-to-read-this-tutorial)
-
+    - [Redux Toolkit](https://redux-toolkit.js.org/api/configureStore)
+    - [React-Redux](https://react-redux.js.org/api/provider)
 server
 - [mongo-sanitize](https://www.npmjs.com/package/mongo-sanitize) [-- link to code](./server/src/middlewares/sanitizeInput.mjs)
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) [-- link to code](./server/src/routes/authJWT.mjs)

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from '@reduxjs/toolkit';
 const initialState = [];
 
 const recipesSlice = createSlice({
@@ -30,15 +31,37 @@ const recipesSlice = createSlice({
 export { recipesSlice };
 export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, deleteRecipe } = recipesSlice.actions;
 
-const readRecipes =  (state)  => {
-  const currRecipes = state?.recipes.map(ele => {
-    return {
-      dishname: ele["dishname"],
-      ingredients: ele["ingredients"]
+const readRecipes =  (state, inputText, categories)  => {
+  const currRecipes = [];
+  
+  state.recipes.forEach(recipe => {
+    let isFound = true;
+    // check if input is found in ingredient or recipe
+    if(inputText) {
+      isFound = false;
+      const searchStr =  `${recipe["dishname"]} ${recipe["ingredients"].join(" ")}`;
+      const inputArr = inputText.split(" ");
+      inputArr.every(input => {
+        if(searchStr.includes(input)) {
+          isFound = true;
+          return false;
+        }
+        return true;
+      });
     }
-  })
+    if(!isFound) return;
+    currRecipes.push({
+      dishname: recipe["dishname"],
+      ingredients: recipe["ingredients"]
+    });
+  });
+
   return currRecipes;
 }
 
-export { readRecipes };
+const recipeDictionary = createSelector([readRecipes], (foundRecipes, inputText) => {
+  return foundRecipes;
+});
+
+export { readRecipes, recipeDictionary};
 export default recipesSlice.reducer;
