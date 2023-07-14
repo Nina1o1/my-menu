@@ -1,12 +1,12 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { axiosProvider } from '../../common/api/axios';
 import './access.css';
-import terms from "../../assets/terms.json";
 import useAuth from "../../common/hooks/useAuth";
 import findTerm from "../../common/utils/findTerms";
 import { loadRecipe } from '../../features/recipes/recipesSlice';
+import AccessForm from "./accessForm";
 
 function Login() {
   document.body.classList.add("purple-page");
@@ -19,10 +19,10 @@ function Login() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [term, setTerm] = useState("");
+  const action = "login";
   
   async function handleClick (evt) {
     evt.preventDefault();
-    const action = "login";
 
     try {
       const username = usernameRef.current.value;
@@ -65,8 +65,6 @@ function Login() {
         dispatch(loadRecipe(filtered));
       });
 
-      // console.log(store.getState());
-
       // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";
       navigate(from);
@@ -76,38 +74,17 @@ function Login() {
       // read custom error / error from user response
       const message = error.msg || error?.response?.data["msg"];
       setTerm(findTerm(message));
-      return;
     }
 
   }
 
   return(
-    <>
-      <div className="access-container">
-        <div className="access-alerts">
-          <h1 className="access-msg-title">{term["title"]}</h1>
-          <p className="access-msg-parag">{term["parag"]}</p>
-        </div>
-
-        <form>
-          <div className="access-row">
-            <label className="access-label">Username:</label>
-            <input className="access-bar text" type="text" name="username" ref={usernameRef} required/>
-          </div>
-          <div className="access-row">
-            <label className="access-label">Password:</label>
-            <input className="access-bar text" type="password" name="password" ref={passwordRef} required/>
-          </div>
-          <div className="access-row">
-            <button className="access-btn" type="submit" onClick={handleClick}>Login</button>
-          </div>
-        </form>
-        <p className="access-switch">
-          {terms["no-account"]}
-          <Link to="/register"> Register</Link>
-        </p>
-      </div>
-    </>
+    <AccessForm 
+      term={term}
+      usernameRef={usernameRef}
+      passwordRef={passwordRef}
+      handleClick={handleClick}
+      action={action}/>
   )
 }
 
