@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import useAuth from "../common/hooks/useAuth";
 import useAxiosTooken from "../common/hooks/useAxiosTooken";
+import useLogout from "../common/hooks/useLogout";
 
 // TODO: delete expired access token in auth
 function ProtectedRoutes () {
-  const { auth, setAuth } = useAuth();
-  const location = useLocation();
+  const { auth } = useAuth();
   const axiosTookenProvider = useAxiosTooken();
+  const resetUserInfo = useLogout();
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +25,7 @@ function ProtectedRoutes () {
         // when error, or expired refresh token, log user out and memorize 
         // current location for user convenience
         console.log(error);
-        setAuth({});
+        resetUserInfo();
         navigate("/login", {state: {from: location}});
       }
     }

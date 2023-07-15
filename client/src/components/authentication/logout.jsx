@@ -1,24 +1,20 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosProvider } from '../../common/api/axios';
-import useAuth from "../../common/hooks/useAuth";
-import { useDispatch } from "react-redux";
-import { resetRecipe } from '../../features/recipes/recipesSlice';
+import useLogout from '../../common/hooks/useLogout';
 
 function Logout() {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
-  const dispatch = useDispatch();
+  const resetUserInfo = useLogout();
 
   async function handleClick(evt) {
     evt.preventDefault();
     const action = "logout";
-
-    setAuth({});
-    dispatch(resetRecipe());
+    
     
     try {
       const postOptions = { withCredentials: true };
       await axiosProvider.post(`/${action}`, null, postOptions);
+      resetUserInfo();
       navigate("/login");
     } catch (error) {
       console.log(error);

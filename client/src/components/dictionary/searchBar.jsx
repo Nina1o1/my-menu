@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import terms from '../../../assets/terms.json';
+import terms from '../../assets/terms.json';
 import { styleToggleHelper } from './dictHelper';
 
 function SearchBar({setSearchCount, inputText, displayMode}) {

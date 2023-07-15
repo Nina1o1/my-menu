@@ -6,7 +6,7 @@ import { LabelContainer,
   ItemSelect,
   BlockItemInput } from "./editComponents";
 
-function EditInfo() {
+function BasicInfo() {
   return(
     <>
       <LabelContainer>
@@ -26,4 +26,4 @@ function EditInfo() {
   )
 }
 
-export default EditInfo;
+export default BasicInfo;

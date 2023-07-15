@@ -2,7 +2,7 @@ import "./edit.css";
 import { useState, useRef } from "react";
 import { Step, StepCount } from "./step";
 import Ingredient from "./ingredient";
-import EditInfo from "./editInfo";
+import BasicInfo from "./basicInfo";
 import FormBtn from "./formBtn";
 import { ItemLabel, FormContainer, LabelContainer, TextContainer} from "./editComponents";
 
@@ -47,7 +47,7 @@ function Edit() {
       </FormContainer> */}
 
       <FormContainer>
-        <EditInfo />
+        <BasicInfo />
       </FormContainer>
 
       <FormContainer>

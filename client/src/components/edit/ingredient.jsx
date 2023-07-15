@@ -8,7 +8,7 @@ function Ingredient({keyVal, delProps}) {
     <div className="multi-container" id={`ingdtItem-${keyVal}`}>
       
       <div className="ingdt-container">
-        <TextInput id={`ingredient-item-${keyVal}`} specifyPurpose="ingdt"/>
+        <TextInput id={`ingredient-item-${keyVal}`} specifyClass="ingdt"/>
         <TextInput id={`ingredient-amount-${keyVal}`} placeholder="Amount"/>
       </div>
 

@@ -1,9 +1,14 @@
 import "./edit.css";
 
 // inputs, id must be consistent with database
-function TextInput({id, placeholder, specifyPurpose}) {
-  const className = extraClasses("edit-text", specifyPurpose);
+function TextInput({id, placeholder, specifyClass}) {
+  const className = extraClasses("edit-text", specifyClass);
   return <input id={id} type="text" className={className} placeholder={placeholder}/>
+}
+
+
+function BlockItemInput({id}){
+  return <textarea id={id} className="edit-text edit-text-block"/>
 }
 
 function ItemSelect({id}) {
@@ -14,17 +19,13 @@ function ItemSelect({id}) {
   )
 }
 
-function BlockItemInput({id}){
-  return <textarea id={id} className="edit-text edit-text-block"/>
-}
-
 // labels
 function ItemLabel({label}) {
   return <div className="edit-label" >{label}</div>
 }
 
-function BlockItemLabel({label, specifyPurpose}) {
-  const className = extraClasses("edit-label-block", specifyPurpose);
+function BlockItemLabel({label, specifyClass}) {
+  const className = extraClasses("edit-label-block", specifyClass);
   return <div className={className}> {label} </div>
 }
 

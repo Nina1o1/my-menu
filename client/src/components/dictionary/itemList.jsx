@@ -3,8 +3,8 @@ import { styleToggleHelper } from './dictHelper';
 
 function ItemList ({displayRecipes, handleClickRecipe, displayMode}) {
   const itemList = displayRecipes.map((recipe, i) => {
-    return <Item 
-      recipe={recipe} 
+    return <Item
+      recipe={recipe}
       handleClickRecipe={handleClickRecipe}
       displayMode={displayMode}
       key={i}/>

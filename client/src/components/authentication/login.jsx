@@ -5,7 +5,7 @@ import { axiosProvider } from '../../common/api/axios';
 import './access.css';
 import useAuth from "../../common/hooks/useAuth";
 import findTerm from "../../common/utils/findTerms";
-import { loadRecipe } from '../../features/recipes/recipesSlice';
+import { loadRecipe } from '../../features/recipesSlice';
 import AccessForm from "./accessForm";
 
 function Login() {
@@ -54,15 +54,7 @@ function Login() {
       setAuth({username, accessToken});
 
       // retrieve and load user recipes to redux store
-      recipes.forEach(recipe => {
-        const filterRecipe = {
-          _id: recipe["_id"],
-          categories: recipe["categories"],
-          dishname: recipe["dishname"],
-          ingredients: recipe["ingredients"].map(ingdt => ingdt["item"])
-        };
-        dispatch(loadRecipe(filterRecipe));
-      });
+      dispatch(loadRecipe(recipes));
 
       // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";

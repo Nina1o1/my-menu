@@ -13,7 +13,7 @@ function Step({keyVal, delProps}) {
 }
 
 function StepCount({num}) {
-  return <BlockItemLabel specifyPurpose={"step-labels"} label={`Step ${num}: `}/>
+  return <BlockItemLabel specifyClass={"step-labels"} label={`Step ${num}: `}/>
 }
 
 export {Step, StepCount};

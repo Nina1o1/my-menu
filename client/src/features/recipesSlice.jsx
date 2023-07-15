@@ -7,15 +7,23 @@ const recipesSlice = createSlice({
   initialState,
   reducers: {
     loadRecipe: (state, action) => {
-      return [...state, action.payload];
+      const filterRecipes = action.payload.map(recipe => {
+        return {
+          _id: recipe["_id"],
+          categories: recipe["categories"],
+          dishname: recipe["dishname"],
+          ingredients: recipe["ingredients"].map(ingdt => ingdt["item"])
+        };
+      });
+      return filterRecipes;
     },
 
-    resetRecipe: (state) => {
+    resetRecipe: () => {
       return initialState;
     },
     
     addRecipe: (state, action) => {
-
+      return [...state, action.payload];
     },
 
     updateRecipe: (state, action) => {

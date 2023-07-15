@@ -1,9 +1,21 @@
+import { useLocation, useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { addRecipe } from "../../features/recipesSlice";
 import "./edit.css";
 import { LabelContainer } from "./editComponents";
-import useAxiosTooken from "../../../common/hooks/useAxiosTooken";
+import useAxiosTooken from "../../common/hooks/useAxiosTooken";
+import useLogout from "../../common/hooks/useLogout";
 
 function FormBtn({formItems}) {
+  // secure post request
   const axiosTookenProvider = useAxiosTooken();
+  // const dispatch = useDispatch();
+  
+  // logout hooks
+  const resetUserInfo = useLogout();
+  const location = useLocation();
+  const navigate = useNavigate();
+
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -65,8 +77,9 @@ function FormBtn({formItems}) {
 
     } catch (error) {
       console.log(error);
+      resetUserInfo();
+      navigate("/login", {state: {from: location}});
     }
-
   }
 
   function handleDelete(evt) {

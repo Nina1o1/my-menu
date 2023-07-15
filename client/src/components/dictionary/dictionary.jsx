@@ -1,11 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './dictionary.css';
 import ItemList from './itemList';
 import SearchBar from './searchBar';
 import Display from '../display/display';
-import { recipeDictionary } from '../recipesSlice';
-import store from "../../../app/store";
-import useAxiosTooken from "../../../common/hooks/useAxiosTooken";
+import { recipeDictionary } from '../../features/recipesSlice';
+import store from "../../app/store";
+import useAxiosTooken from "../../common/hooks/useAxiosTooken";
+import useLogout from '../../common/hooks/useLogout';
 import { styleToggleHelper } from './dictHelper';
 
 export default function Dictionary() {
@@ -21,10 +23,13 @@ export default function Dictionary() {
   const [displayMode, setdisplayMode] = useState(false);
   const [dictContainerStyle, setDictContainerStyle] = useState("dictionary-container");
   const [showpageContainerStyle, setShowpageContainerStyle] = useState("showpage-container");
-  // state to display specific recipe
   const [clickedRecipe, setClickedRecipe] = useState(null);
-  // fetch api
+  // sucure fetch api
   const axiosTookenProvider = useAxiosTooken();
+  // hooks for logout
+  const resetUserInfo = useLogout();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // find recipes and re-render when click on search button
   useEffect(() => {
@@ -48,6 +53,8 @@ export default function Dictionary() {
       setdisplayMode(true);
     } catch (error) {
       console.log(error);
+      resetUserInfo();
+      navigate("/login", {state: {from: location}});
     }
   }
 
@@ -72,7 +79,7 @@ export default function Dictionary() {
         </div>
 
         {displayMode
-          ? <Display recipe = {clickedRecipe}/>
+          ? <Display recipe = {clickedRecipe} setdisplayMode={setdisplayMode}/>
           : "" }
 
       </div>
