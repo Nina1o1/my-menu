@@ -6,7 +6,7 @@ import BackBtn from "./backBtn";
 
 function Display ({recipe, setdisplayMode}) {
   
-  console.log(recipe);
+  // console.log(recipe);
   // TODO: display and edit
   return (
     <div className='display-container'>

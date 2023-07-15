@@ -86,17 +86,15 @@ A Sample Recipe;
 `/` -- page for menu dictionary
 ![dictionary page](./documentation/dictionary-page.png)
 
+`/` -- also responsive to display each recipe
+![recipe show page](./documentation/display-page.png)
+
 `/edit` -- page to add, edit, or delete recipe
 ![recipe edit page](./documentation/edit-page.png)
 
-`/:recipe_name` -- page to show each recipe
-![recipe show page](./documentation/edit-page.png)
-
 `/login` -- page to authenticate an existing user
+`/register` -- page to register a new user, share the same layout with login page
 ![login page](./documentation/login-page.png)
-
-`/register` -- page to register a new user
-![register page](./documentation/register-page.png)
 
 ## Site Map
 ```

@@ -1,6 +1,6 @@
 // contents
 function Text({specifyClass, content}) {
-  const className = extraClasses("display-text", specifyClass);
+  const className = extraClasses("", specifyClass);
   return <div className={className}>{content}</div>
 }
 
@@ -15,7 +15,18 @@ function ItemContainer({children}) {
   return <div className="item-container">{children}</div>
 }
 
-
+function ParagContainer({longContent}) {
+  const stepLine = longContent.split("\n");
+  // console.log(stepLine);
+  const textLine = stepLine.map((line, i) => {
+    return <Text content={line} key={i}/>
+  });
+  return (
+    <div className="parag-container">
+      {textLine}
+    </div>
+  )
+}
 function extraClasses(defaultClassName, specifyPurpose) {
   let className;
   if(specifyPurpose?.length > 1) {
@@ -29,4 +40,5 @@ export {
   Text,
   ItemLabel,
   ItemContainer,
+  ParagContainer
 }

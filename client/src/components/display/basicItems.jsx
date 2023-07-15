@@ -1,4 +1,4 @@
-import {  Text, ItemLabel, ItemContainer } from "./displayComponents";
+import {  Text, ItemLabel, ItemContainer, ParagContainer } from "./displayComponents";
 function BasicItems ({recipe}) {
   return (
     <>
@@ -11,10 +11,21 @@ function BasicItems ({recipe}) {
 
 function Item({label, content}) {
   if (!content?.length) return;
+  let item;
+  // customize for note
+  switch (label) {
+    case "Note": {
+      item = <ParagContainer longContent = {content}/>;
+      break;  
+    }
+    default: {
+      item = <Text content = {content}/>;
+    }
+  }
   return (
     <ItemContainer>
       <ItemLabel label = {label}/>
-      <Text content = {content}/>
+      {item}
     </ItemContainer>
   )
 }
