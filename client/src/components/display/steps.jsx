@@ -1,12 +1,14 @@
-import {  ItemLabel, ItemContainer, ParagContainer } from "./displayComponents";
+import {  ItemLabel, ItemContainer, ParagContainer, Br } from "./displayComponents";
 
 function Steps({steps}){
+  if (!steps?.length) return;
   const styleSteps = steps.map((step, i) => {
     return <EachStep step={step["description"]} label={i + 1} key={i}/>
   });
   
   return (
     <>
+      <Br/>
       <ItemContainer>
         <ItemLabel label = "Steps"/>
       </ItemContainer>

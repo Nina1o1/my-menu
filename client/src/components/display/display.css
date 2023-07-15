@@ -9,6 +9,7 @@
 .display-content-container{
   margin: auto;
   width: fit-content;
+  min-width: 300px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;

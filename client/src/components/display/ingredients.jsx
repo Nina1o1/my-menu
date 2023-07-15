@@ -1,12 +1,13 @@
-import {  Text, ItemLabel, ItemContainer } from "./displayComponents";
+import {  Text, ItemLabel, ItemContainer, Br } from "./displayComponents";
 
 function Ingredients({ingredients}) {
-
+  if(!ingredients?.length) return;
   const styleIngredients = ingredients?.map((ingdt, i) => {
     return <EachIngredient ingredient={ingdt} label={i + 1} key={i}/>
   });
   return (
     <>
+      <Br />
       <ItemContainer>
         <ItemLabel label = "Ingredients"/>
       </ItemContainer>

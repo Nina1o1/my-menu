@@ -27,6 +27,11 @@ function ParagContainer({longContent}) {
     </div>
   )
 }
+
+// style
+function Br() {
+  return <div className="display-break"/>
+}
 function extraClasses(defaultClassName, specifyPurpose) {
   let className;
   if(specifyPurpose?.length > 1) {
@@ -40,5 +45,6 @@ export {
   Text,
   ItemLabel,
   ItemContainer,
-  ParagContainer
+  ParagContainer,
+  Br
 }
