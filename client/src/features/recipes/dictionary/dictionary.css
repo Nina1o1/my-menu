@@ -37,6 +37,7 @@
   max-height: 1.4rem;
   overflow: hidden;
   gap: 0 30px;
+  cursor: pointer;
 }
 .dict-item:hover{
   color: #3E54AC;

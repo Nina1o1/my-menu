@@ -10,7 +10,7 @@ function FormBtn({formItems}) {
     console.log(formItems);
     if(!formItems) return; // no input, form element is null
 
-    // read form data via useRef passed as property, consistent with database, see README
+    // read form data via useRef passed as property, consistent with database, see README for database
     const formdata = {};
     Array.from(formItems).forEach(ele => {
       if(!ele.id) return;

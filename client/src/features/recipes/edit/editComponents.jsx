@@ -1,9 +1,9 @@
 import "./edit.css";
 
 // inputs, id must be consistent with database
-function TextInput({id, name, placeholder, specifyPurpose}) {
+function TextInput({id, placeholder, specifyPurpose}) {
   const className = extraClasses("edit-text", specifyPurpose);
-  return <input id={id} type="text" className={className} name={name} placeholder={placeholder}/>
+  return <input id={id} type="text" className={className} placeholder={placeholder}/>
 }
 
 function ItemSelect({id}) {

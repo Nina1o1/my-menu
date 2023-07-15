@@ -11,6 +11,7 @@ import registerRouter from "./authRoutes/register.mjs";
 import refreshTokenRouter from "./authRoutes/refreshToken.mjs";
 // protected routes
 import editRecipeRouter from './routes/editRecipe.mjs';
+import findRecipeRouter from './routes/findRecipeRouter.mjs';
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
 import { verifyJWT, verifyAuthRouter } from './middlewares/verifyJWT.mjs';
@@ -70,6 +71,7 @@ app.get("/api/verifyAuth", verifyAuthRouter);
 
 // protected routes
 app.post("/editRecipe", editRecipeRouter);
+app.get("/findRecipe", findRecipeRouter);
 
 app.listen(3000, () => {
   console.log("connecting to server...")

@@ -49,7 +49,7 @@ const RecipeSchema = new mongoose.Schema({
 
   slug: {
     type: String,
-    slug: ["dishname"],
+    slug: "dishname",
     unique: true,
     slugPaddingSize: 4
   }

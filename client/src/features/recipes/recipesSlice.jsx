@@ -51,10 +51,7 @@ const readRecipes =  (state, inputText, categories)  => {
     }
     // TODO: check category
     if(!isFound) return;
-    currRecipes.push({
-      dishname: recipe["dishname"],
-      ingredients: recipe["ingredients"]
-    });
+    currRecipes.push(recipe);
   });
 
   return currRecipes;

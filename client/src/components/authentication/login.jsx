@@ -56,8 +56,8 @@ function Login() {
       // retrieve and load user recipes to redux store
       recipes.forEach(recipe => {
         const filterRecipe = {
-          _id: recipe["_id"], 
-          categories: recipe["categories"], 
+          _id: recipe["_id"],
+          categories: recipe["categories"],
           dishname: recipe["dishname"],
           ingredients: recipe["ingredients"].map(ingdt => ingdt["item"])
         };

@@ -15,9 +15,9 @@ export default function AppRoutes() {
       <Route path="*" element={<Error />} />
 
       
-      <Route element={ <ProtectedRoutes /> }>
         <Route path="edit" element={<Edit />} />
         <Route path="" element={<Dictionary />} />
+      <Route element={ <ProtectedRoutes /> }>
       </Route>
 
     </Routes>

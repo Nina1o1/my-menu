@@ -100,14 +100,13 @@ A Sample Recipe;
 
 ## Site Map
 ```
-|-  /              
-|                  
-|-  /login         
-|                  
-|-  /register      
-|                  |- /
-|-  /:recipe_name -| 
-                   |- /edit
+|-  /
+|
+|-  /login
+|
+|-  /register
+|
+|-  /edit
 ```
 
 ## User Stories
