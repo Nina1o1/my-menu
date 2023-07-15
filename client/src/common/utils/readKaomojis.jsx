@@ -2,6 +2,7 @@ import kaomojis from "../../assets/kaomojis.json";
 
 class Kaomoji {
   constructor(emotions, value) {
+    console.log("reading me!");
     this.emotions = emotions;
     this.value = value;
   }
@@ -21,6 +22,9 @@ class Kaomojis {
   }
   findSad() {    
     return this.findEmotion("sad");
+  }
+  findHappy() {
+    return this.findEmotion("happy");
   }
 }
 

@@ -1,4 +1,10 @@
 /* ==== Dictionary Page ==== */
+.dictionary-container{
+  width: 100%;
+}
+.dictionary-container-mode{
+  max-width: 346px;
+}
 .search-container{
   margin-bottom: 4%;
   height: 2.5rem;
@@ -8,14 +14,21 @@
   align-items: center;
 }
 .search-btn{
-  height: 60px;
+  height: 3.8rem;
   min-width: 136px;
+}
+.search-btn-mode {
+  height: 3.8rem;
 }
 .search-bar{
   margin-left: 30px;
   width: 100%;
   height: 2rem;
-  border-color: #BFACE2;
+}
+.search-bar-mode{
+  margin-left: 1rem;
+  width: 100%;
+  height: 2rem;
 }
 
 /* list of dishes */
@@ -30,16 +43,26 @@
   border-color: #BFACE2;
 }
 .dict-item{
-  color: black;
+  max-height: 1.4rem;
+  gap: 0 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-height: 1.4rem;
+
   overflow: hidden;
-  gap: 0 30px;
   cursor: pointer;
 }
 .dict-item:hover{
+  color: #3E54AC;
+  max-height: fit-content;
+}
+.dict-item-mode{
+  max-height: 1.4rem;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+}
+.dict-item-mode:hover{
   color: #3E54AC;
   max-height: fit-content;
 }
@@ -47,6 +70,9 @@
   display: inline-block;
   width: 45%;
   margin-right: 0.7rem;
+}
+.item-each-mode{
+  width: 100%;
 }
 
 .item-ingdt{
