@@ -1,8 +1,13 @@
-/* ==== Dictionary Page ==== */
-.dictionary-container{
-  width: 100%;
+.showpage-container-mode{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 1rem;
 }
+
+/* ==== Dictionary Page ==== */
 .dictionary-container-mode{
+  border: solid;
   max-width: 346px;
 }
 .search-container{
@@ -74,7 +79,6 @@
 .item-each-mode{
   width: 100%;
 }
-
 .item-ingdt{
   display: inline-block;
   margin-right: 0.7rem;
