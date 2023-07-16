@@ -1,14 +1,18 @@
-.showpage-container-mode{
+/* .showpage-container-mode{
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   gap: 5.6rem;
-}
+} */
 
 /* ==== Dictionary Page ==== */
+.dictionary-container{
+  width: 86%;
+  position: fixed;
+}
 .dictionary-container-mode{
-  display: block;
   min-width: 350px;
+  position: fixed;
 }
 
 .search-container{
