@@ -2,16 +2,14 @@ import "./display.css";
 import BasicItems from "./basicItems";
 import Ingredients from "./ingredients";
 import Steps from "./steps";
-import BackBtn from "./backBtn";
+import { BackBtn, EditBtn } from "./btns";
 
 function Display ({recipe, setdisplayMode}) {
-  
-  // console.log(recipe);
   // TODO: display and edit
   return (
     <div className='display-container'>
       <BackBtn setdisplayMode={setdisplayMode}/>
-
+      <EditBtn recipe={recipe}/>
       <h1 className="display-header">{recipe["dishname"]}</h1>
 
       <div className="display-content-container">

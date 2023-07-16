@@ -1,6 +1,5 @@
 import {  Text, ItemLabel, ItemContainer, ParagContainer, Br } from "./displayComponents";
 function BasicItems ({recipe}) {
-  console.log("reading me");
   return (
     <>
       <Br/>
