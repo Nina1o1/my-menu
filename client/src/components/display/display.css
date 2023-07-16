@@ -1,6 +1,6 @@
 .display-container{
   position: relative;
-  width: 100%;
+  margin-left: calc(350px + 5.6rem);
   top: -0.6rem;
 
   text-align: center;
