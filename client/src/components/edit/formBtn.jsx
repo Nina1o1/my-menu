@@ -16,8 +16,9 @@ function FormBtn({formItems}) {
     evt.preventDefault();
     let recipeData = {};
 
+    // read form data
     try {
-      recipeData = readFormData(formItems); // read form data
+      recipeData = readFormData(formItems);
     } catch (error) {
       console.log(error);
       return;
@@ -43,6 +44,7 @@ function FormBtn({formItems}) {
         console.log(error);
         resetUserInfo();
         navigate("/login", {state: {from: location}});
+        return;
       }
     }
     

@@ -1,6 +1,6 @@
 .container{
   position: relative;
   min-height: 82vh;
-  padding: 40px 7% 0;
+  padding: 2rem 7% 0;
   margin-top: calc(8vh + 2rem);
 }
