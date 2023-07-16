@@ -10,9 +10,10 @@ function Display ({recipe, setdisplayMode}) {
     <div className='display-container'>
       <BackBtn setdisplayMode={setdisplayMode}/>
       <EditBtn recipe={recipe}/>
+
       <h1 className="display-header">{recipe["dishname"]}</h1>
 
-      <div className="display-content-container">
+      <div className="display-detail-container">
         <BasicItems recipe={recipe}/>
         <Ingredients ingredients={recipe["ingredients"]}/>
         <Steps steps={recipe["steps"]}/>

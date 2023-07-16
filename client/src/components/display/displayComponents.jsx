@@ -1,6 +1,6 @@
 // contents
 function Text({specifyClass, content}) {
-  const className = extraClasses("", specifyClass);
+  const className = extraClasses("display-text", specifyClass);
   return <div className={className}>{content}</div>
 }
 
