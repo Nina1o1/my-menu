@@ -58,7 +58,6 @@ function FormBtn({formItems}) {
       const formdata = {};
       Array.from(formItems).forEach(ele => {
         if(!ele.id) return;
-        console.log(ele);
         const idtype = ele.id.split("-");
         switch (idtype[0]) {
   
@@ -92,7 +91,6 @@ function FormBtn({formItems}) {
           }
   
           default: {
-            console.log()
             formdata[ele.id] = ele.value;
           }
         }
