@@ -21,8 +21,6 @@ export default function Dictionary() {
   const selectedCategories = useRef([]);
   // states to manage display mode
   const [displayMode, setdisplayMode] = useState(false);
-  const [dictContainerStyle, setDictContainerStyle] = useState("dictionary-container");
-  const [showpageContainerStyle, setShowpageContainerStyle] = useState("showpage-container");
   const [clickedRecipe, setClickedRecipe] = useState(null);
   // sucure fetch api
   const axiosTookenProvider = useAxiosTooken();
@@ -58,31 +56,21 @@ export default function Dictionary() {
     }
   }
 
-  useEffect(() => {
-    const styleToggle = styleToggleHelper(displayMode);
-    setDictContainerStyle(styleToggle(dictContainerStyle));
-    setShowpageContainerStyle(styleToggle(showpageContainerStyle));
-  },[displayMode])
   return(
     <>
-      <div className={showpageContainerStyle}>
+      <SearchBar 
+        setSearchCount={setSearchCount} 
+        inputText = {inputText}
+        displayMode = {displayMode}/>
+      <ItemList
+        displayRecipes={displayRecipes}
+        handleClickRecipe = {handleClickRecipe}
+        displayMode={displayMode}/>
+      
+      {displayMode
+        ? <Display recipe = {clickedRecipe} setdisplayMode={setdisplayMode}/>
+        : "" }
 
-       <div className={dictContainerStyle}>
-          <SearchBar 
-            setSearchCount={setSearchCount} 
-            inputText = {inputText}
-            displayMode = {displayMode}/>
-          <ItemList
-            displayRecipes={displayRecipes}
-            handleClickRecipe = {handleClickRecipe}
-            displayMode={displayMode}/>
-        </div>
-
-        {displayMode
-          ? <Display recipe = {clickedRecipe} setdisplayMode={setdisplayMode}/>
-          : "" }
-
-      </div>
     </>
   )
 }

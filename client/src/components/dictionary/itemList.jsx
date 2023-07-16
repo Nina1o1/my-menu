@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react';
 import { styleToggleHelper } from './dictHelper';
 
 function ItemList ({displayRecipes, handleClickRecipe, displayMode}) {
+  const [dictContainerStyle, setDictContainerStyle] = useState("dict-cont");
+  useEffect(() => {
+    const styleToggle = styleToggleHelper(displayMode);
+    setDictContainerStyle(styleToggle(dictContainerStyle));
+  },[displayMode]);
+
   const itemList = displayRecipes.map((recipe, i) => {
     return <Item
       recipe={recipe}
@@ -11,7 +17,7 @@ function ItemList ({displayRecipes, handleClickRecipe, displayMode}) {
   });
   
   return(
-    <ul className="dict-container"> {itemList} </ul>
+    <ul className={`dict-container ${dictContainerStyle}`}> {itemList} </ul>
   )
 }
 

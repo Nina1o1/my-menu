@@ -3,6 +3,7 @@ import terms from '../../assets/terms.json';
 import { styleToggleHelper } from './dictHelper';
 
 function SearchBar({setSearchCount, inputText, displayMode}) {
+  const [searchContainerStyle, setSearchContainerStyle] = useState("search-cont")
   const [searchBtnStyle, setSearchBtnStyle] = useState("search-btn");
   const [searchBarStyle, setSearchBarStyle] = useState("search-bar");
     
@@ -11,6 +12,7 @@ function SearchBar({setSearchCount, inputText, displayMode}) {
     const styleToggle = styleToggleHelper(displayMode);
     setSearchBtnStyle(styleToggle(searchBtnStyle));
     setSearchBarStyle(styleToggle(searchBarStyle));
+    setSearchContainerStyle(styleToggle(searchContainerStyle))
   },[displayMode])
   
   // re-render dictionary component when click on search btn
@@ -21,7 +23,7 @@ function SearchBar({setSearchCount, inputText, displayMode}) {
 
 
   return(
-    <div className="search-container">
+    <div className={`search-container ${searchContainerStyle}`}>
       <button 
         type="submit" 
         onClick={handleSearch} 

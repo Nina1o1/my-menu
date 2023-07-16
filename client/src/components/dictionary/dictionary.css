@@ -1,28 +1,26 @@
-/* .showpage-container-mode{
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  gap: 5.6rem;
-} */
-
 /* ==== Dictionary Page ==== */
 .dictionary-container{
-  width: 86%;
-  position: fixed;
-}
-.dictionary-container-mode{
-  min-width: 350px;
-  position: fixed;
+  width: 100%;
 }
 
+/* search */
 .search-container{
-  margin-bottom: 2rem;
-  height: 2.5rem;
+  padding-bottom: 2rem;
+  position: fixed;
   display: flex;
   flex-flow: row;
   justify-content: flex-start;
   align-items: center;
+  background-color: #fff;
 }
+
+.search-cont{
+  width: 86%;
+}
+.search-cont-mode{
+  width: 350px;
+}
+
 .search-btn{
   height: 3.8rem;
   min-width: 136px;
@@ -45,10 +43,22 @@
 
 /* list of dishes */
 .dict-container{
+  position: fixed;
+  margin-top: 6rem;
+  height: 76vh;
+  overflow-y: scroll;
+
+  height: 76vh;
   display: flex;
   flex-flow: column;
   font-family: 'Courier New', Courier, monospace;
-  /* overflow: scroll; */
+}
+
+.dict-cont{
+  width: 86%;
+}
+.dict-cont-mode{
+  width: 350px;
 }
 .dict-row{
   padding: 1rem 0;
