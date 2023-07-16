@@ -52,16 +52,6 @@
   display: flex;
   flex-flow: column;
   font-family: 'Courier New', Courier, monospace;
-
-  max-height: 68vh;
-  overflow: scroll;
-}
-
-.dict-cont{
-  width: 86%;
-}
-.dict-cont-mode{
-  width: 350px;
 }
 .dict-row{
   padding: 1rem 0;

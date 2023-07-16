@@ -86,16 +86,31 @@ function FormBtn({formItems}) {
             break;
           }
 
-          case "dishname": {
-            if(!ele.value) throw "no dishname";
-          }
-  
-          default: {
-            formdata[ele.id] = ele.value;
-          }
+        default: {
+          formdata[ele.id] = ele.value;
         }
-      });
-      return formdata;
+      }
+    });
+
+    // post request to send or update recipe
+    // TODO : update recipe
+    const action = "editRecipe";
+    try {
+      const postOptions = {
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json'}
+      }
+      // post request
+      await axiosTookenProvider.post(
+        `/${action}`, 
+        JSON.stringify(formdata),
+        postOptions
+      );
+
+    } catch (error) {
+      console.log(error);
+      resetUserInfo();
+      navigate("/login", {state: {from: location}});
     }
   
   return(
