@@ -11,12 +11,14 @@ function Display ({recipe, setdisplayMode}) {
       <BackBtn setdisplayMode={setdisplayMode}/>
       <EditBtn recipe={recipe}/>
 
-      <h1 className="display-header">{recipe["dishname"]}</h1>
+      <div className="display-content-container">
+        <h1 className="display-header">{recipe["dishname"]}</h1>
 
-      <div className="display-detail-container">
-        <BasicItems recipe={recipe}/>
-        <Ingredients ingredients={recipe["ingredients"]}/>
-        <Steps steps={recipe["steps"]}/>
+        <div className="display-detail-container">
+          <BasicItems recipe={recipe}/>
+          <Ingredients ingredients={recipe["ingredients"]}/>
+          <Steps steps={recipe["steps"]}/>
+        </div>
       </div>
     </div>
   )

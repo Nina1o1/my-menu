@@ -10,6 +10,7 @@ function Edit() {
   document.body.classList.remove("purple-page");
 
   const formRef = useRef(null);
+  const [renderForm, setRenderForm] = useState(false);
   // array of components
   const [stepComp, setStepComp] = useState([]);
   const [stepCountComp, setStepCountComp] = useState([]);
@@ -36,9 +37,13 @@ function Edit() {
     setExtraItem(prev => [...prev, extraComp]);
   }
 
+  function handleClickForm(evt) {
+    evt.preventDefault();
+    setRenderForm(true);
+  }
   // TODO: image, image for each step, ingredient portion, drag feature
   return(
-    <form ref={formRef}>
+    <form ref={formRef} onClick={handleClickForm}>
 
       {/* <FormContainer>
         <div className="img-container">

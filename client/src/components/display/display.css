@@ -2,11 +2,16 @@
   position: relative;
   width: 100%;
   top: -0.6rem;
-
   text-align: center;
+  max-height: 78vh;
 }
 
-.display-content-container{
+.display-content-container {
+  height: 100%;
+  overflow: scroll;
+}
+
+.display-detail-container{
   margin: auto;
   width: fit-content;
   min-width: 300px;
@@ -36,7 +41,7 @@
 }
 /* break line */
 .display-break{
-  height: 2rem;
+  height: 0.5rem;
   border-bottom-style: solid;
   border-color: #3E54AC;
 }
@@ -60,11 +65,10 @@
 }
 
 .display-backbtn{
-  top: 0;
 }
 
 .display-editbtn{
-  top: 3.6rem;
+  top: 4.6rem;
 }
 /* labels */
 .display-label{
@@ -84,7 +88,7 @@
 
 /* dishname header */
 .display-header{
-  margin: 0 0 0.5rem;
+  margin: 0.5rem 0;
 
   color: #3E54AC;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;

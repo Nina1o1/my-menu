@@ -3,7 +3,6 @@ import { TextInput } from "./editComponents";
 import EditBtn from "./editBtn";
 
 function Ingredient({keyVal, delProps}) {
-  // const dragMe = keyVal === 1 ? "Drag Me!" : "";
   return (
     <div className="multi-container" id={`ingdtItem-${keyVal}`}>
       
