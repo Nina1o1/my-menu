@@ -16,13 +16,15 @@ async function editRecipeRouter (req, res) {
       ...readRecipe
     }
 
+    let editedRecipe;
     if(recipeId) {
-      await Recipe.findByIdAndUpdate(recipeId, newRecipe, {new: true});
+      editedRecipe = await Recipe.findByIdAndUpdate(recipeId, newRecipe, {new: true});
+      console.log(editedRecipe);
     }
     else {
-      await new Recipe(newRecipe).save();
+      editedRecipe = await new Recipe(newRecipe).save();
     }
-    return res.sendStatus(200);
+    return res.status(200).send({recipe: editedRecipe});
   } catch (error) {
     console.log(error);
     return res.sendStatus(502);

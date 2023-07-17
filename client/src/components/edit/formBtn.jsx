@@ -5,7 +5,7 @@ import { readFormData } from "./editHelper";
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
 import useLogout from "../../common/hooks/useLogout";
 
-function FormBtn({formItems, recipeId}) {
+function FormBtn({formItems, recipe}) {
   // secure post request
   const axiosTookenProvider = useAxiosTooken();
   
@@ -22,14 +22,13 @@ function FormBtn({formItems, recipeId}) {
     
     try {
       formdata = readFormData(formItems);
-      if(recipeId) formdata["_id"] = recipeId;
+      if(recipe?.["_id"]) formdata["_id"] = recipe["_id"];
     } catch (error) {
       console.log(error);
       return;
     }
 
     // post request to send or update recipe
-    // TODO : update recipe
     const action = "editRecipe";
     try {
       const postOptions = {
@@ -37,13 +36,12 @@ function FormBtn({formItems, recipeId}) {
         headers: { 'Content-Type': 'application/json'}
       }
       // post request
-      console.log(formdata);
-      await axiosTookenProvider.post(
+      const res = await axiosTookenProvider.post(
         `/${action}`, 
         JSON.stringify(formdata),
         postOptions
       );
-
+      navigate("/", {state: res.data});
     } catch (error) {
       console.log(error);
       resetUserInfo();

@@ -6,7 +6,6 @@ import { BackBtn, EditBtn } from "./btns";
 import { Br } from "./displayComponents";
 
 function Display ({recipe, setdisplayMode}) {
-  // TODO: display and edit
   return (
     <div className='display-container'>
       <BackBtn setdisplayMode={setdisplayMode}/>

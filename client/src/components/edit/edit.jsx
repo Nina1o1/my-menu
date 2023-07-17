@@ -97,7 +97,7 @@ function Edit() {
       </FormContainer>
 
       <FormContainer>
-        <FormBtn formItems={formRef.current} recipeId={location?.state?.["_id"]}/>
+        <FormBtn formItems={formRef.current} recipe={location?.state || {}}/>
       </FormContainer>
     </form>
   )
