@@ -1,8 +1,7 @@
-import {  Text, ItemLabel, ItemContainer, ParagContainer, Br } from "./displayComponents";
+import {  Text, ItemLabel, ItemContainer, ParagContainer } from "./displayComponents";
 function BasicItems ({recipe}) {
   return (
     <>
-      <Br/>
       <Item label="Serve Size" content={recipe["serveSize"]}/>
       <Item label="Categories" content={recipe["categories"]}/>
       <Item label="Note" content={recipe["note"]}/>
