@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 function EditBtn({recipe}) {
-  // handleClick
-  
-  return <img 
-    className="display-btn display-editbtn" 
-    src="./edit.png" alt="e"/>
+  return (
+    <Link to="edit" state={recipe}>
+      <img 
+        className="display-btn display-editbtn" 
+        src="./edit.png" alt="e"/>
+    </Link>
+  )
 }
 
 function BackBtn({setdisplayMode}){
