@@ -8,6 +8,7 @@ async function editRecipeRouter (req, res) {
   const userid = JSON.parse(jwt)["userid"];
 
   // TODO: identify recipe_id to decide EDIT / ADD
+  return res.sendStatus(200);
   try {
     const newRecipe = new Recipe({
       author: userid,
