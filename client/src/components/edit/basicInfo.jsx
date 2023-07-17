@@ -1,29 +1,40 @@
-import { LabelContainer, 
+import {
+  ItemContainer,
   ItemLabel, 
-  BlockItemLabel, 
-  TextContainer, 
   TextInput, 
-  ItemSelect,
   BlockItemInput } from "./editComponents";
 
-function BasicInfo() {
+function BasicInfo({recipe}) {
   return(
     <>
-      <LabelContainer>
-        <ItemLabel label="Dish Name: "/>
-        <ItemLabel label="Serve Size: "/>
-        <ItemLabel label="Categories: "/>
-        <BlockItemLabel label="Note: "/>
-      </LabelContainer>
-
-      <TextContainer>
-        <TextInput id="dishname"/>
-        <TextInput id="serveSize"/>
-        <ItemSelect id="categories"/>
-        <BlockItemInput id="note" />
-      </TextContainer>
+      <Item label="Dish Name" content={recipe?.["serveSize"]}/>    
+      <Item label="Serve Size" content={recipe?.["serveSize"]}/>
+      <Item label="Categories" content={recipe?.["categories"]}/>
+      <Item label="Note" content={recipe?.["note"]}/>
     </>
   )
 }
+
+function Item({label, content}) {
+  if (!content?.length) content = "";
+  let item;
+  // customize for note
+  switch (label) {
+    case "Note": {
+      item = <BlockItemInput longContent = {content}/>;
+      break;  
+    }
+    default: {
+      item = <TextInput content = {content}/>;
+    }
+  }
+  return (
+    <ItemContainer>
+      <ItemLabel label = {label}/>
+      {item}
+    </ItemContainer>
+  )
+}
+
 
 export default BasicInfo;

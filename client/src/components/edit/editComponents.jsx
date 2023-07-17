@@ -6,7 +6,6 @@ function TextInput({id, placeholder, specifyClass}) {
   return <input id={id} type="text" className={className} placeholder={placeholder}/>
 }
 
-
 function BlockItemInput({id}){
   return <textarea id={id} className="edit-text edit-text-block"/>
 }
@@ -54,6 +53,14 @@ function TextContainer({children}) {
   )
 }
 
+function ItemContainer({children}) {
+  return(
+    <div className="item-container">
+      {children}
+    </div>
+  )
+}
+
 function extraClasses(defaultClassName, specifyPurpose) {
   let className;
   if(specifyPurpose?.length > 1) {
@@ -72,5 +79,6 @@ export {
 
   FormContainer,
   LabelContainer,
-  TextContainer
+  TextContainer,
+  ItemContainer
 }

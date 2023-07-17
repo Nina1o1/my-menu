@@ -2,11 +2,17 @@
 .form-container{
   margin: 0 165px 3rem 165px;
   display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.item-container {
+  display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
 }
 
-.label-container{
+/* .label-container{
   width: 230px;
   display: flex;
   flex-flow: column nowrap;
@@ -18,15 +24,25 @@
   display: flex;
   flex-flow: column nowrap;
   position: relative;
-}
+} */
 
 /* general style for label & input */
 .edit-label{
+  width: 230px;
   padding: 1rem 1rem 1rem 0;
+
+  text-align: left;
+  color: #3E54AC;
+  font-size: 1rem;
 }
 
 .edit-label-block{
+  width: 230px;
   padding: 1rem 1rem 8rem 0;
+  
+  text-align: left;
+  color: #3E54AC;
+  font-size: 1rem;
 }
 
 .edit-text{
@@ -71,7 +87,7 @@
 /* multiple inputs */
 .multi-container{
   position: relative;
-  width: 100%;
+  /* width: 100%; */
 }
 
 /* step */

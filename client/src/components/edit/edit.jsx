@@ -39,13 +39,6 @@ function Edit() {
   // TODO: image, image for each step, ingredient portion, drag feature
   return(
     <form ref={formRef}>
-
-      {/* <FormContainer>
-        <div className="img-container">
-          TODO: image
-        </div>
-      </FormContainer> */}
-
       <FormContainer>
         <BasicInfo />
       </FormContainer>
@@ -71,14 +64,12 @@ function Edit() {
       </FormContainer>
 
       <FormContainer>
-        <LabelContainer>
-           {stepCount[0] <= 1
-             ? <ItemLabel label="Steps: "/>
-             : <>{stepCountComp}</>}        
-        </LabelContainer>
+        {stepCount[0] <= 1
+          ? <ItemLabel label="Steps: "/>
+          : <>{stepCountComp}</>}        
 
-        <TextContainer>
           { stepComp }
+      </FormContainer>
           <button className="add-btn"
             onClick={evt => 
               handleAddItem(
@@ -91,8 +82,6 @@ function Edit() {
               )}>
             Add Step
           </button>
-        </TextContainer>
-      </FormContainer>
 
       <FormContainer>
         <FormBtn formItems={formRef.current}/>
