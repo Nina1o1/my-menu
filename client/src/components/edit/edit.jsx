@@ -1,16 +1,21 @@
+import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./edit.css";
-import { useState, useRef } from "react";
 import { Step, StepCount } from "./step";
 import Ingredient from "./ingredient";
 import BasicInfo from "./basicInfo";
 import FormBtn from "./formBtn";
 import { ItemLabel, FormContainer, LabelContainer, TextContainer} from "./editComponents";
+import { loadIngredients, loadSteps, handleAddItem } from "./editHelper";
 
 function Edit() {
   document.body.classList.remove("purple-page");
 
   const formRef = useRef(null);
-  // array of components
+  const [initializeForm, setInitializeForm] = useState(false);
+  // read recipe passed from dictionary
+  const location = useLocation({});
+  // array of components (step & ingredients)
   const [stepComp, setStepComp] = useState([]);
   const [stepCountComp, setStepCountComp] = useState([]);
   const [ingredientComp, setIngredientComp] = useState([]);
@@ -22,25 +27,29 @@ function Edit() {
   const stepDelProps = [setStepComp, stepCount, setStepCount, setStepCountComp];
   const ingredientDelProps = [setIngredientComp, ingredientComp, setIngredientCount];
 
-  // pass to a button that add iterable objects (step & ingredient)
-  function handleAddItem (evt, ItemComponent, setItemComp, setItemCount, ...extraProps) {
-    evt.preventDefault();
+  // read recipe on initial render
+  useEffect(() => {
+    if (location?.state) {
+      const readRecipe = location?.state;
+      if(readRecipe["ingredients"]) {
+        loadIngredients(readRecipe["ingredients"], setIngredientComp, setIngredientCount, ingredientDelProps);
+      }
+      if(readRecipe["steps"]){
+        loadSteps(readRecipe["steps"], setStepComp, setStepCount, setStepCountComp, stepDelProps);
+      }
+    }
+  }, []);
 
-    // increase count & add component for step & ingredient
-    setItemCount(prev => prev.map(ele => ++ele));
-    setItemComp(prev => [...prev, ItemComponent]);
-    
-    // extraProps read step count component, defined as "stepCountComp" state
-    if (extraProps?.length === 0) return;
-    const [setExtraItem, extraComp] = [...extraProps];
-    setExtraItem(prev => [...prev, extraComp]);
+  function handleClickForm(evt) {
+    evt.preventDefault();
+    if(!initializeForm) setInitializeForm(true);
   }
 
   // TODO: image, image for each step, ingredient portion, drag feature
   return(
-    <form ref={formRef}>
+    <form ref={formRef} onClick={handleClickForm}>
       <FormContainer>
-        <BasicInfo />
+        <BasicInfo recipe = {location?.state || {}} />
       </FormContainer>
 
       <FormContainer>
@@ -64,12 +73,14 @@ function Edit() {
       </FormContainer>
 
       <FormContainer>
-        {stepCount[0] <= 1
-          ? <ItemLabel label="Steps: "/>
-          : <>{stepCountComp}</>}        
+        <LabelContainer>
+           {stepCount[0] <= 1
+             ? <ItemLabel label="Steps: "/>
+             : <>{stepCountComp}</>}        
+        </LabelContainer>
 
+        <TextContainer>
           { stepComp }
-      </FormContainer>
           <button className="add-btn"
             onClick={evt => 
               handleAddItem(
@@ -82,6 +93,8 @@ function Edit() {
               )}>
             Add Step
           </button>
+        </TextContainer>
+      </FormContainer>
 
       <FormContainer>
         <FormBtn formItems={formRef.current}/>
