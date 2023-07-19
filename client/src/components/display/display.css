@@ -45,6 +45,15 @@
   border-color: #3E54AC;
 }
 
+/* dishname header */
+.display-header{
+  margin: 0;
+
+  color: #3E54AC;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 3rem;
+}
+
 /* buttons */
 .display-btn{
   position: absolute;
@@ -78,18 +87,14 @@
 
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: #3E54AC;
+  /* text-align: right; */
 }
 
-.multi-label{
+.label-count{
   min-width: 90px;
   text-align: right;
 }
 
-/* dishname header */
-.display-header{
-  margin: 0;
-
-  color: #3E54AC;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: 3rem;
+/* text */
+.ingdt-amount{
 }

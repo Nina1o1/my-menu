@@ -20,7 +20,7 @@ function Steps({steps}){
 function EachStep({step, label}){
   return (
     <ItemContainer>
-      <ItemLabel label={label} specifyClass="multi-label"/>
+      <ItemLabel label={label} specifyClass="label-count"/>
       <ParagContainer longContent={step}/>
     </ItemContainer>
   )

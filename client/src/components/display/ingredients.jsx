@@ -20,9 +20,8 @@ function EachIngredient({ingredient, label}) {
   return (
     <>
       <ItemContainer>
-        <ItemLabel label = {label} specifyClass="multi-label"/>
-        <Text content={ingredient["item"]}/>
-        <Text content={ingredient["amount"]}/>
+        <ItemLabel label = {label} specifyClass="label-count"/>
+        <Text content={`${ingredient["item"]} ······ ${ingredient["amount"]}`}/>
       </ItemContainer>
     </>
   )
