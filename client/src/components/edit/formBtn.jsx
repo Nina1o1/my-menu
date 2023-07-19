@@ -1,17 +1,21 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./edit.css";
 import { LabelContainer } from "./editComponents";
 import { readFormData } from "./editHelper";
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
 import useLogout from "../../common/hooks/useLogout";
+import { addRecipe, updateRecipe } from "../../features/recipesSlice";
 
-function FormBtn({formItems, recipeId}) {
+function FormBtn({formItems, recipe}) {
   // secure post request
   const axiosTookenProvider = useAxiosTooken();
   // logout hooks
   const resetUserInfo = useLogout();
   const location = useLocation();
   const navigate = useNavigate();
+  // redux hook
+  const dispatch = useDispatch();
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -21,7 +25,6 @@ function FormBtn({formItems, recipeId}) {
     
     try {
       formdata = readFormData(formItems);
-      if (recipeId) formdata["_id"] = recipeId;
     } catch (error) {
       console.log(error);
       return;
@@ -29,20 +32,28 @@ function FormBtn({formItems, recipeId}) {
 
     // post request to send or update recipe
     // TODO : update recipe
+    const action = "editRecipe";
     try {
-      console.log(formdata);
       const postOptions = {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json'}
       }
       // post request
-      const action = "editRecipe";
       await axiosTookenProvider.post(
         `/${action}`, 
         JSON.stringify(formdata),
         postOptions
       );
+      const retRecipe = res.data
 
+      // update / add recipe to redux store
+      if (recipe?.["_id"]) {
+        // TODO
+        dispatch(updateRecipe(retRecipe));
+      } else {
+        dispatch(addRecipe(retRecipe));
+      }
+      navigate("/", {state: retRecipe});
     } catch (error) {
       console.log(error);
       resetUserInfo();
@@ -50,8 +61,30 @@ function FormBtn({formItems, recipeId}) {
     }
   }
 
-  function handleDelete(evt) {
+  async function handleDelete(evt) {
+    evt.preventDefault();
     
+    if(recipe?.["_id"]){
+      try {
+        const action = "deleteRecipe";
+        const postOptions = {
+          withCredentials: true,
+          headers: { 'Content-Type': 'application/json'}
+        }
+        // post request
+        await axiosTookenProvider.post(
+          `/${action}`, 
+          JSON.stringify({recipeId: recipe["_id"]}),
+          postOptions
+        );
+        // navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else{
+      formItems.reset();
+    }
   }
 
   return(

@@ -36,10 +36,24 @@ export default function Dictionary() {
     const foundRecipes = recipeDictionary(
       store.getState(),
       inputText.current.value
-      );
-    // click to set style mode to false
+    );
     setDisplayRecipes(foundRecipes);
-  }, [searchCount]);
+    }, [searchCount]);
+
+  // when edit page sends a recipe, display it
+  useEffect(() => {
+    if(location?.state?.recipe) {
+      setClickedRecipe(location?.state?.recipe);
+      setdisplayMode(true);
+    }
+  }, [location?.state?.recipe]);
+  
+  // change component style when display mode changes
+  useEffect(() => {
+    const styleToggle = styleToggleHelper(displayMode);
+    setDictContainerStyle(styleToggle(dictContainerStyle));
+    setShowpageContainerStyle(styleToggle(showpageContainerStyle));
+  },[displayMode]);
 
   // read whole recipe from database (via recipe._id) when click on recipe list
   async function handleClickRecipe(evt, recipeId) {
@@ -58,11 +72,7 @@ export default function Dictionary() {
     }
   }
 
-  useEffect(() => {
-    const styleToggle = styleToggleHelper(displayMode);
-    setDictContainerStyle(styleToggle(dictContainerStyle));
-    setShowpageContainerStyle(styleToggle(showpageContainerStyle));
-  },[displayMode])
+
   return(
     <>
       <div className={showpageContainerStyle}>

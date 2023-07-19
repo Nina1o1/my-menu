@@ -7,15 +7,23 @@ async function editRecipeRouter (req, res) {
   if (!jwt) return res.sendStatus(401);
   const userid = JSON.parse(jwt)["userid"];
 
-  // TODO: identify recipe_id to decide EDIT / ADD
-  return res.sendStatus(200);
   try {
-    const newRecipe = new Recipe({
+    const readRecipe = req.body;
+    const recipeId = readRecipe?.["_id"];
+    delete readRecipe?.["_id"];
+    const newRecipe = {
       author: userid,
-      ...req.body
-    });
-    await newRecipe.save();
-    return res.sendStatus(200);
+      ...readRecipe
+    }
+
+    let editedRecipe;
+    if(recipeId) {
+      editedRecipe = await Recipe.findByIdAndUpdate(recipeId, newRecipe, {new: true});
+    }
+    else {
+      editedRecipe = await new Recipe(newRecipe).save();
+    }
+    return res.status(200).send({recipe: editedRecipe});
   } catch (error) {
     console.log(error);
     return res.sendStatus(502);

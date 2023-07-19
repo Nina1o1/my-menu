@@ -157,6 +157,7 @@ A Sample Recipe;
 - [Redux](https://redux.js.org/tutorials/fundamentals/part-1-overview#how-to-read-this-tutorial)
     - [Redux Toolkit](https://redux-toolkit.js.org/api/configureStore) [-- link to code](./client/src/features/)
     - [React-Redux](https://react-redux.js.org/api/provider) [-- link to code](./client/src/components/authentication/login.jsx)
+    - [Redux Toolkit Proxy Object/ undefined](https://stackoverflow.com/questions/65764486/why-reducer-function-return-only-proxy-redux-toolkit) [-- link to code](./client/src/features/)
 - [mongo-sanitize](https://www.npmjs.com/package/mongo-sanitize) [-- link to code](./server/src/middlewares/sanitizeInput.mjs)
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) [-- link to code](./server/src/authRoutes/authJWT.mjs)
 - [dotenv](https://www.npmjs.com/package/dotenv) [-- link to code](./server/src/authRoutes/authJWT.mjs)
