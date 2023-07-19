@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createSelector } from '@reduxjs/toolkit';
+import { createSlice, createSelector, current } from '@reduxjs/toolkit';
+
 const initialState = [];
 
 const recipesSlice = createSlice({
@@ -23,15 +23,37 @@ const recipesSlice = createSlice({
     },
     
     addRecipe: (state, action) => {
-      return [...state, action.payload];
+      const inputRecipe = action?.payload?.["recipe"];
+      if (!inputRecipe) return current(state);
+      return [...current(state), inputRecipe];
     },
 
     updateRecipe: (state, action) => {
-
+      const inputRecipe = action?.payload?.["recipe"];
+      if (!inputRecipe) return current(state);
+      const findAndUpdateRecipe = current(state).map(recipe => {
+        if(recipe["_id"] === inputRecipe["_id"]) {
+          return {
+            _id: inputRecipe["_id"],
+            categories: inputRecipe["categories"],
+            dishname: inputRecipe["dishname"],
+            ingredients: inputRecipe["ingredients"].map(ingdt => ingdt["item"])
+          }
+        }
+        return recipe;
+      });
+      return findAndUpdateRecipe;
     },
 
     deleteRecipe: (state, action) => {
-
+      const inputRecipe = action?.payload?.["recipe"];
+      if (!inputRecipe) return current(state);
+      const findAndDeleteRecipe = current(state).map(recipe => {
+        if(recipe["_id"] !== inputRecipe["_id"]) return recipe;
+        return;
+      });
+      console.log(findAndDeleteRecipe);
+      return findAndDeleteRecipe;
     }
   }
 });
@@ -40,7 +62,7 @@ export { recipesSlice };
 export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, deleteRecipe } = recipesSlice.actions;
 
 const readRecipes =  (state, inputText, categories)  => {
-  const currRecipes = [];
+  const foundRecipes = [];
   
   state.recipes.forEach(recipe => {
     let isFound = true;
@@ -59,15 +81,14 @@ const readRecipes =  (state, inputText, categories)  => {
     }
     // TODO: check category
     if(!isFound) return;
-    currRecipes.push(recipe);
+    foundRecipes.push(recipe);
   });
-
-  return currRecipes;
+  return foundRecipes;
 }
 
-const recipeDictionary = createSelector([readRecipes], (foundRecipes, inputText) => {
+const recipeDictionary = createSelector([readRecipes], (foundRecipes) => {
   return foundRecipes;
 });
 
-export { readRecipes, recipeDictionary};
+export {recipeDictionary};
 export default recipesSlice.reducer;

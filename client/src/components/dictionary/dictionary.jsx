@@ -36,11 +36,11 @@ export default function Dictionary() {
     const foundRecipes = recipeDictionary(
       store.getState(),
       inputText.current.value
-      );
-      setDisplayRecipes(foundRecipes);
+    );
+    setDisplayRecipes(foundRecipes);
     }, [searchCount]);
-    
-    // when edit page sends a recipe, display it
+
+  // when edit page sends a recipe, display it
   useEffect(() => {
     if(location?.state?.recipe) {
       setClickedRecipe(location?.state?.recipe);
@@ -53,7 +53,7 @@ export default function Dictionary() {
     const styleToggle = styleToggleHelper(displayMode);
     setDictContainerStyle(styleToggle(dictContainerStyle));
     setShowpageContainerStyle(styleToggle(showpageContainerStyle));
-  },[displayMode])
+  },[displayMode]);
 
   // read whole recipe from database (via recipe._id) when click on recipe list
   async function handleClickRecipe(evt, recipeId) {

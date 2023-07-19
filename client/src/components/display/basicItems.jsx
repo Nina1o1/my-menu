@@ -2,6 +2,7 @@ import {  Text, ItemLabel, ItemContainer, ParagContainer, Br } from "./displayCo
 function BasicItems ({recipe}) {
   return (
     <>
+      <Br/>
       <Item label="Serve Size" content={recipe["serveSize"]}/>
       <Item label="Categories" content={recipe["categories"]}/>
       <Item label="Note" content={recipe["note"]}/>

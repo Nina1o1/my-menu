@@ -19,7 +19,6 @@ async function editRecipeRouter (req, res) {
     let editedRecipe;
     if(recipeId) {
       editedRecipe = await Recipe.findByIdAndUpdate(recipeId, newRecipe, {new: true});
-      console.log(editedRecipe);
     }
     else {
       editedRecipe = await new Recipe(newRecipe).save();

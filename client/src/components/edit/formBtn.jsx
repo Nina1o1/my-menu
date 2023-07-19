@@ -1,18 +1,21 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./edit.css";
 import { LabelContainer } from "./editComponents";
 import { readFormData } from "./editHelper";
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
 import useLogout from "../../common/hooks/useLogout";
+import { addRecipe, updateRecipe } from "../../features/recipesSlice";
 
 function FormBtn({formItems, recipe}) {
   // secure post request
   const axiosTookenProvider = useAxiosTooken();
-  
   // logout hooks
   const resetUserInfo = useLogout();
   const location = useLocation();
   const navigate = useNavigate();
+  // redux hook
+  const dispatch = useDispatch();
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -29,19 +32,27 @@ function FormBtn({formItems, recipe}) {
     }
 
     // post request to send or update recipe
-    const action = "editRecipe";
     try {
+      const action = "editRecipe";
       const postOptions = {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json'}
       }
-      // post request
       const res = await axiosTookenProvider.post(
         `/${action}`, 
         JSON.stringify(formdata),
         postOptions
       );
-      navigate("/", {state: res.data});
+      const retRecipe = res.data
+
+      // update / add recipe to redux store
+      if (recipe?.["_id"]) {
+        // TODO
+        dispatch(updateRecipe(retRecipe));
+      } else {
+        dispatch(addRecipe(retRecipe));
+      }
+      navigate("/", {state: retRecipe});
     } catch (error) {
       console.log(error);
       resetUserInfo();
@@ -49,8 +60,30 @@ function FormBtn({formItems, recipe}) {
     }
   }
 
-  function handleDelete(evt) {
+  async function handleDelete(evt) {
+    evt.preventDefault();
     
+    if(recipe?.["_id"]){
+      try {
+        const action = "deleteRecipe";
+        const postOptions = {
+          withCredentials: true,
+          headers: { 'Content-Type': 'application/json'}
+        }
+        // post request
+        await axiosTookenProvider.post(
+          `/${action}`, 
+          JSON.stringify({recipeId: recipe["_id"]}),
+          postOptions
+        );
+        // navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else{
+      formItems.reset();
+    }
   }
 
   return(
