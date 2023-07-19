@@ -1,21 +1,17 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./edit.css";
 import { LabelContainer } from "./editComponents";
 import { readFormData } from "./editHelper";
-import useAxiosTooken from "../../common/hooks/useAxiosTooken";
-import useLogout from "../../common/hooks/useLogout";
 import { addRecipe, updateRecipe, deleteRecipe } from "../../features/recipesSlice";
 
+import useEditRecipe from "../../common/hooks/useEditRecipe";
+
 function FormBtn({formItems, recipe}) {
-  // secure post request
-  const axiosTookenProvider = useAxiosTooken();
-  // logout hooks
-  const resetUserInfo = useLogout();
-  const location = useLocation();
   const navigate = useNavigate();
-  // redux hook
   const dispatch = useDispatch();
+  // custome post request hook
+  const editRecipe = useEditRecipe();
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -33,19 +29,9 @@ function FormBtn({formItems, recipe}) {
     }
 
     // post request to send the updated / new recipe
-    const action = "editRecipe";
     try {
-      const postOptions = {
-        withCredentials: true,
-        headers: { 'Content-Type': 'application/json'}
-      }
-      const res = await axiosTookenProvider.post(
-        `/${action}`, 
-        JSON.stringify(formdata),
-        postOptions
-      );
-      const retRecipe = res.data;
-
+      const action = "editRecipe";
+      const retRecipe = await editRecipe(action, formdata);
       // update / add recipe to redux store
       if (recipe?.["_id"]) {
         dispatch(updateRecipe(retRecipe));
@@ -57,8 +43,6 @@ function FormBtn({formItems, recipe}) {
     } catch (error) {
       console.log(error);
       return;
-      resetUserInfo();
-      navigate("/login", {state: {from: location}});
     }
   }
 
@@ -66,19 +50,11 @@ function FormBtn({formItems, recipe}) {
     evt.preventDefault();
     
     if(recipe?.["_id"]){
-      const recipeId = {recipeId: recipe["_id"]};
       // post request to delete recipe in database
       try {
+        const recipeId = {recipeId: recipe["_id"]};
         const action = "deleteRecipe";
-        const postOptions = {
-          withCredentials: true,
-          headers: { 'Content-Type': 'application/json'}
-        }
-        await axiosTookenProvider.post(
-          `/${action}`, 
-          JSON.stringify(recipeId),
-          postOptions
-        );
+        const ret = await editRecipe(action, recipeId);
         dispatch(deleteRecipe(recipe));
         navigate("/");
       } catch (error) {

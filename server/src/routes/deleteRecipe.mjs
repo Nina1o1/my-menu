@@ -4,8 +4,8 @@ async function deleteRecipeRouter (req, res) {
     const recipeId = req.body?.["recipeId"];
     if(!recipeId) throw "no recipe id recieved";
 
-    await Recipe.findByIdAndDelete(recipeId);
-    return res.sendStatus(200);
+    const deletedRecipe = await Recipe.findByIdAndDelete(recipeId);
+    return res.status(200).send({recipe: deletedRecipe});
   } catch (error) {
     return res.sendStatus(502);
   }
