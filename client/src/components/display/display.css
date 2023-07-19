@@ -64,11 +64,11 @@
 }
 
 .display-backbtn{
-  top: 0;
+  top: 1rem;
 }
 
 .display-editbtn{
-  top: 3.6rem;
+  top: 4.6rem;
 }
 
 /* labels */
