@@ -1,3 +1,4 @@
+
 .showpage-container-mode{
   display: flex;
   flex-flow: row;
@@ -6,7 +7,11 @@
 }
 
 /* ==== Dictionary Page ==== */
+.dictionary-container{
+  margin-top: 1rem;
+}
 .dictionary-container-mode{
+  margin-top: 1rem;
   display: block;
   min-width: 350px;
 }

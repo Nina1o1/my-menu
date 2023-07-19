@@ -40,7 +40,7 @@
 
 /* break line */
 .display-break{
-  height: 2rem;
+  min-height: 1rem;
   border-bottom-style: solid;
   border-color: #3E54AC;
 }
