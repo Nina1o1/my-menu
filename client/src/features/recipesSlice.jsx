@@ -22,11 +22,11 @@ const recipesSlice = createSlice({
       return initialState;
     },
     
-    // addRecipe: (state, action) => {
-    //   const inputRecipe = action?.payload?.["recipe"];
-    //   if (!inputRecipe) return current(state);
-    //   return [...current(state), inputRecipe];
-    // },
+    addRecipe: (state, action) => {
+      const inputRecipe = action?.payload?.["recipe"];
+      if (!inputRecipe) return current(state);
+      return [...current(state), inputRecipe];
+    },
 
     updateRecipe: (state, action) => {
       const inputRecipe = action?.payload?.["recipe"];
@@ -51,7 +51,6 @@ const recipesSlice = createSlice({
       const findAndDeleteRecipe = current(state).filter(recipe => {
         return recipe["_id"] !== inputRecipe["_id"];
       });
-      console.log(findAndDeleteRecipe);
       return findAndDeleteRecipe;
     }
   }

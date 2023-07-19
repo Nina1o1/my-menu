@@ -79,7 +79,6 @@ function FormBtn({formItems, recipe}) {
           JSON.stringify(recipeId),
           postOptions
         );
-        console.log(recipe);
         dispatch(deleteRecipe(recipe));
         navigate("/");
       } catch (error) {
