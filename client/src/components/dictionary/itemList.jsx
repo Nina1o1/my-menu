@@ -19,7 +19,7 @@ function Item ({recipe, handleClickRecipe, displayMode}) {
   const [dictItemStyle, setDictItemStyle] = useState("dict-item");
   const [itemStyle, setItemStyle] = useState("item-each");
 
-  const ingredientList = recipe["ingredients"].map((ingred, i) => {
+  const ingredientList = recipe?.["ingredients"].map((ingred, i) => {
     return (<span key={i} className="item-ingdt">{ingred}</span>)
   });
 

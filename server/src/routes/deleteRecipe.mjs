@@ -2,7 +2,7 @@ import { Recipe } from "../databases/alldb.mjs";
 async function deleteRecipeRouter (req, res) {
   try {
     const recipeId = req.body?.["recipeId"];
-    if(!recipeId) throw "no recipeId recieved";
+    if(!recipeId) throw "no recipe id recieved";
 
     await Recipe.findByIdAndDelete(recipeId);
     return res.sendStatus(200);

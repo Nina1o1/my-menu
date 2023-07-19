@@ -5,7 +5,7 @@ import { LabelContainer } from "./editComponents";
 import { readFormData } from "./editHelper";
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
 import useLogout from "../../common/hooks/useLogout";
-import { addRecipe, updateRecipe } from "../../features/recipesSlice";
+import { addRecipe, updateRecipe, deleteRecipe } from "../../features/recipesSlice";
 
 function FormBtn({formItems, recipe}) {
   // secure post request
@@ -20,42 +20,43 @@ function FormBtn({formItems, recipe}) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     
-    // read form data via useRef passed as property, consistent with database, see README for database
     let formdata = {};
-    
+
+    // if editing an existing recipe, use recipe id to target and modify in server
+    if(recipe?.["_id"]) formdata["_id"] = recipe["_id"];
+    // read form data
     try {
-      formdata = readFormData(formItems);
+      readFormData(formItems, formdata);
     } catch (error) {
       console.log(error);
       return;
     }
 
-    // post request to send or update recipe
-    // TODO : update recipe
+    // post request to send the updated / new recipe
     const action = "editRecipe";
     try {
       const postOptions = {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json'}
       }
-      // post request
-      await axiosTookenProvider.post(
+      const res = await axiosTookenProvider.post(
         `/${action}`, 
         JSON.stringify(formdata),
         postOptions
       );
-      const retRecipe = res.data
+      const retRecipe = res.data;
 
       // update / add recipe to redux store
       if (recipe?.["_id"]) {
-        // TODO
         dispatch(updateRecipe(retRecipe));
-      } else {
+      } 
+      else {
         dispatch(addRecipe(retRecipe));
       }
       navigate("/", {state: retRecipe});
     } catch (error) {
       console.log(error);
+      return;
       resetUserInfo();
       navigate("/login", {state: {from: location}});
     }
@@ -65,21 +66,25 @@ function FormBtn({formItems, recipe}) {
     evt.preventDefault();
     
     if(recipe?.["_id"]){
+      const recipeId = {recipeId: recipe["_id"]};
+      // post request to delete recipe in database
       try {
         const action = "deleteRecipe";
         const postOptions = {
           withCredentials: true,
           headers: { 'Content-Type': 'application/json'}
         }
-        // post request
         await axiosTookenProvider.post(
           `/${action}`, 
-          JSON.stringify({recipeId: recipe["_id"]}),
+          JSON.stringify(recipeId),
           postOptions
         );
-        // navigate("/");
+        console.log(recipe);
+        dispatch(deleteRecipe(recipe));
+        navigate("/");
       } catch (error) {
         console.log(error);
+        return;
       }
     }
     else{

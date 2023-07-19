@@ -37,9 +37,8 @@ function handleAddItem (evt, ItemComponent, setItemComp, setItemCount, ...extraP
   setExtraItem(prev => [...prev, extraComp]);
 }
 
-function readFormData(formItems) {
+function readFormData(formItems, formdata) {
   if(!formItems) throw "no data";
-  const formdata = {};
   Array.from(formItems).forEach(ele => {
     if(!ele.id) return;
     const idtype = ele.id.split("-");

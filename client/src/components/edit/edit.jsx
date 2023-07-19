@@ -27,11 +27,10 @@ function Edit() {
   const stepDelProps = [setStepComp, stepCount, setStepCount, setStepCountComp];
   const ingredientDelProps = [setIngredientComp, ingredientComp, setIngredientCount];
 
-  let readRecipe;
   // read recipe on initial render
   useEffect(() => {
     if (location?.state) {
-      readRecipe = location?.state;
+      const readRecipe = location?.state;
       if(readRecipe["ingredients"]) {
         loadIngredients(readRecipe["ingredients"], setIngredientComp, setIngredientCount, ingredientDelProps);
       }
@@ -50,7 +49,7 @@ function Edit() {
   return(
     <form ref={formRef} onClick={handleClickForm}>
       <FormContainer>
-        <BasicInfo recipe = {readRecipe || {}} />
+        <BasicInfo recipe = {location?.state || {}} />
       </FormContainer>
 
       <FormContainer>
