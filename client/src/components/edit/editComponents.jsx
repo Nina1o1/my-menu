@@ -22,18 +22,41 @@ function BlockItemInput({id, value}){
     defaultValue={value}/>
 }
 
-function ItemSelect({id, options}) {
+function ItemSelect({options}) {
   let optionComps;
+
+  function handleCheck(evt) {
+    evt.stopPropagation();
+  }
+
+  function handleClick(evt) {
+    evt.preventDefault();
+    let clickEvent = new MouseEvent("click", {bubbles: true, cancelable: true, clientX: 100, clientY: 100});
+    evt.currentTarget.firstChild.dispatchEvent(clickEvent);
+  }
+
   if (!options) optionComps = ""; 
   else {
     optionComps = options?.map((ele, i) => {
-      return <option value={ele} key={i}>{ele}</option>
+      return (
+        <div key={i} onClick={handleClick} className="select-option">
+          <input 
+            type="checkbox"
+            className="select-input"
+            id={`select-${i}`}
+            value={ele} 
+            onClick={ handleCheck }/>
+          <div className="select-label"> {ele} </div>
+        </div>
+      )
     });
   }
   return(
-    <select id={id} className="edit-text edit-select">
-      {optionComps}
-    </select>
+    <div className="edit-text edit-select">
+      <div className="select-options">
+        {optionComps}
+      </div>
+    </div>
   )
 }
 

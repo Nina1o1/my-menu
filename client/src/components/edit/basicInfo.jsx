@@ -80,13 +80,13 @@ function BasicInfo({recipe}) {
         </div>
         <BlockItemInput id="note" value={recipe?.["note"]}/>
       </TextContainer>
-      <PopOut 
+      {/* <PopOut 
         content = {content}
         leftBtnText = "Back"
         rightBtnText = "Add"
         handleClickRight = {handleClickRight}
         showPopup = {showPopup}
-        setShowPopup={setShowPopup}/>
+        setShowPopup={setShowPopup}/> */}
     </>
   )
 }

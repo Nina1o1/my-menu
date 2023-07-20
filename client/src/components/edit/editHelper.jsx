@@ -38,6 +38,7 @@ function handleAddItem (evt, ItemComponent, setItemComp, setItemCount, ...extraP
 }
 
 function readFormData(formItems, formdata) {
+  console.log(formItems);
   if(!formItems) throw "no data";
   Array.from(formItems).forEach(ele => {
     if(!ele.id) return;
@@ -74,6 +75,7 @@ function readFormData(formItems, formdata) {
       }
 
       default: {
+        console.log(ele);
         formdata[ele.id] = ele.value;
       }
     }
