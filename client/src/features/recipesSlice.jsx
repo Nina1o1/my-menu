@@ -84,9 +84,9 @@ const readRecipes =  (state, inputText, categories)  => {
   return foundRecipes;
 }
 
-const recipeDictionary = createSelector([readRecipes], (foundRecipes) => {
+const getRecipe = createSelector([readRecipes], (foundRecipes) => {
   return foundRecipes;
 });
 
-export {recipeDictionary};
+export {getRecipe};
 export default recipesSlice.reducer;

@@ -23,7 +23,7 @@ async function refreshTokenRouter (req, res) {
         if (err || foundUser.username !== decoded.username) return res.sendStatus(402);
         const accessToken = jwt.sign(
           {username: decoded.username,
-           userid: decode.userid},
+           userid: decoded.userid},
           process.env.ACCESS_TOKEN_SECRET,
           {expiresIn: "15m"}
         )

@@ -22,11 +22,17 @@ function BlockItemInput({id, value}){
     defaultValue={value}/>
 }
 
-function ItemSelect({id}) {
+function ItemSelect({id, options}) {
+  let optionComps;
+  if (!options) optionComps = ""; 
+  else {
+    optionComps = options?.map((ele, i) => {
+      return <option value={ele} key={i}>{ele}</option>
+    });
+  }
   return(
     <select id={id} className="edit-text edit-select">
-      <option value="">test</option>
-      <option value="">try</option>
+      {optionComps}
     </select>
   )
 }
@@ -106,9 +112,7 @@ function PopOut({content="", leftBtnText="", rightBtnText="", handleClickRight, 
 
   function handleClickLeft (evt) {
     evt.preventDefault();
-    if(showPopup) {
-      setShowPopup(false);
-    }
+    setShowPopup(false);
   }
 
   useEffect(() => {

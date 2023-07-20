@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LabelContainer, 
   ItemLabel, 
   BlockItemLabel, 
@@ -10,11 +10,13 @@ import { LabelContainer,
   PopOut } from "./editComponents";
 import { useDispatch } from "react-redux";
 import { addCategory } from "../../features/categoriesSlice";
-import store from "../../app/store";
 import useEditRecipe from "../../common/hooks/useEditRecipe";
+import { getCategories } from "../../features/categoriesSlice";
+import store from "../../app/store";
 
 function BasicInfo({recipe}) {
   const [showPopup, setShowPopup] = useState(false);
+  const [categoryOptions,setCategoryOptions] = useState([]);
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const editRecipe = useEditRecipe();
@@ -32,12 +34,10 @@ function BasicInfo({recipe}) {
 
   function handlePopup (evt) {
     evt.preventDefault();
-    if(!showPopup) {
-      setShowPopup(true);
-    }
+    setShowPopup(true);
   }
 
-  function handleClickRight (evt) {
+  async function handleClickRight (evt) {
     evt.preventDefault();
     const inputText = inputRef.current?.firstChild?.value;
     if(!inputText) return;
@@ -45,13 +45,19 @@ function BasicInfo({recipe}) {
       if (store.getState()?.categories?.includes(inputText)) {
         throw "category already exists";
       }
-      // editRecipe("addCategory", {category: inputText});
-      // dispatch(addCategory(inputText));
-      // if(showPopup) setShowPopup(false);
+      await editRecipe("addCategory", {category: inputText});
+      dispatch(addCategory(inputText));
+      setCategoryOptions(getCategories(store.getState()));
+      setShowPopup(false);
     } catch (error) {
       console.log(error);
     }
   }
+
+  // read new categories on first render and when a new category is added
+  useEffect(() => {
+    setCategoryOptions(getCategories(store.getState()));
+  },[]);
 
   return(
     <>
@@ -66,7 +72,10 @@ function BasicInfo({recipe}) {
         <TextInput id="dishname" value={recipe?.["dishname"]}/>
         <TextInput id="serveSize" value={recipe?.["serveSize"]}/>
         <div className="select-container">
-          <ItemSelect id="categories" value={recipe?.["categories"]}/>
+          <ItemSelect 
+            id="categories" 
+            value={recipe?.["categories"]}
+            options={categoryOptions}/>
           <SelectBtn display="+" handleClick={handlePopup}/>
         </div>
         <BlockItemInput id="note" value={recipe?.["note"]}/>

@@ -1,8 +1,11 @@
 import {  Text, ItemLabel, ItemContainer, ParagContainer, Br } from "./displayComponents";
 function BasicItems ({recipe}) {
+  const needBr = recipe?.["serveSize"]
+    || recipe?.["categories"].length !== 0
+    || recipe?.["note"];
   return (
     <>
-      <Br/>
+      {needBr ? <Br/> : ""}
       <Item label="Serve Size" content={recipe["serveSize"]}/>
       <Item label="Categories" content={recipe["categories"]}/>
       <Item label="Note" content={recipe["note"]}/>

@@ -60,7 +60,6 @@ function Login() {
       // retrieve and load user recipes to redux store
       dispatch(loadRecipe(recipes));
       dispatch(loadCategory(categories));
-
       // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";
       navigate(from);

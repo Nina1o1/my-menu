@@ -8,7 +8,7 @@ import SearchBar from './searchBar';
 import Display from '../display/display';
 import { styleToggleHelper } from './dictHelper';
 // redux
-import { recipeDictionary } from '../../features/recipesSlice';
+import { getRecipe } from '../../features/recipesSlice';
 import store from "../../app/store";
 // auth hooks
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
@@ -41,7 +41,7 @@ export default function Dictionary() {
 
   // find recipes and re-render when click on search button
   useEffect(() => {
-    const foundRecipes = recipeDictionary(
+    const foundRecipes = getRecipe(
       store.getState(),
       inputText.current.value
     );

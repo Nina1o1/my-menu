@@ -1,4 +1,5 @@
 import extraClasses from "../../common/utils/addExtraClasses";
+import { Link } from "react-router-dom";
 
 // contents
 function Text({specifyClass, content}) {

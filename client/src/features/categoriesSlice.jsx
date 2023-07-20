@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice, createSelector, current } from "@reduxjs/toolkit";
 
 const initialState = [];
 
@@ -7,7 +7,7 @@ const categoriesSlice = createSlice({
   initialState,
   reducers: {
     loadCategory: (state, action) => {
-      return action.payload.categories;
+      return action.payload;
     },
 
     resetCategory: () => {
@@ -18,7 +18,7 @@ const categoriesSlice = createSlice({
       const input = action.payload;
       if (!input) return;
       const currState = current(state);
-      if (currState.includes(input)) return;
+      if (currState.includes(input)) return currState;
       return [... currState, input];
     },
 
@@ -43,6 +43,13 @@ const categoriesSlice = createSlice({
 export { categoriesSlice };
 export const { loadCategory, resetCategory, addCategory, updateCategory, deleteCategory } = categoriesSlice.actions;
 
-export const readCategories = (state) => state.categories.category;
+const readCategories = (state) => {
+  return state.categories;
+}
 
+const getCategories = createSelector([readCategories], (foundCategories) => {
+  return foundCategories;
+});
+
+export {getCategories};
 export default categoriesSlice.reducer;
