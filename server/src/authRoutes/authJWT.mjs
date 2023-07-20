@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import { User, Recipe } from "../databases/alldb.mjs";
+import { User, Category } from "../databases/alldb.mjs";
 import readData from '../utils/readData.mjs';
 import findRecipes from '../utils/findRecipes.mjs';
 
@@ -29,7 +29,8 @@ async function loginRouter (req, res) {
 
     // create JWTs
     const accessToken = jwt.sign(
-      {"username": username},
+      {"username": username,
+       "userid": foundUser["_id"]},
       process.env.ACCESS_TOKEN_SECRET,
       {expiresIn: "15m"}
     )
@@ -50,15 +51,15 @@ async function loginRouter (req, res) {
       sameSite: false,
       maxAge: 24 * 60 * 60 * 1000
     }
-    const cookieData = JSON.stringify({refreshToken, userid: foundUser._id.toString()});
-    res.cookie("jwt", cookieData, cookieOptions);
-    // res.cookie("jwt", refreshToken, cookieOptions);
+    // const cookieData = JSON.stringify({refreshToken, userid: foundUser._id.toString()});
+    // res.cookie("jwt", cookieData, cookieOptions);
+    res.cookie("jwt", refreshToken, cookieOptions);
 
     // read user recipes
     const recipes = await findRecipes(foundUser);
-
+    const categories = await Category.findOne({"author": foundUser._id});
     // user login, send accessToken and recipe data to client
-    return res.send({accessToken, recipes, msg: status["login-success"]});
+    return res.send({accessToken, recipes, categories: categories?.["categories"], msg: status["login-success"]});
   } catch (error) {
     console.log(error);
     // server error
@@ -68,12 +69,11 @@ async function loginRouter (req, res) {
 
 async function logoutRouter (req,res) {
   // check refresh token
-  const jwtCookie = req?.cookies?.jwt;
-  if(!jwtCookie) return res.sendStatus(204);
-  const refreshToken = JSON.parse(jwtCookie)["refreshToken"];
+  const refreshToken = req?.cookies?.jwt;
+  if(!refreshToken) return res.sendStatus(204);
 
   // target user
-  const foundUser = await User.findOne({refreshToken});
+  const foundUser = await User.findOne({"refreshToken": refreshToken});
   if(!foundUser) {
     res.clearCookie("jwt", {httpOnly: true, sameSite: false});
     res.sendStatus(204);

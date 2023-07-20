@@ -18,6 +18,7 @@ function verifyJWT (req, res, next) {
       // expired access token
       if (err) return res.sendStatus(403);
       req.username = decoded.username;
+      req.userid = decoded.userid;
       next();
     }
   )

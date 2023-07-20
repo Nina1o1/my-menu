@@ -1,12 +1,16 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+// authentication api
 import { axiosProvider } from '../../common/api/axios';
-import './access.css';
 import useAuth from "../../common/hooks/useAuth";
-import findTerm from "../../common/utils/findTerms";
+// redux
 import { loadRecipe } from '../../features/recipesSlice';
+import { loadCategory } from '../../features/categoriesSlice';
+// layout
+import './access.css';
 import AccessForm from "./accessForm";
+import findTerm from "../../common/utils/findTerms";
 
 function Login() {
   document.body.classList.add("purple-page");
@@ -45,8 +49,8 @@ function Login() {
         postOptions
       );
 
-      const { accessToken, recipes } = res.data;
-
+      const { accessToken, recipes, categories } = res.data;
+      
       // custom error: no access token
       if(!accessToken) throw {msg: "error"};
 
@@ -55,6 +59,7 @@ function Login() {
 
       // retrieve and load user recipes to redux store
       dispatch(loadRecipe(recipes));
+      dispatch(loadCategory(categories));
 
       // redirect user to protected route of last visit
       const from = location?.state?.from?.pathname || "/";

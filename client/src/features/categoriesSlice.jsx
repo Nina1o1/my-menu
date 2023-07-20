@@ -1,44 +1,47 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
-const initialState = {
-  category: []
-};
+const initialState = [];
 
 const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    loadCategory: (state) => {
-      state.category = initialState;
+    loadCategory: (state, action) => {
+      return action.payload.categories;
+    },
+
+    resetCategory: () => {
+      return initialState;
     },
 
     addCategory: (state, action) => {
-      if (!action?.payload) return;
       const input = action.payload;
-      if (state.category.includes(input)) return;
-      state.category = [... state.category, input];
+      if (!input) return;
+      const currState = current(state);
+      if (currState.includes(input)) return;
+      return [... currState, input];
     },
 
-    updateCategory: (state, action) => {
-      const { target, input } = action?.payload;
-      if(!target || !input) return;
-      if (!state.category.includes(target) || state.category.includes(input)) return;
-      state.category = state.category.map((cat) => {
-        return (cat == target) ? input : cat;
-      });
-    },
+    // updateCategory: (state, action) => {
+    //   const { target, input } = action?.payload;
+    //   if(!target || !input) return;
+    //   if (!state.includes(target) || state.includes(input)) return;
+    //   state = state.map((cat) => {
+    //     return (cat == target) ? input : cat;
+    //   });
+    // },
 
-    deleteCategory: (state, action) => {
-      if (!action?.payload) return;
-      const target = action.payload;
-      if (!state.category.includes(target)) return;
-      state.category = state.category.filter((cat) => cat !== target);
-    }
+    // deleteCategory: (state, action) => {
+    //   const target = action.payload;
+    //   if (!target) return;
+    //   if (!state.includes(target)) return;
+    //   state = state.filter((cat) => cat !== target);
+    // }
   }
 });
 
 export { categoriesSlice };
-export const { loadCategory, addCategory, updateCategory, deleteCategory } = categoriesSlice.actions;
+export const { loadCategory, resetCategory, addCategory, updateCategory, deleteCategory } = categoriesSlice.actions;
 
 export const readCategories = (state) => state.categories.category;
 

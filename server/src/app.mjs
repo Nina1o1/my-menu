@@ -13,6 +13,7 @@ import refreshTokenRouter from "./authRoutes/refreshToken.mjs";
 import editRecipeRouter from './routes/editRecipe.mjs';
 import findRecipeRouter from './routes/findRecipe.mjs';
 import deleteRecipeRouter from './routes/deleteRecipe.mjs';
+import addCategoryRouter from './routes/addCategory.mjs';
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
 import { verifyJWT, verifyAuthRouter } from './middlewares/verifyJWT.mjs';
@@ -74,6 +75,7 @@ app.get("/api/verifyAuth", verifyAuthRouter);
 app.post("/editRecipe", editRecipeRouter);
 app.get("/findRecipe", findRecipeRouter);
 app.post("/deleteRecipe", deleteRecipeRouter);
+app.post("/addCategory", addCategoryRouter);
 
 app.listen(3000, () => {
   console.log("connecting to server...")

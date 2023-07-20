@@ -1,20 +1,25 @@
 import { useRef, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+// styling and components
 import './dictionary.css';
 import ItemList from './itemList';
+import FilterBar from './filterBar';
 import SearchBar from './searchBar';
 import Display from '../display/display';
+import { styleToggleHelper } from './dictHelper';
+// redux
 import { recipeDictionary } from '../../features/recipesSlice';
 import store from "../../app/store";
+// auth hooks
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
 import useLogout from '../../common/hooks/useLogout';
-import { styleToggleHelper } from './dictHelper';
 
 export default function Dictionary() {
   document.body.classList.remove("purple-page");
 
   // states to read and select recipes
   const [displayRecipes, setDisplayRecipes] = useState([]);
+  const [displayCategories, setDisplayCategories] = useState([]);
   const [searchCount, setSearchCount] = useState(0);
   const inputText = useRef("");
   // TODO: search by category
@@ -24,12 +29,15 @@ export default function Dictionary() {
   const [dictContainerStyle, setDictContainerStyle] = useState("dictionary-container");
   const [showpageContainerStyle, setShowpageContainerStyle] = useState("showpage-container");
   const [clickedRecipe, setClickedRecipe] = useState(null);
-  // sucure fetch api
+  // fetch api
   const axiosTookenProvider = useAxiosTooken();
   // hooks for logout
   const resetUserInfo = useLogout();
   const location = useLocation();
   const navigate = useNavigate();
+
+  // show all categories
+  
 
   // find recipes and re-render when click on search button
   useEffect(() => {
@@ -82,6 +90,8 @@ export default function Dictionary() {
             setSearchCount={setSearchCount} 
             inputText = {inputText}
             displayMode = {displayMode}/>
+          <FilterBar
+            displayCategories = {displayCategories}/>
           <ItemList
             displayRecipes={displayRecipes}
             handleClickRecipe = {handleClickRecipe}

@@ -35,8 +35,7 @@ function FormBtn({formItems, recipe}) {
       // update / add recipe to redux store
       if (recipe?.["_id"]) {
         dispatch(updateRecipe(retRecipe));
-      } 
-      else {
+      } else {
         dispatch(addRecipe(retRecipe));
       }
       navigate("/", {state: retRecipe});
@@ -61,8 +60,7 @@ function FormBtn({formItems, recipe}) {
         console.log(error);
         return;
       }
-    }
-    else{
+    } else {
       formItems.reset();
     }
   }
@@ -70,7 +68,6 @@ function FormBtn({formItems, recipe}) {
   return(
     <>
         <LabelContainer />
-
         <div className="btn-container">
           <button onClick={handleDelete} className="form-btn form-delete">Delete</button>
           <button onClick={handleSubmit} className="form-btn form-submit">Submit</button>

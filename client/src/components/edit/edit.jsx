@@ -12,7 +12,7 @@ function Edit() {
   document.body.classList.remove("purple-page");
 
   const formRef = useRef(null);
-  const [initializeForm, setInitializeForm] = useState(false);
+  const [fireForm, setFireForm] = useState(false);
   // read recipe passed from dictionary
   const location = useLocation({});
   // array of components (step & ingredients)
@@ -42,7 +42,7 @@ function Edit() {
 
   function handleClickForm(evt) {
     evt.preventDefault();
-    if(!initializeForm) setInitializeForm(true);
+    if(!fireForm) setFireForm(true);
   }
 
   // TODO: image, image for each step, ingredient portion, drag feature

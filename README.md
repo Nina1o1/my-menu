@@ -42,7 +42,7 @@ A Sample Category:
 ```json
 {
   "_id": "xx",
-  "username": "abc", // reference to author id, unique
+  "author": "abc", // reference to author id, unique
   "categories": ["fav", "easy"] // name of category, each unique
 }
 ```

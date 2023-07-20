@@ -1,6 +1,5 @@
 import "./edit.css";
-import { BlockItemLabel, BlockItemInput } from "./editComponents";
-import EditBtn from "./editBtn";
+import { BlockItemLabel, BlockItemInput, EditBtn } from "./editComponents";
 
 function Step({keyVal, delProps, stepVal}) {
   const dragMe = keyVal === 1 ? "Hold And Drag!" : "";

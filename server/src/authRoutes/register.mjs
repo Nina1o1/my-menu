@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { User } from "../databases/alldb.mjs";
+import { User, Category } from "../databases/alldb.mjs";
 import readData from '../utils/readData.mjs';
 
 async function registerRouter (req, res) {
@@ -26,7 +26,13 @@ async function registerRouter (req, res) {
       username: username,
       hash: hash
     });
-    await newUser.save();
+    const storedUse = await newUser.save();
+    const newCategory = new Category({
+      author: storedUse._id,
+      categories: []
+    });
+    const storedCategory = await newCategory.save();
+    await User.findByIdAndUpdate(storedUse._id, {"categories": storedCategory._id}, {new: true});
     return res.send({msg: status["register-success"]}); 
 
   } catch (error) {

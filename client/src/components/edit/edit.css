@@ -39,6 +39,7 @@
   border-width: 0.1rem;
   border-style: none;
   border-bottom-style: solid;
+  cursor: pointer;
 }
 
 .edit-text:hover{
@@ -64,8 +65,15 @@
 }
 
 /* select */
-.edit-select {
-  width: 100%;
+.select-container{
+  position: relative;
+}
+
+.edit-select{
+  width: 100%;  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 /* multiple inputs */
@@ -101,14 +109,14 @@
 
   background-color: transparent;
   border-width: 0.1rem;
-  color: #BFACE2;
+  color: #3E54AC;
   cursor: pointer;
 }
 .edit-btn:hover {
   border-color: #3E54AC;
   border-style: solid;
-  color: #3E54AC;
 }
+
 /* add button */
 .add-btn {
   padding: 1rem;
@@ -159,4 +167,79 @@
   border-radius: 0.3rem;
   background-color: #ECF2FF;
   border-color: #ECF2FF;
+}
+
+/* popout */
+.popout-container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 4rem;
+  min-width: 30%;
+  z-index: 2;
+  gap: 3rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
+  border-radius: 0.5rem;
+  background-color: #ECF2FF;
+  box-shadow: 5px 5px 2px #3E54AC;
+}
+
+.hidePopout{
+  display: none;
+}
+.popout-content{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  text-align: left;
+  color: #3E54AC;
+}
+
+.popout-label{
+  min-width: 150px;
+}
+
+.popout-text{
+  border-radius: 0.3rem;
+  border-style: none;
+  box-shadow: 2px 2px 2px #3E54AC;
+}
+.popout-text:hover{
+  background-color: #fff;
+  box-shadow: -2px -2px 2px #3E54AC;
+}
+
+.popout-btn-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 6rem;
+}
+
+.popout-btn{
+  width: 100%;
+  height: 55px;
+  background-color: #fff;
+  color: #3E54AC;
+  box-shadow: 2px 2px 2px #3E54AC;
+}
+
+.popout-btn:hover{
+  background-color: #fff;
+  border-color: #3E54AC;
+  border-width: 0.1rem;
+  box-shadow: -2px -2px 2px #3E54AC;
+}
+
+.popout-left{
+  box-shadow: 2px 2px 2px #BFACE2;
+}
+
+.popout-left:hover{
+  box-shadow: -2px -2px 2px #BFACE2;
 }

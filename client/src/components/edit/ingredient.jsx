@@ -1,6 +1,5 @@
 import "./edit.css";
-import { TextInput } from "./editComponents";
-import EditBtn from "./editBtn";
+import { TextInput, EditBtn } from "./editComponents";
 
 function Ingredient({keyVal, delProps, indgtVal}) {
   const itemValue = indgtVal?.["item"] || "";

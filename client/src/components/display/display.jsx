@@ -2,7 +2,7 @@ import "./display.css";
 import BasicItems from "./basicItems";
 import Ingredients from "./ingredients";
 import Steps from "./steps";
-import { BackBtn, EditBtn } from "./btns";
+import { BackBtn, EditBtn } from "./displayComponents";
 
 function Display ({recipe, setdisplayMode}) {
   return (

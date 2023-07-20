@@ -19,13 +19,20 @@ const useEditRecipe = () => {
       );
     } 
     catch (error) {
-      console.log(error);
-      resetUserInfo();
-      navigate("/login", {state: {from: location}});
-      return;
+      console.log("error");
+      // expired refresh token, log out
+      if(error.response.status === 402) {
+        navigate("/login", {state: {from: location}});
+        resetUserInfo();
+      }
+      // server error 
+      else {
+        return;
+      }
     }
     return res?.data;
   }
+  
   return editRecipe;
 }
 

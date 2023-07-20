@@ -2,17 +2,12 @@ import { Recipe } from "../databases/alldb.mjs";
 
 async function editRecipeRouter (req, res) {
 
-  // read user id from cookie
-  const jwt = req.cookies?.jwt;
-  if (!jwt) return res.sendStatus(401);
-  const userid = JSON.parse(jwt)["userid"];
-
   try {
     const readRecipe = req.body;
     const recipeId = readRecipe?.["_id"];
     delete readRecipe?.["_id"];
     const newRecipe = {
-      author: userid,
+      author: req.userid,
       ...readRecipe
     }
 
