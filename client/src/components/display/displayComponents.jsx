@@ -2,7 +2,7 @@ import extraClasses from "../../common/utils/addExtraClasses";
 import { Link } from "react-router-dom";
 
 // contents
-function Text({specifyClass, content}) {
+function Text({content, specifyClass}) {
   const className = extraClasses("display-text", specifyClass);
   return <div className={className}>{content}</div>
 }
@@ -36,15 +36,17 @@ function Br() {
   return <div className="display-break"/>
 }
 
-// special buttons
-function EditBtn({recipe}) {
+// link btn
+function LinkBtn({linkLoc, linkState, imgSrc, specifyClass}) {
+  const className = extraClasses("display-btn", specifyClass);
   return (
-    <Link to="edit" state={recipe}>
+    <Link to={linkLoc} state={linkState}>
       <img 
-        className="display-btn display-editbtn" 
-        src="./edit.png" alt="e"/>
+        className={className}
+        src={imgSrc}/>
     </Link>
   )
+
 }
 
 function BackBtn({setdisplayMode}){
@@ -67,6 +69,6 @@ export {
   ItemContainer,
   ParagContainer,
   Br,
-  EditBtn,
-  BackBtn
+  BackBtn,
+  LinkBtn
 }

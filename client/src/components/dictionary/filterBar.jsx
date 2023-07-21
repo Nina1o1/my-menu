@@ -15,7 +15,7 @@ function FilterBar({displayCategories, selectCategories, setSearchCount}) {
   return (
     <div className="category-container">
       {styleCategory}
-      <EachCategory category="+"/>
+      <div className="each-category">+</div>
     </div>
   );
 }
@@ -29,7 +29,7 @@ function EachCategory({category, selectCategories, setSearchCount}) {
   function handleClick(evt){
     evt.preventDefault();
     const currSelect = selectCategories.current;
-    
+
     if(currSelect.includes(category)){
       const targetIndex = currSelect.indexOf(category);
       currSelect.splice(targetIndex, 1);
