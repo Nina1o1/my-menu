@@ -1,17 +1,15 @@
 import "./edit.css";
 import extraClasses from "../../common/utils/addExtraClasses";
-import { useEffect, useState } from "react";
 
 // inputs, id must be consistent with database
-function TextInput({id, value, placeholder, customRef, specifyClass}) {
+function TextInput({id, value, placeholder, specifyClass}) {
   const className = extraClasses("edit-text", specifyClass);
   return <input 
     type="text"
     id={id}
     className={className}
     defaultValue={value}
-    placeholder={placeholder}
-    ref={customRef}/>
+    placeholder={placeholder}/>
 }
 
 
@@ -20,44 +18,6 @@ function BlockItemInput({id, value}){
     id={id} 
     className="edit-text edit-text-block"
     defaultValue={value}/>
-}
-
-function ItemSelect({options}) {
-  let optionComps;
-
-  function handleCheck(evt) {
-    evt.stopPropagation();
-  }
-
-  function handleClick(evt) {
-    evt.preventDefault();
-    let clickEvent = new MouseEvent("click", {bubbles: true, cancelable: true, clientX: 100, clientY: 100});
-    evt.currentTarget.firstChild.dispatchEvent(clickEvent);
-  }
-
-  if (!options) optionComps = ""; 
-  else {
-    optionComps = options?.map((ele, i) => {
-      return (
-        <div key={i} onClick={handleClick} className="select-option">
-          <input 
-            type="checkbox"
-            className="select-input"
-            id={`select-${i}`}
-            value={ele} 
-            onClick={ handleCheck }/>
-          <div className="select-label"> {ele} </div>
-        </div>
-      )
-    });
-  }
-  return(
-    <div className="edit-text edit-select">
-      <div className="select-options">
-        {optionComps}
-      </div>
-    </div>
-  )
 }
 
 // labels
@@ -97,12 +57,12 @@ function TextContainer({children}) {
 }
 
 // button
-function SelectBtn({display, specifyClass, handleClick}) {
+function Btn({display, specifyClass, handleClick}) {
   const className = extraClasses("edit-btn", specifyClass);
-  return <button className="edit-btn" onClick={handleClick}>{display}</button>;
+  return <button className={className} onClick={handleClick}>{display}</button>;
 }
 
-// special buttons
+// special button
 // delete item (step / ingredient), specified via "delProps" & "keyVal"
 function EditBtn({display, delProps, keyVal}) {
 
@@ -128,52 +88,15 @@ function EditBtn({display, delProps, keyVal}) {
   )
 }
 
-// popout
-function PopOut({content="", leftBtnText="", rightBtnText="", handleClickRight, showPopup, setShowPopup}) {
-
-  const [popoutContainer, setPopoutContainer] = useState("popout-container");
-
-  function handleClickLeft (evt) {
-    evt.preventDefault();
-    setShowPopup(false);
-  }
-
-  useEffect(() => {
-    const currContainer = popoutContainer.split(" ");
-    if (currContainer?.[1] === "hidePopout") {
-      setPopoutContainer(currContainer[0]);
-    } else {
-      currContainer.push("hidePopout")
-      setPopoutContainer(currContainer.join(" "));
-    }
-  }, [showPopup]);
-
-  return(
-    <div className={popoutContainer}>
-      <div className="popout-content">
-        {content}
-      </div>
-
-      <div className="popout-btn-container">
-        <button className="popout-btn popout-left" onClick={handleClickLeft}>{leftBtnText}</button>
-        <button className="popout-btn" onClick={handleClickRight}>{rightBtnText}</button>
-      </div>
-    </div>
-  )
-}
-
-
 export {
   ItemLabel,
   BlockItemLabel,
-  ItemSelect,
   TextInput,
   BlockItemInput,
 
   FormContainer,
   LabelContainer,
   TextContainer,
-  SelectBtn,
+  Btn,
   EditBtn,
-  PopOut
 }

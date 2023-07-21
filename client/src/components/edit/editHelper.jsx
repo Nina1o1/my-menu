@@ -38,7 +38,6 @@ function handleAddItem (evt, ItemComponent, setItemComp, setItemCount, ...extraP
 }
 
 function readFormData(formItems, formdata) {
-  console.log(formItems);
   if(!formItems) throw "no data";
   Array.from(formItems).forEach(ele => {
     if(!ele.id) return;
@@ -62,11 +61,6 @@ function readFormData(formItems, formdata) {
         else if (idtype[1] === "amount") {
           ingdtData[ingdtData.length-1]["amount"] = ele.value;
         }
-        break;
-      }
-
-      case "categories": {
-        formdata["categories"] = [];
         break;
       }
 
