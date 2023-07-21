@@ -17,7 +17,7 @@ function FilterBar({displayCategories, selectCategories, setSearchCount}) {
       {styleCategory}
       <div className="each-category">+</div>
     </div>
-  );
+  )
 }
 
 function EachCategory({category, selectCategories, setSearchCount}) {
