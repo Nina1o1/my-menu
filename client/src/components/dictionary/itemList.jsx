@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { styleToggleHelper } from './dictHelper';
+import { modeToggleHelper } from './dictHelper';
 
 function ItemList ({displayRecipes, handleClickRecipe, displayMode}) {
   const itemList = displayRecipes.map((recipe, i) => {
@@ -24,7 +24,7 @@ function Item ({recipe, handleClickRecipe, displayMode}) {
   });
 
   useEffect(() => {
-    const styleToggle = styleToggleHelper(displayMode);
+    const styleToggle = modeToggleHelper(displayMode);
     setDictItemStyle(styleToggle(dictItemStyle));
     setItemStyle(styleToggle(itemStyle));
   },[displayMode]);

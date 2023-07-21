@@ -61,7 +61,7 @@ export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, deleteRecipe } 
 
 const readRecipes =  (state, inputText, categories)  => {
   const foundRecipes = [];
-  
+
   state.recipes.forEach(recipe => {
     let isFound = true;
     // check if input is found in ingredient or recipe
@@ -77,7 +77,16 @@ const readRecipes =  (state, inputText, categories)  => {
         return true;
       });
     }
-    // TODO: check category
+    if(categories.length) {
+      isFound = false;
+      categories.every(cat => {
+        if(recipe["categories"].includes(cat)) {
+          isFound = true;
+          return false;
+        }
+        return true;
+      });
+    }
     if(!isFound) return;
     foundRecipes.push(recipe);
   });

@@ -44,6 +44,31 @@
   height: 2rem;
 }
 
+/* categories */
+.category-container{
+  max-width: 100%;
+  padding: 0.5rem 0;
+  max-height: 2.4rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.each-category{
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-color: #BFACE2;
+  border-style: solid;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.category-active{
+  color: #fff;
+  background-color: #BFACE2;
+}
+
 /* list of dishes */
 .dict-container{
   display: flex;

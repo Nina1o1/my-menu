@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import terms from '../../assets/terms.json';
-import { styleToggleHelper } from './dictHelper';
+import { modeToggleHelper } from './dictHelper';
 
 function SearchBar({setSearchCount, inputText, displayMode}) {
   const [searchBtnStyle, setSearchBtnStyle] = useState("search-btn");
@@ -8,7 +8,7 @@ function SearchBar({setSearchCount, inputText, displayMode}) {
     
   // turn into display mode upon displayMode change
   useEffect(() => { 
-    const styleToggle = styleToggleHelper(displayMode);
+    const styleToggle = modeToggleHelper(displayMode);
     setSearchBtnStyle(styleToggle(searchBtnStyle));
     setSearchBarStyle(styleToggle(searchBarStyle));
   },[displayMode])

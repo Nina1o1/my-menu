@@ -6,9 +6,10 @@ import ItemList from './itemList';
 import FilterBar from './filterBar';
 import SearchBar from './searchBar';
 import Display from '../display/display';
-import { styleToggleHelper } from './dictHelper';
+import { modeToggleHelper } from './dictHelper';
 // redux
 import { getRecipe } from '../../features/recipesSlice';
+import { getCategories } from '../../features/categoriesSlice';
 import store from "../../app/store";
 // auth hooks
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
@@ -22,8 +23,7 @@ export default function Dictionary() {
   const [displayCategories, setDisplayCategories] = useState([]);
   const [searchCount, setSearchCount] = useState(0);
   const inputText = useRef("");
-  // TODO: search by category
-  const selectedCategories = useRef([]);
+  const selectCategories = useRef([]);
   // states to manage display mode
   const [displayMode, setdisplayMode] = useState(false);
   const [dictContainerStyle, setDictContainerStyle] = useState("dictionary-container");
@@ -36,14 +36,22 @@ export default function Dictionary() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // show all categories
-  
+  // find all categories on initial re-render
+  useEffect(() => {
+    const foundCategories = getCategories(store.getState());
+    setDisplayCategories(foundCategories);
+  }, []);  
 
   // find recipes and re-render when click on search button
   useEffect(() => {
+    console.log("find again");
+    console.log(selectCategories.current);
+
+    // TODO: createselector not detecting array
     const foundRecipes = getRecipe(
       store.getState(),
-      inputText.current.value
+      inputText.current.value,
+      selectCategories.current
     );
     setDisplayRecipes(foundRecipes);
     }, [searchCount]);
@@ -58,7 +66,7 @@ export default function Dictionary() {
   
   // change component style when display mode changes
   useEffect(() => {
-    const styleToggle = styleToggleHelper(displayMode);
+    const styleToggle = modeToggleHelper(displayMode);
     setDictContainerStyle(styleToggle(dictContainerStyle));
     setShowpageContainerStyle(styleToggle(showpageContainerStyle));
   },[displayMode]);
@@ -91,7 +99,9 @@ export default function Dictionary() {
             inputText = {inputText}
             displayMode = {displayMode}/>
           <FilterBar
-            displayCategories = {displayCategories}/>
+            displayCategories = {displayCategories}
+            selectCategories = {selectCategories}
+            setSearchCount = {setSearchCount}/>
           <ItemList
             displayRecipes={displayRecipes}
             handleClickRecipe = {handleClickRecipe}
