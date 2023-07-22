@@ -20,10 +20,6 @@ function Display ({recipe, setdisplayMode}) {
         linkLoc="edit" linkState={recipe} 
         imgSrc="/edit.png" 
         specifyClass="display-editbtn"/>
-       <FuncBtn
-        // handleClick = {}
-        imgSrc="/category.png" 
-        specifyClass="display-categorybtn"/>
 
       <h1 className="display-header">{recipe["dishname"]}</h1>
       <div className="display-detail-container">

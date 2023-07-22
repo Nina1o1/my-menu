@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 function Text({content, specifyClass}) {
   const className = extraClasses("display-text", specifyClass);
   if(Array.isArray(content)) {
-    content = content.map(ele => <span>{ele}</span>);
+    content = content.map((ele, i) => {
+      if (i + 1 < content.length) ele = `${ele},`
+      return <span key={i}>{ele}</span>
+    });
   }
   return <div className={className}>{content}</div>
 }

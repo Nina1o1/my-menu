@@ -61,33 +61,33 @@ export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, deleteRecipe } 
 
 const readRecipes =  (state, inputText, ...categories)  => {
   const foundRecipes = [];
+
+  // check if input is found in ingredient or recipe
   state.recipes.forEach(recipe => {
-    let isFound = true;
-    // check if input is found in ingredient or recipe
+    if (!inputText && !categories.length) {
+      foundRecipes.push(recipe);
+      return;
+    }
     if(inputText) {
-      isFound = false;
       const searchStr =  `${recipe["dishname"]} ${recipe["ingredients"].join(" ")}`;
       const inputArr = inputText.split(" ");
       inputArr.every(input => {
         if(searchStr.includes(input)) {
-          isFound = true;
+          foundRecipes.push(recipe);
           return false;
         }
         return true;
       });
     }
     if(categories.length) {
-      isFound = false;
       categories.every(cat => {
         if(recipe["categories"].includes(cat)) {
-          isFound = true;
+          foundRecipes.push(recipe);
           return false;
         }
         return true;
       });
     }
-    if(!isFound) return;
-    foundRecipes.push(recipe);
   });
   return foundRecipes;
 }

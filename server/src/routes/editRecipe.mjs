@@ -2,8 +2,6 @@ import { Recipe } from "../databases/alldb.mjs";
 
 async function editRecipeRouter (req, res) {
 
-  console.log(req.body.categories);
-
   try {
     const readRecipe = req.body;
     const recipeId = readRecipe?.["_id"];
