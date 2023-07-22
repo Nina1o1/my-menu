@@ -42,16 +42,12 @@ export default function Dictionary() {
     setDisplayCategories(foundCategories);
   }, []);  
 
-  // find recipes and re-render when click on search button
+  // find recipes and re-render when click on search button & category selection
   useEffect(() => {
-    console.log("find again");
-    console.log(selectCategories.current);
-
-    // TODO: createselector not detecting array
     const foundRecipes = getRecipe(
       store.getState(),
       inputText.current.value,
-      selectCategories.current
+      ...selectCategories.current
     );
     setDisplayRecipes(foundRecipes);
     }, [searchCount]);

@@ -59,9 +59,8 @@ const recipesSlice = createSlice({
 export { recipesSlice };
 export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, deleteRecipe } = recipesSlice.actions;
 
-const readRecipes =  (state, inputText, categories)  => {
+const readRecipes =  (state, inputText, ...categories)  => {
   const foundRecipes = [];
-
   state.recipes.forEach(recipe => {
     let isFound = true;
     // check if input is found in ingredient or recipe
