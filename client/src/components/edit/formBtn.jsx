@@ -27,7 +27,7 @@ function FormBtn({formItems, recipe}) {
       console.log(error);
       return;
     }
-
+    console.log(formdata);
     // post request to send the updated / new recipe
     try {
       const action = "editRecipe";

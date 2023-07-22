@@ -32,6 +32,7 @@
 .edit-text{
   width: calc(100% - 4rem);
   padding: 1rem 3rem 1rem 1rem;
+  min-height: 1rem;
 
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
@@ -58,63 +59,41 @@
 }
 
 /* select */
-.select-container{
-  position: relative;
-}
+.edit-fieldset{
+  margin: 0;
+  padding: 1rem 0 0 0;
 
-.edit-select{
-  padding: 1rem 0;
-  width: 100%;
-  height: 1rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  cursor: pointer;
+  border-style: none;
 }
 
 .select-options{
-  position: relative;
-  z-index: 2;
-  margin-top: 2rem;
   display: flex;
-  flex-flow: column nowrap;
-  text-align: left;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+.select-check{
+  appearance: none;
+  margin: 0;
+}
+.select-option{
+  min-width: fit-content;
+  padding: 0.5rem 1rem;
 
-  border-left-style: solid;
-  border-width: 0.1rem;
+  color: #3E54AC;
+  border-style: solid;
+  border-radius: 1rem;
+}
+.select-state{
   border-color: #BFACE2;
 }
-
-.select-option{
-  position: relative;
-  color: #3E54AC;
-  background-color: #fff;
-  padding: 1rem 0;
-}
-.select-option:nth-child(2n+1){
+.select-state:hover{
   background-color: #ECF2FF;
+  border-color: #ECF2FF;
 }
-.select-option > input[type=checkbox] {
-  appearance: none;
-  -webkit-appearance: none;
-
-  display: block;
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  bottom: 1rem;
-  left: 0.5rem;
-  border: 1px solid #3E54AC;
-  border-radius: 100%;
-  background-color: #fff;
-}
-
-.select-option > input[type=checkbox]:checked {
-  background-color: #3E54AC;
-}
-.select-label{
-  display: inline-block;
-  padding-left: 2.5rem;
+.select-state-active{
+  color: #fff;
+  background-color: #BFACE2;
+  border-color: #BFACE2;
 }
 /* multiple inputs */
 .multi-container{

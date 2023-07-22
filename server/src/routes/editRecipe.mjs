@@ -2,15 +2,17 @@ import { Recipe } from "../databases/alldb.mjs";
 
 async function editRecipeRouter (req, res) {
 
+  console.log(req.body.categories);
+
   try {
     const readRecipe = req.body;
     const recipeId = readRecipe?.["_id"];
     delete readRecipe?.["_id"];
+    
     const newRecipe = {
       author: req.userid,
       ...readRecipe
     }
-
     let editedRecipe;
     if(recipeId) {
       editedRecipe = await Recipe.findByIdAndUpdate(recipeId, newRecipe, {new: true});

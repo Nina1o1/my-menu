@@ -64,12 +64,17 @@ function readFormData(formItems, formdata) {
         break;
       }
 
+      case "categories": {
+        if (!formdata?.["categories"]) formdata["categories"] = [];
+        if (!ele.checked) return;
+        formdata?.["categories"].push(ele.value);
+        break;
+      }
       case "dishname": {
         if(!ele.value) throw "no dishname";
       }
 
       default: {
-        console.log(ele);
         formdata[ele.id] = ele.value;
       }
     }

@@ -1,5 +1,5 @@
 import "./edit.css";
-import extraClasses from "../../common/utils/addExtraClasses";
+import { extraClasses } from "../../common/utils/styleHelper";
 
 // inputs, id must be consistent with database
 function TextInput({id, value, placeholder, specifyClass}) {
@@ -97,6 +97,7 @@ export {
   FormContainer,
   LabelContainer,
   TextContainer,
+  
   Btn,
   EditBtn,
 }

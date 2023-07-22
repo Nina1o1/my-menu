@@ -1,9 +1,12 @@
-import extraClasses from "../../common/utils/addExtraClasses";
+import { extraClasses } from "../../common/utils/styleHelper";
 import { Link } from "react-router-dom";
 
 // contents
 function Text({content, specifyClass}) {
   const className = extraClasses("display-text", specifyClass);
+  if(Array.isArray(content)) {
+    content = content.map(ele => <span>{ele}</span>);
+  }
   return <div className={className}>{content}</div>
 }
 

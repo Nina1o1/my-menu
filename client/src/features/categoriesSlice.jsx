@@ -47,9 +47,9 @@ const readCategories = (state) => {
   return state.categories;
 }
 
-const getCategories = createSelector([readCategories], (foundCategories) => {
+const selectCategories = createSelector([readCategories], (foundCategories) => {
   return foundCategories;
 });
 
-export {getCategories};
+export {selectCategories};
 export default categoriesSlice.reducer;

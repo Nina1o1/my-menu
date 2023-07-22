@@ -7,6 +7,8 @@ import BasicInfo from "./basicInfo";
 import FormBtn from "./formBtn";
 import { ItemLabel, FormContainer, LabelContainer, TextContainer} from "./editComponents";
 import { loadIngredients, loadSteps, handleAddItem } from "./editHelper";
+import { selectCategories } from "../../features/categoriesSlice";
+import store from "../../app/store";
 
 function Edit() {
   document.body.classList.remove("purple-page");
@@ -15,6 +17,7 @@ function Edit() {
   const [fireForm, setFireForm] = useState(false);
   // read recipe passed from dictionary
   const location = useLocation({});
+  const [currCategories, setCurrCategories] = useState([]);
   // array of components (step & ingredients)
   const [stepComp, setStepComp] = useState([]);
   const [stepCountComp, setStepCountComp] = useState([]);
@@ -27,8 +30,10 @@ function Edit() {
   const stepDelProps = [setStepComp, stepCount, setStepCount, setStepCountComp];
   const ingredientDelProps = [setIngredientComp, ingredientComp, setIngredientCount];
 
-  // read recipe on initial render
+  // read recipe from display & category on initial render
   useEffect(() => {
+    setCurrCategories(selectCategories(store.getState()));
+
     if (location?.state) {
       const readRecipe = location?.state;
       if(readRecipe["ingredients"]) {
@@ -49,7 +54,9 @@ function Edit() {
   return(
     <form ref={formRef} onClick={handleClickForm}>
       <FormContainer>
-        <BasicInfo recipe = {location?.state || {}} />
+        <BasicInfo 
+          recipe = {location?.state || {}}
+          currCategories = {currCategories} />
       </FormContainer>
 
       <FormContainer>

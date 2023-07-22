@@ -92,9 +92,9 @@ const readRecipes =  (state, inputText, ...categories)  => {
   return foundRecipes;
 }
 
-const getRecipe = createSelector([readRecipes], (foundRecipes) => {
+const selectRecipe = createSelector([readRecipes], (foundRecipes) => {
   return foundRecipes;
 });
 
-export {getRecipe};
+export {selectRecipe};
 export default recipesSlice.reducer;

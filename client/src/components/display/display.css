@@ -37,6 +37,12 @@
   gap: 0.5rem;
 }
 
+/* text */
+.display-text{
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem
+}
 /* break line */
 .display-break{
   min-height: 1rem;

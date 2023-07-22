@@ -8,8 +8,8 @@ import SearchBar from './searchBar';
 import Display from '../display/display';
 import { modeToggleHelper } from './dictHelper';
 // redux
-import { getRecipe } from '../../features/recipesSlice';
-import { getCategories } from '../../features/categoriesSlice';
+import { selectRecipe } from '../../features/recipesSlice';
+import { selectCategories } from '../../features/categoriesSlice';
 import store from "../../app/store";
 // auth hooks
 import useAxiosTooken from "../../common/hooks/useAxiosTooken";
@@ -23,7 +23,7 @@ export default function Dictionary() {
   const [displayCategories, setDisplayCategories] = useState([]);
   const [searchCount, setSearchCount] = useState(0);
   const inputText = useRef("");
-  const selectCategories = useRef([]);
+  const chooseCategories = useRef([]);
   // states to manage display mode
   const [displayMode, setdisplayMode] = useState(false);
   const [dictContainerStyle, setDictContainerStyle] = useState("dictionary-container");
@@ -38,16 +38,16 @@ export default function Dictionary() {
 
   // find all categories on initial re-render
   useEffect(() => {
-    const foundCategories = getCategories(store.getState());
+    const foundCategories = selectCategories(store.getState());
     setDisplayCategories(foundCategories);
   }, []);  
 
   // find recipes and re-render when click on search button & category selection
   useEffect(() => {
-    const foundRecipes = getRecipe(
+    const foundRecipes = selectRecipe(
       store.getState(),
       inputText.current.value,
-      ...selectCategories.current
+      ...chooseCategories.current
     );
     setDisplayRecipes(foundRecipes);
     }, [searchCount]);
@@ -96,7 +96,7 @@ export default function Dictionary() {
             displayMode = {displayMode}/>
           <FilterBar
             displayCategories = {displayCategories}
-            selectCategories = {selectCategories}
+            chooseCategories = {chooseCategories}
             setSearchCount = {setSearchCount}/>
           <ItemList
             displayRecipes={displayRecipes}

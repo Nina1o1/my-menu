@@ -61,13 +61,20 @@
 .each-category{
   min-width: fit-content;
   padding: 0.5rem 1rem;
-  border-color: #BFACE2;
+  
+  color: #3E54AC;
   border-style: solid;
   border-radius: 1rem;
   cursor: pointer;
 }
-
-.category-active{
+.category-state{
+  border-color: #BFACE2;
+}
+.category-state:hover{
+  border-color: #ECF2FF;
+  background-color: #ECF2FF;
+}
+.category-state-active{
   color: #fff;
   background-color: #BFACE2;
 }

@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import slug from "mongoose-slug-updater";
 import IngredientSchema from "./ingredientdb.mjs";
 import StepSchema from "./stepdb.mjs";
 
@@ -20,7 +19,7 @@ const RecipeSchema = new mongoose.Schema({
   },
 
   categories: [{
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "Category"
   }],
 
@@ -46,14 +45,6 @@ const RecipeSchema = new mongoose.Schema({
     type: StepSchema,
     required: true
   }],
-
-  slug: {
-    type: String,
-    slug: "dishname",
-    unique: true,
-    slugPaddingSize: 4
-  }
-
 });
 
 export default RecipeSchema;
