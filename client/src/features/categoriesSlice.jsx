@@ -15,7 +15,7 @@ const categoriesSlice = createSlice({
     },
 
     addCategory: (state, action) => {
-      const input = action.payload;
+      const input = action.payload?.["category"];
       if (!input) return;
       const currState = current(state);
       if (currState.includes(input)) return currState;

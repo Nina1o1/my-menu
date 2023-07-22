@@ -17,7 +17,6 @@ function Edit() {
   const [fireForm, setFireForm] = useState(false);
   // read recipe passed from dictionary
   const location = useLocation({});
-  const [currCategories, setCurrCategories] = useState([]);
   // array of components (step & ingredients)
   const [stepComp, setStepComp] = useState([]);
   const [stepCountComp, setStepCountComp] = useState([]);
@@ -30,10 +29,8 @@ function Edit() {
   const stepDelProps = [setStepComp, stepCount, setStepCount, setStepCountComp];
   const ingredientDelProps = [setIngredientComp, ingredientComp, setIngredientCount];
 
-  // read recipe from display & category on initial render
+  // read recipe from display page on initial render
   useEffect(() => {
-    setCurrCategories(selectCategories(store.getState()));
-
     if (location?.state) {
       const readRecipe = location?.state;
       if(readRecipe["ingredients"]) {
@@ -55,8 +52,7 @@ function Edit() {
     <form ref={formRef} onClick={handleClickForm}>
       <FormContainer>
         <BasicInfo 
-          recipe = {location?.state || {}}
-          currCategories = {currCategories} />
+          recipe = {location?.state || {}}/>
       </FormContainer>
 
       <FormContainer>

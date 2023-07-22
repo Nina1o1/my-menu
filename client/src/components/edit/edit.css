@@ -75,16 +75,17 @@
   appearance: none;
   margin: 0;
 }
+
 .select-option{
   min-width: fit-content;
   padding: 0.5rem 1rem;
 
   color: #3E54AC;
+  font-family: 'Courier New', Courier, monospace;
   border-style: solid;
-  border-radius: 1rem;
-}
-.select-state{
   border-color: #BFACE2;
+  border-radius: 1rem;
+  font-size: 1rem;
 }
 .select-state:hover{
   background-color: #ECF2FF;
@@ -95,6 +96,40 @@
   background-color: #BFACE2;
   border-color: #BFACE2;
 }
+.select-add-container{
+  position: relative;
+  margin: 0 2.6rem;
+}
+.select-btn{
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0.1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+
+  border-radius: 100%;
+  cursor: pointer;
+}
+.select-add-btn{
+  left: -2.6rem;
+}
+.select-del-btn{
+  right: -2.6rem;
+  border-color: #BFACE2;
+  border-style: solid;
+  background-color: #fff;
+  color: #BFACE2;
+}
+.select-del-btn:hover{
+  border-color: #ECF2FF;
+}
+.select-display-hide{
+  visibility: hidden;
+}
+
+/**/
+
 /* multiple inputs */
 .multi-container{
   position: relative;

@@ -5,9 +5,18 @@ import { LabelContainer,
   TextInput, 
   BlockItemInput } from "./editComponents";
 import { useState, useEffect, useRef } from "react";
-import { toggleStyle } from "../../common/utils/styleHelper"
+import { toggleStyle } from "../../common/utils/styleHelper";
+import store from "../../app/store";
+import { useDispatch } from "react-redux";
+import { addCategory, selectCategories } from "../../features/categoriesSlice";
+import useEditRecipe from "../../common/hooks/useEditRecipe";
 
-function BasicInfo({recipe, currCategories}) {
+function BasicInfo({recipe}) {
+  const [currCategories, setCurrCategories] = useState([]);
+  const [editCat, setEditCat] = useState(0);
+  useEffect(() => {
+    setCurrCategories(selectCategories(store.getState()));
+  }, [editCat]);
 
   return(
     <>
@@ -24,13 +33,14 @@ function BasicInfo({recipe, currCategories}) {
         <BlockItemInput id="note" value={recipe?.["note"]}/>
         <EditCategories 
           currCategories={currCategories}
-          value={recipe?.["categories"]}/>
+          value={recipe?.["categories"]}
+          setEditCat={setEditCat}/>
       </TextContainer>
     </>
   )
 }
 
-function EditCategories({currCategories, value}){
+function EditCategories({currCategories, value, setEditCat}){
   const styleCategories = currCategories?.map((category, i) => {
     const chosen = value?.includes(category);
     return <EachCategory category={category} chosen={chosen} key={i}/>;
@@ -39,11 +49,60 @@ function EditCategories({currCategories, value}){
     <fieldset className="edit-fieldset">
       <div className="select-options">
         {styleCategories}
+        <AddCategory setEditCat={setEditCat}/>
       </div>
     </fieldset>
   )
 }
 
+function AddCategory({setEditCat}){
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [displayComp, setDisplayComp] = useState("select-display-hide");
+  const toggle = toggleStyle("hide");
+  const inputRef = useRef("");
+  const editRecipe = useEditRecipe();
+  const dispatch = useDispatch();
+
+  function handleDelete (evt) {
+    evt.preventDefault();
+    if(!isDisplayed) return;
+    setIsDisplayed(false);
+    setDisplayComp(toggle(displayComp));
+  }
+
+  async function handleAdd(evt) {
+    evt.preventDefault();
+    // if input field is not displaying, display it
+    if(!isDisplayed) {
+      setIsDisplayed(true);
+      setDisplayComp(toggle(displayComp));
+      return;
+    } 
+    const newCat = inputRef.current.value;
+    // if input field is displaying, post request & store in redux store
+    if (newCat) {
+      try {
+        if (store.getState()?.categories.includes(newCat)) throw "category already exists";
+        const retCategory = await editRecipe("addCategory", {"category": newCat});
+        dispatch(addCategory(retCategory));
+        // reset input display style
+        setEditCat(prev => ++prev);
+        inputRef.current.value = "";
+        setDisplayComp(toggle(displayComp));
+      } catch (error) {
+        console.log(error);
+      }  
+    }
+  }
+
+  return (
+    <div className="select-add-container">
+      <input type="text" className={`select-option ${displayComp}`} ref={inputRef}/>
+      <button className="select-btn select-add-btn" onClick={handleAdd}>+</button>
+      <button className={`select-btn select-del-btn ${displayComp}`} onClick={handleDelete}>-</button>
+    </div>
+  )
+}
 function EachCategory({category, chosen}){
   const [optionActive, setOptionActive] = useState("select-state");
   const inputRef = useRef(null);

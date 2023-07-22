@@ -83,16 +83,14 @@ A Sample Recipe;
 
 ## Wireframes
 
-`/` -- page for menu dictionary
+`/` -- page for recipe dictionary
 ![dictionary page](./documentation/dictionary-page.png)
-
-`/` -- also responsive to display each recipe
-![recipe show page](./documentation/display-page.png)
 
 `/edit` -- page to add, edit, or delete recipe
 ![recipe edit page](./documentation/edit-page.png)
 
 `/login` -- page to authenticate an existing user
+
 `/register` -- page to register a new user, share the same layout with login page
 ![login page](./documentation/login-page.png)
 
