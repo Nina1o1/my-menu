@@ -47,16 +47,17 @@
 /* categories */
 .category-container{
   max-width: 100%;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 1rem 0;
   max-height: 2.4rem;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   gap: 2rem;
+  overflow-x: scroll;
 }
 
 .each-category{
-  width: fit-content;
+  min-width: fit-content;
   padding: 0.5rem 1rem;
   border-color: #BFACE2;
   border-style: solid;

@@ -15,7 +15,6 @@ function FilterBar({displayCategories, selectCategories, setSearchCount}) {
   return (
     <div className="category-container">
       {styleCategory}
-      <div className="each-category">+</div>
     </div>
   )
 }
