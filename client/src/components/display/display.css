@@ -1,7 +1,6 @@
 .display-container{
   position: relative;
   width: 100%;
-  top: -0.6rem;
 
   text-align: center;
 }
@@ -57,13 +56,10 @@
 /* buttons */
 .display-btn{
   position: absolute;
-  left: -4.6rem;
-  width: 3.6rem;
-  height: 3.6rem;
+  left: -4.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
 
-  font-size: 1.5rem;
-  color: #3E54AC;
-  line-height: 3.6rem;
   cursor: pointer;
   border-radius: 0.3rem;
 }
@@ -73,11 +69,15 @@
 }
 
 .display-backbtn{
-  top: 1rem;
+  top: 0.5rem;
 }
 
 .display-editbtn{
-  top: 4.6rem;
+  top: 4rem;
+}
+
+.display-categorybtn{
+  top: 7.5rem;
 }
 
 /* labels */
@@ -87,7 +87,6 @@
 
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: #3E54AC;
-  /* text-align: right; */
 }
 
 .label-count{

@@ -2,16 +2,28 @@ import "./display.css";
 import BasicItems from "./basicItems";
 import Ingredients from "./ingredients";
 import Steps from "./steps";
-import { BackBtn, LinkBtn } from "./displayComponents";
+import { LinkBtn, FuncBtn } from "./displayComponents";
 
 function Display ({recipe, setdisplayMode}) {
+    function handleClickBack(evt) {
+      evt.preventDefault();
+      setdisplayMode(false);
+    }
+
   return (
     <div className='display-container'>
-      <BackBtn setdisplayMode={setdisplayMode}/>
+      <FuncBtn
+        handleClick = {handleClickBack}
+        imgSrc="/back.png" 
+        specifyClass="display-backbtn"/>
       <LinkBtn 
         linkLoc="edit" linkState={recipe} 
-        imgSrc="./edit.png" 
+        imgSrc="/edit.png" 
         specifyClass="display-editbtn"/>
+       <FuncBtn
+        // handleClick = {}
+        imgSrc="/category.png" 
+        specifyClass="display-categorybtn"/>
 
       <h1 className="display-header">{recipe["dishname"]}</h1>
       <div className="display-detail-container">

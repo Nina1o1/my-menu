@@ -49,26 +49,21 @@ function LinkBtn({linkLoc, linkState, imgSrc, specifyClass}) {
 
 }
 
-function BackBtn({setdisplayMode}){
-
-  function handleClick(evt) {
-    evt.preventDefault();
-    setdisplayMode(false);
-  }
-
+function FuncBtn({handleClick, imgSrc, specifyClass}){
+  const className = extraClasses("display-btn", specifyClass);
   return (
-    <div className="display-btn display-backbtn" onClick={handleClick}>
-      {">"}
-    </div>
+    <img 
+      onClick={handleClick}
+      className={className}
+      src={imgSrc}/>
   )
 }
-
 export {
   Text,
   ItemLabel,
   ItemContainer,
   ParagContainer,
   Br,
-  BackBtn,
-  LinkBtn
+  LinkBtn,
+  FuncBtn
 }
