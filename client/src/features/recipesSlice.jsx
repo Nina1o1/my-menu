@@ -92,9 +92,29 @@ const readRecipes =  (state, inputText, ...categories)  => {
   return foundRecipes;
 }
 
+const readFolderRecipes =  (state, category, number)  => {
+  const foundRecipes = [];
+
+  // check if input is found in ingredient or recipe
+  if (!category) return foundRecipes;
+  state.recipes.every(recipe => {
+    if (recipe["categories"].includes(category)) {
+      foundRecipes.push(recipe);
+      if (foundRecipes.length === number) return false;
+    }
+    return true;
+  });
+  return foundRecipes;
+}
+
+
 const selectRecipe = createSelector([readRecipes], (foundRecipes) => {
   return foundRecipes;
 });
 
-export {selectRecipe};
+const selectFolderRecipe = createSelector([readFolderRecipes], (foundRecipes) => {
+  return foundRecipes;
+});
+
+export {selectRecipe, selectFolderRecipe};
 export default recipesSlice.reducer;

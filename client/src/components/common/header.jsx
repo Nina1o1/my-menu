@@ -20,6 +20,7 @@ function Navigate() {
     <nav className="nav-container">
         <NavLink to="/" className="nav-item">Dictionary</NavLink>
         <NavLink to="/edit" className="nav-item">Add</NavLink>
+        <NavLink to="/folder" className="nav-item">Folder</NavLink>
         <span className="nav-userName">
           { auth?.username
             ? (

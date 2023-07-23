@@ -40,7 +40,7 @@ export default function Dictionary() {
   useEffect(() => {
     const foundCategories = selectCategories(store.getState());
     setDisplayCategories(foundCategories);
-  }, []);  
+  }, []);
 
   // find recipes and re-render when click on search button & category selection
   useEffect(() => {

@@ -7,8 +7,6 @@ import BasicInfo from "./basicInfo";
 import FormBtn from "./formBtn";
 import { ItemLabel, FormContainer, LabelContainer, TextContainer} from "./editComponents";
 import { loadIngredients, loadSteps, handleAddItem } from "./editHelper";
-import { selectCategories } from "../../features/categoriesSlice";
-import store from "../../app/store";
 
 function Edit() {
   document.body.classList.remove("purple-page");

@@ -13,7 +13,7 @@
 .dictionary-container-mode{
   margin-top: 1rem;
   display: block;
-  min-width: 350px;
+  max-width: 350px;
 }
 
 .search-container{
