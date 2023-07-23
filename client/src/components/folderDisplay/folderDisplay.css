@@ -1,0 +1,113 @@
+/* container */
+.folderdisplay-container{
+  margin-top: 1rem;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 5.6rem;
+}
+
+.folderdisplaylist-container{
+  display: block;
+  width: 350px;
+  min-width: 350px;
+}
+
+.folderShow-container{
+  position: relative;
+  width: 100%;
+}
+.folderShow-list-container{
+  max-height: 75vh;
+  overflow: scroll;
+}
+/* folder display list */
+.folderdisplaylist-header{
+  padding-bottom: 3.5rem;
+  margin: -0.5rem 0 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #3E54AC;
+  font-size: 3rem;
+  text-align: left;
+}
+.folderdisplay-btns-container{
+  display: flex;
+  flex-flow: column;
+}
+.folderdisplay-btn{
+  width: 100%;
+  cursor: pointer;
+  background-color: #fff;
+  color: #3E54AC;
+  text-align: left;
+}
+.folderdisplaylist-box{
+  max-height: 35vh;
+  overflow: scroll;
+
+}
+
+.folderdisplaylist-item{
+  padding: 1rem 0;
+  border-color: #3E54AC;
+  color: #3E54AC;
+  border-bottom-style: solid;
+  cursor: pointer;
+}
+
+.folderdisplaylist-item:hover{
+  border-radius: 0.3rem;
+  background-color: #ECF2FF;
+  border-color: #ECF2FF;
+}
+
+.folderdisplaylist-new{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.folderdisplaylist-new > input {
+  width: 100%;
+  border-color: #3E54AC;
+  border-width: 0.1rem;
+}
+.folderdisplaylist-new > button{
+  margin: 0;
+  padding: 0 0.5rem;
+  background-color: #fff;
+  color: #3E54AC;
+}
+/* folder show page */
+.folder-btn{
+  position: absolute;
+  left: -4.5rem;
+  width: 3rem;
+  height: 3rem;
+
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-color: #fff;
+}
+.folder-btn:hover{
+  border-color: #3E54AC;
+}
+
+.folderdisplaylist-recipe {
+  padding: 1rem 0;
+  font-size: 1rem;
+  color: #3E54AC;
+  cursor: pointer;  
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-color: #fff;
+}
+.folderdisplaylist-recipe:nth-child(2n+1) {
+  background-color: #ECF2FF;
+}
+.folderdisplaylist-recipe:hover{
+  background-color: #fff;
+  border-color: #3E54AC;
+}

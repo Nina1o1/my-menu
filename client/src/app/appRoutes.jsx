@@ -5,6 +5,7 @@ import Error from '../components/common/error.jsx';
 import Dictionary from "../components/dictionary/dictionary"
 import Edit from "../components/edit/edit"
 import Folder from '../components/folder/folder';
+import FolderDisplay from '../components/folderDisplay/folderDisplay';
 import ProtectedRoutes from '../components/protectedRoutes';
 
 export default function AppRoutes() {
@@ -18,7 +19,8 @@ export default function AppRoutes() {
         <Route path="edit" element={<Edit />} />
         <Route path="" element={<Dictionary />} />
         <Route path="folder" element={<Folder />} />
-      
+        <Route path="folder_display" element={<FolderDisplay />} />
+
       <Route element={ <ProtectedRoutes /> }>
       </Route>
 

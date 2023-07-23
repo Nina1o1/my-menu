@@ -1,0 +1,39 @@
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { selectCategories } from "../../features/categoriesSlice";
+import store from "../../app/store";
+import "./folderDisplay.css";
+import FolderList from "./folderList.jsx";
+import FolderShow from "./folderShow.jsx";
+
+function FolderDisplay() {
+  const location = useLocation();
+
+  const [foundCategories, setFoundCategories] = useState([]);
+  const [currCategory, setCurrCategory] = useState("");
+  // load categories on initial mount
+  useEffect(() => {
+    setFoundCategories(selectCategories(store.getState()));
+  },[]);
+
+  useEffect(() => {
+    if (location?.state?.["category"]) {
+      setCurrCategory(location?.state?.["category"]);
+    }
+  }, []);
+
+  return(
+    <>
+      <div className="folderdisplay-container">
+        <FolderList
+          foundCategories={foundCategories}
+          setCurrCategory={setCurrCategory}
+          currCategory={currCategory}/>
+        <FolderShow 
+          currCategory={currCategory}/>
+      </div>
+    </>
+  )
+}
+
+export default FolderDisplay;
