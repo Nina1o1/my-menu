@@ -1,53 +1,105 @@
 import { useRef, useState } from "react";
 import "./folderDisplay.css";
+import terms from "../../assets/terms.json"
 import store from "../../app/store";
 import useEditRecipe from "../../common/hooks/useEditRecipe";
 import { useDispatch } from "react-redux";
 import { addCategory } from "../../features/categoriesSlice";
+import Popup from "../popup/popup";
+
 function FolderList({foundCategories, setCurrCategory, currCategory}) {
 
   const [showOtherRecipes, setShowOtherRecipes] = useState(false);
   const [showCreateNew, setShowCreateNew] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showRename, setShowRename] = useState(false);
+  const editRecipe = useEditRecipe();
+  const dispatch = useDispatch();
+
+
+  async function fetchShowRename(dispatch, editRecipe, newCat) {
+    console.log(newCat);
+  }
+
+  async function handleClickDelete(){
+    setShowDelete(false);
+  }
+
+  async function fetchShowCreateNew(newCat) {
+    const retCategory = await editRecipe("addCategory", {"category": newCat});
+    dispatch(addCategory(retCategory));
+  }
+
+
+  function handleRename(evt) {
+    evt.preventDefault();
+    if(showOtherRecipes) setShowOtherRecipes(false);
+    if(showCreateNew) setShowCreateNew(false);
+    if(showDelete) setShowDelete(false);
+    setShowRename(prev => !prev);
+  }
   function handleCreateNew(evt) {
     evt.preventDefault();
     if(showOtherRecipes) setShowOtherRecipes(false);
+    if(showRename) setShowRename(false);
+    if(showDelete) setShowDelete(false);
     setShowCreateNew(prev => !prev);
+  }
+  function handleDelete(evt){
+    evt.preventDefault();
+    if(showOtherRecipes) setShowOtherRecipes(false);
+    if(showCreateNew) setShowCreateNew(false);
+    if(showRename) setShowRename(false);
+    setShowDelete(prev => !prev);
   }
   function handleShowOtherRecipes(evt){
     evt.preventDefault();
     if(showCreateNew) setShowCreateNew(false);
+    if(showRename) setShowRename(false);
+    if(showDelete) setShowDelete(false);
     setShowOtherRecipes(prev => !prev);
   }
+
   return(
     <>
       <div className="folderdisplaylist-container">
         <h1 className="folderdisplaylist-header"> {currCategory} </h1>
         <div className="folderdisplay-btns-container">
-          <Btn content="rename"/>
-          <Btn content="delete"/>
-          <Btn content="create new" 
-            handleClick={handleCreateNew}
-            setShowCreateNew={setShowCreateNew}/>
-          <Btn content="other recipes" 
-            handleClick={handleShowOtherRecipes}/>
-        </div>
-        <div className="folderdisplaylist-box"> 
+          {showRename
+            ? <CategoryInput
+                placeholder="rename"
+                setDisplay={setShowRename}
+                fetchFunc={fetchShowRename}/>
+            : <Btn content="rename" handleClick={handleRename}/>}
           {showCreateNew
-            ? <CreateNew />
-            : ""}
+            ? <CategoryInput 
+                placeholder="create new"
+                setDisplay={setShowCreateNew}
+                fetchFunc={fetchShowCreateNew}/>
+            : <Btn content="create new" handleClick={handleCreateNew}/>}
+          <Btn content="delete" handleClick={handleDelete}/>
+          <Btn content="other recipes" handleClick={handleShowOtherRecipes}/>
+        </div>
+        <div className="folderdisplaylist-box">
           {showOtherRecipes
             ? <Categories foundCategories={foundCategories} setCurrCategory={setCurrCategory}/>
             : ""}
         </div>
+        {showDelete
+            ? <Popup 
+                content={terms["category-delete"]}
+                setDisplay={setShowDelete}
+                handleClickRight={handleClickDelete}/>
+            : ""}
       </div>
     </>
   )
 }
 
-function CreateNew(){
+function CategoryInput({placeholder, setDisplay, fetchFunc}){
   const inputRef = useRef("");
-  const editRecipe = useEditRecipe();
-  const dispatch = useDispatch();
+  // const editRecipe = useEditRecipe();
+  // const dispatch = useDispatch();
 
   async function handleAdd(evt) {
     evt.preventDefault();
@@ -55,19 +107,24 @@ function CreateNew(){
     if (newCat) {
       try {
         if (store.getState()?.categories.includes(newCat)) throw "category already exists";
-        const retCategory = await editRecipe("addCategory", {"category": newCat});
-        dispatch(addCategory(retCategory));
+        await fetchFunc(newCat);
+        // await fetchFunc(dispatch, editRecipe, newCat);
         inputRef.current.value = "";
-        setShowCreateNew(false);
+        setDisplay(false);
       } catch (error) {
         console.log(error);
-      }  
+      }
     }
+  }
+  function handleClose(evt) {
+    evt.preventDefault();
+    setDisplay(false);
   }
   return(
     <form className="folderdisplaylist-new">
-      <input type="text" className="text" ref={inputRef}/>
+      <input type="text" className="text" placeholder={`- ${placeholder}`} ref={inputRef}/>
       <button className="folderdisplaylist-new-btn" onClick={handleAdd}>add</button>
+      <button className="folderdisplaylist-new-btn" onClick={handleClose}>close</button>
     </form>
   )
 }

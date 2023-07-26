@@ -5,12 +5,20 @@ import { LabelContainer } from "./editComponents";
 import { readFormData } from "./editHelper";
 import { addRecipe, updateRecipe, deleteRecipe } from "../../features/recipesSlice";
 import useEditRecipe from "../../common/hooks/useEditRecipe";
+import { useRef, useState } from "react";
+import Popup from "../popup/popup";
+import terms from "../../assets/terms.json";
 
 function FormBtn({formItems, recipe}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // custome post request hook
   const editRecipe = useEditRecipe();
+  // popup hooks
+  const [showPopup, setShowPopup] = useState(false);
+  // const [popupContent, setPopupContent] = useState("");
+  const popupContent = useRef("");
+  const popupClickRight = useRef(undefined);
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -23,6 +31,11 @@ function FormBtn({formItems, recipe}) {
     try {
       readFormData(formItems, formdata);
     } catch (error) {
+      if(error === terms["edit-noname"]) {
+        popupContent.current = terms["edit-noname"];
+        popupClickRight.current = undefined;
+        setShowPopup(true);
+      }
       console.log(error);
       return;
     }
@@ -44,15 +57,13 @@ function FormBtn({formItems, recipe}) {
     }
   }
 
-  async function handleDelete(evt) {
-    evt.preventDefault();
-    
+  async function handleDelete() {
     if(recipe?.["_id"]){
       // post request to delete recipe in database
       try {
         const recipeId = {recipeId: recipe["_id"]};
         const action = "deleteRecipe";
-        const ret = await editRecipe(action, recipeId);
+        await editRecipe(action, recipeId);
         dispatch(deleteRecipe(recipe));
         navigate("/");
       } catch (error) {
@@ -64,13 +75,21 @@ function FormBtn({formItems, recipe}) {
     }
   }
 
+  function handleClickDelete() {
+    popupContent.current = terms["edit-delete"];
+    popupClickRight.current = handleDelete;
+    setShowPopup(true);
+  }
   return(
     <>
         <LabelContainer />
         <div className="btn-container">
-          <button onClick={handleDelete} className="form-btn form-delete">Delete</button>
+          <button onClick={handleClickDelete} className="form-btn form-delete">Delete</button>
           <button onClick={handleSubmit} className="form-btn form-submit">Submit</button>
         </div>
+        {showPopup
+          ? <Popup content={popupContent.current} setDisplay={setShowPopup} handleClickRight={popupClickRight.current}/>
+          : ""}
     </>
   )
 }

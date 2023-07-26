@@ -1,5 +1,6 @@
 import Ingredient from "./ingredient";
 import { Step, StepCount } from "./step";
+import terms from "../../assets/terms.json";
 
 function loadSteps(steps, setStepComp, setStepCount, setStepCountComp, stepDelProps) {
   if(!steps) return;
@@ -71,7 +72,7 @@ function readFormData(formItems, formdata) {
         break;
       }
       case "dishname": {
-        if(!ele.value) throw "no dishname";
+        if(!ele.value) throw terms["edit-noname"];
       }
 
       default: {

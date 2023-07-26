@@ -10,10 +10,14 @@ import store from "../../app/store";
 import { useDispatch } from "react-redux";
 import { addCategory, selectCategories } from "../../features/categoriesSlice";
 import useEditRecipe from "../../common/hooks/useEditRecipe";
+import terms from "../../assets/terms.json";
+import Popup from "../popup/popup";
 
 function BasicInfo({recipe}) {
   const [currCategories, setCurrCategories] = useState([]);
   const [editCat, setEditCat] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  const popupContent = useRef("");
   useEffect(() => {
     setCurrCategories(selectCategories(store.getState()));
   }, [editCat]);
@@ -34,13 +38,18 @@ function BasicInfo({recipe}) {
         <EditCategories 
           currCategories={currCategories}
           value={recipe?.["categories"]}
-          setEditCat={setEditCat}/>
+          setEditCat={setEditCat}
+          popupContent={popupContent}
+          setShowPopup={setShowPopup}/>
       </TextContainer>
+      {showPopup
+          ? <Popup content={popupContent.current} setDisplay={setShowPopup}/>
+          : ""}
     </>
   )
 }
 
-function EditCategories({currCategories, value, setEditCat}){
+function EditCategories({currCategories, value, setEditCat, popupContent, setShowPopup}){
   const styleCategories = currCategories?.map((category, i) => {
     const chosen = value?.includes(category);
     return <EachCategory category={category} chosen={chosen} key={i}/>;
@@ -49,13 +58,16 @@ function EditCategories({currCategories, value, setEditCat}){
     <fieldset className="edit-fieldset">
       <div className="select-options">
         {styleCategories}
-        <AddCategory setEditCat={setEditCat}/>
+        <AddCategory 
+          setEditCat={setEditCat}
+          popupContent={popupContent}
+          setShowPopup={setShowPopup}/>
       </div>
     </fieldset>
   )
 }
 
-function AddCategory({setEditCat}){
+function AddCategory({setEditCat, popupContent, setShowPopup}){
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [displayComp, setDisplayComp] = useState("select-display-hide");
   const toggle = toggleStyle("hide");
@@ -82,7 +94,7 @@ function AddCategory({setEditCat}){
     // if input field is displaying, post request & store in redux store
     if (newCat) {
       try {
-        if (store.getState()?.categories.includes(newCat)) throw "category already exists";
+        if (store.getState()?.categories.includes(newCat)) throw terms["edit-existCategory"];
         const retCategory = await editRecipe("addCategory", {"category": newCat});
         dispatch(addCategory(retCategory));
         // reset input display style
@@ -90,6 +102,9 @@ function AddCategory({setEditCat}){
         inputRef.current.value = "";
         setDisplayComp(toggle(displayComp));
       } catch (error) {
+        popupContent.current = terms["edit-existCategory"];
+        setShowPopup(true);
+        console.log("this is the error");
         console.log(error);
       }  
     }

@@ -6,10 +6,12 @@
   
   "dict-search" : "What do you want?",
 
-  "edit-name": "Dish Name",
-  "edit-ingredients": "Add ingredients. Separate each by COMMA",
-  "edit-description": "Describe your meal!",
-  
+  "edit-delete": "Sure to delete this recipe?",
+  "edit-noname": "Please add a dishname",
+  "edit-existCategory": "This category already exists",
+
+  "category-delete": "Sure to delete this category?",
+
   "nodata": {
     "title": "Please Complete Your Information",
     "parag": ""
