@@ -16,7 +16,6 @@ function FormBtn({formItems, recipe}) {
   const editRecipe = useEditRecipe();
   // popup hooks
   const [showPopup, setShowPopup] = useState(false);
-  // const [popupContent, setPopupContent] = useState("");
   const popupContent = useRef("");
   const popupClickRight = useRef(undefined);
 

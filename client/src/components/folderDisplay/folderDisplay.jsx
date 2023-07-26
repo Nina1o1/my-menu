@@ -11,11 +11,12 @@ function FolderDisplay() {
 
   const [foundCategories, setFoundCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState("");
-  // load categories on initial mount
+  // load all categories on initial mount
   useEffect(() => {
+    console.log("reading me");
     setFoundCategories(selectCategories(store.getState()));
   },[]);
-
+  // read specific category from folder page
   useEffect(() => {
     if (location?.state?.["category"]) {
       setCurrCategory(location?.state?.["category"]);
@@ -27,6 +28,7 @@ function FolderDisplay() {
       <div className="folderdisplay-container">
         <FolderList
           foundCategories={foundCategories}
+          setFoundCategories={setFoundCategories}
           setCurrCategory={setCurrCategory}
           currCategory={currCategory}/>
         <FolderShow 

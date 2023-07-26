@@ -11,7 +11,7 @@ function FolderShow({currCategory}) {
   }
 
   let styleFoundRecipes = "";
-  // display 5 recipes under this category
+  // find recipes under this category
   const foundRecipes = selectFolderRecipe(store.getState(), currCategory);
   if (foundRecipes?.length) {
     styleFoundRecipes = foundRecipes?.map((recipe, i) => {
