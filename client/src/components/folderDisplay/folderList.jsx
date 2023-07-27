@@ -43,7 +43,7 @@ function FolderList({setFoundCategories, foundCategories, setCurrCategory, currC
   }
   async function fetchShowCreateNew(newCat, setCurrCategory, setFoundCategories) {
     try {
-      await editRecipe("addCategory", {"category": newCat});
+      await editRecipe("updateCategory", {"category": newCat});
       dispatch(addCategory(newCat));
       setCurrCategory(newCat);
       setFoundCategories(prev => [...prev, newCat]);

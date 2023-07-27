@@ -14,7 +14,7 @@ import editRecipeRouter from './routes/editRecipe.mjs';
 import findRecipeRouter from './routes/findRecipe.mjs';
 import deleteRecipeRouter from './routes/deleteRecipe.mjs';
 import addCategoryRouter from './routes/addCategory.mjs';
-import editCategoryRouter from './routes/editCategory.mjs';
+import updateCategoryRouter from './routes/updateCategory.mjs';
 import deleteCategoryRouter from './routes/deleteCategory.mjs';
 // middlewares
 import sanitizeInput from "./middlewares/sanitizeInput.mjs";
@@ -78,7 +78,7 @@ app.post("/editRecipe", editRecipeRouter);
 app.get("/findRecipe", findRecipeRouter);
 app.post("/deleteRecipe", deleteRecipeRouter);
 app.post("/addCategory", addCategoryRouter);
-app.post("/editCategory", editCategoryRouter);
+app.post("/updateCategory", updateCategoryRouter);
 app.post("/deleteCategory", deleteCategoryRouter);
 
 app.listen(3000, () => {

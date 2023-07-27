@@ -1,5 +1,5 @@
 import { Recipe, Category } from "../databases/alldb.mjs";
-async function editCategoryRouter(req, res) {
+async function updateCategoryRouter(req, res) {
   const { target, input } = req?.body;
   try {
     // update category
@@ -21,4 +21,4 @@ async function editCategoryRouter(req, res) {
   }
 }
 
-export default editCategoryRouter;
+export default updateCategoryRouter;
