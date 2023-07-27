@@ -13,7 +13,6 @@ function FolderDisplay() {
   const [currCategory, setCurrCategory] = useState("");
   // load all categories on initial mount
   useEffect(() => {
-    console.log("reading me");
     setFoundCategories(selectCategories(store.getState()));
   },[]);
   // read specific category from folder page

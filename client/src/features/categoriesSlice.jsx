@@ -15,28 +15,30 @@ const categoriesSlice = createSlice({
     },
 
     addCategory: (state, action) => {
-      const input = action.payload?.["category"];
-      if (!input) return;
+      const input = action.payload;
       const currState = current(state);
+      if (!input) return currState;
       if (currState.includes(input)) return currState;
       return [... currState, input];
     },
 
-    // updateCategory: (state, action) => {
-    //   const { target, input } = action?.payload;
-    //   if(!target || !input) return;
-    //   if (!state.includes(target) || state.includes(input)) return;
-    //   state = state.map((cat) => {
-    //     return (cat == target) ? input : cat;
-    //   });
-    // },
+    updateCategory: (state, action) => {
+      const { target, input } = action?.payload;
+      const currState = current(state);
+      if (!target || !input) return currState;
+      if (!currState.includes(target) || currState.includes(input)) return currState;
+      const retState = currState.filter(cat => cat!== target);      
+      retState.push(input);
+      return retState;
+    },
 
-    // deleteCategory: (state, action) => {
-    //   const target = action.payload;
-    //   if (!target) return;
-    //   if (!state.includes(target)) return;
-    //   state = state.filter((cat) => cat !== target);
-    // }
+    deleteCategory: (state, action) => {
+      const target = action.payload;
+      const currState = current(state);
+      if (!target) return currState;
+      if (!currState.includes(target)) return currState;
+      return currState.filter((cat) => cat !== target);
+    }
   }
 });
 

@@ -31,7 +31,7 @@ const recipesSlice = createSlice({
     updateRecipe: (state, action) => {
       const inputRecipe = action?.payload?.["recipe"];
       if (!inputRecipe) return current(state);
-      const findAndUpdateRecipe = current(state).map(recipe => {
+      const retRecipe = current(state).map(recipe => {
         if(recipe["_id"] === inputRecipe["_id"]) {
           return {
             _id: inputRecipe["_id"],
@@ -42,22 +42,51 @@ const recipesSlice = createSlice({
         }
         return recipe;
       });
-      return findAndUpdateRecipe;
+      return retRecipe;
+    },
+
+    updateRecipeCategory: (state, action) => {
+      const { target, input } = action?.payload;
+      const currState = current(state);
+      if(!target || !input) return currState;
+      const retRecipe = currState.map(recipe => {
+        if(!recipe?.["categories"]?.includes(target)) return recipe;
+        const retCat = recipe["categories"].filter(cat => cat !== target);
+        retCat.push(input);
+        return {
+          ...recipe,
+          categories: retCat
+        }
+      });
+      return retRecipe;
+    },
+
+    deleteRecipeCategory: (state, action) => {
+      const target = action?.payload;
+      const currState = current(state);
+      if (!target) return currState;
+      const retRecipe = currState.map(recipe => {
+        const currCat = recipe?.["categories"]
+        if(!currCat?.includes(target)) return recipe;
+        const retCat = currCat.splice(currCat.indexOf(target), 1);
+        return {
+          ...recipe,
+          categories: retCat
+        }
+      });
+      return retRecipe;
     },
 
     deleteRecipe: (state, action) => {
       const inputRecipe = action?.payload;
       if (!inputRecipe) return current(state);
-      const findAndDeleteRecipe = current(state).filter(recipe => {
-        return recipe["_id"] !== inputRecipe["_id"];
-      });
-      return findAndDeleteRecipe;
+      return current(state).filter(recipe => recipe["_id"] !== inputRecipe["_id"]);
     }
   }
 });
 
 export { recipesSlice };
-export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, deleteRecipe } = recipesSlice.actions;
+export const { loadRecipe, resetRecipe, addRecipe, updateRecipe, updateRecipeCategory, deleteRecipeCategory, deleteRecipe } = recipesSlice.actions;
 
 const readRecipes =  (state, inputText, ...categories)  => {
   const foundRecipes = [];

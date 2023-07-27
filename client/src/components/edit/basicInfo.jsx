@@ -77,9 +77,10 @@ function AddCategory({setEditCat, popupContent, setShowPopup}){
 
   function handleDelete (evt) {
     evt.preventDefault();
-    if(!isDisplayed) return;
-    setIsDisplayed(false);
-    setDisplayComp(toggle(displayComp));
+    if(isDisplayed) {
+      setIsDisplayed(false);
+      setDisplayComp(toggle(displayComp));
+    }
   }
 
   async function handleAdd(evt) {
@@ -95,11 +96,12 @@ function AddCategory({setEditCat, popupContent, setShowPopup}){
     if (newCat) {
       try {
         if (store.getState()?.categories.includes(newCat)) throw terms["edit-existCategory"];
-        const retCategory = await editRecipe("addCategory", {"category": newCat});
-        dispatch(addCategory(retCategory));
+        await editRecipe("addCategory", {"category": newCat});
+        dispatch(addCategory(newCat));
         // reset input display style
         setEditCat(prev => ++prev);
         inputRef.current.value = "";
+        setIsDisplayed(false);
         setDisplayComp(toggle(displayComp));
       } catch (error) {
         popupContent.current = terms["edit-existCategory"];

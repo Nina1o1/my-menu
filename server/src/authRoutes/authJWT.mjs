@@ -35,7 +35,8 @@ async function loginRouter (req, res) {
       {expiresIn: "15m"}
     )
     const refreshToken = jwt.sign(
-      {"username": username},
+      {"username": username,
+       "userid": foundUser["_id"]},
       process.env.REFRESH_TOKEN_SECRET,
       {expiresIn: "1d"}
     )

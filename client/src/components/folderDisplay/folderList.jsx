@@ -4,10 +4,12 @@ import terms from "../../assets/terms.json"
 import store from "../../app/store";
 import useEditRecipe from "../../common/hooks/useEditRecipe";
 import { useDispatch } from "react-redux";
-import { addCategory } from "../../features/categoriesSlice";
+import { addCategory, updateCategory, deleteCategory, selectCategories } from "../../features/categoriesSlice";
+import { updateRecipeCategory, deleteRecipeCategory } from "../../features/recipesSlice";
 import Popup from "../popup/popup";
 import Categories from "./folderCategories";
-// import { CategoryInput, Btn } from "./folderInputCategory"
+import { useNavigate } from "react-router-dom";
+
 
 function FolderList({setFoundCategories, foundCategories, setCurrCategory, currCategory}) {
 
@@ -23,28 +25,44 @@ function FolderList({setFoundCategories, foundCategories, setCurrCategory, currC
   // fetch & redux hooks
   const dispatch = useDispatch();
   const editRecipe = useEditRecipe();
+  const navigate = useNavigate();
+  
 
 
   async function fetchShowRename(newCat, setCurrCategory, setFoundCategories, currCategory) {
-    console.log(newCat);
-    setCurrCategory(newCat);
-    setFoundCategories(prev => {
-      return prev.map(ele => {
-        if(ele === currCategory) return newCat;
-        else return ele;
-      });
-    })
+    try {
+      const data = {"input": newCat, "target": currCategory};
+      await editRecipe("editCategory", data);
+      dispatch(updateCategory(data));
+      dispatch(updateRecipeCategory(data));
+      setCurrCategory(newCat);
+      setFoundCategories(selectCategories(store.getState()));
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  async function handleClickDelete(){
-    setShowDelete(false);
-  }
-
   async function fetchShowCreateNew(newCat, setCurrCategory, setFoundCategories) {
-    const retCategory = await editRecipe("addCategory", {"category": newCat});
-    dispatch(addCategory(retCategory));
-    setCurrCategory(newCat);
-    setFoundCategories(prev => [...prev, newCat]);
+    try {
+      await editRecipe("addCategory", {"category": newCat});
+      dispatch(addCategory(newCat));
+      setCurrCategory(newCat);
+      setFoundCategories(prev => [...prev, newCat]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function handleClickDelete(){
+    try {
+      await editRecipe("deleteCategory", {"target": currCategory});
+      dispatch(deleteCategory(currCategory));
+      dispatch(deleteRecipeCategory(currCategory));
+      setFoundCategories(selectCategories(store.getState()));
+      setCurrCategory(foundCategories[0] || "");
+      setShowDelete(false);
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleRename(evt) {

@@ -40,4 +40,5 @@
   overflow: scroll;
   gap: 0.5rem 0;
   font-size: 1.2rem;
+  justify-content: flex-start;
 }

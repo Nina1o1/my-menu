@@ -6,7 +6,7 @@ async function addCategoryRouter (req, res) {
       {"author": req.userid},
       {$push: {"categories": newCategory}}
     );
-    return res.status(200).send({"category": newCategory});
+    return res.sendStatus(200);
   } catch (error) {
     console.log(error);
     return res.sendStatus(502);
