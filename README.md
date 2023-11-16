@@ -3,21 +3,6 @@
 With the food left in fridge, what should I cook to fit my appetite?
 My Menu is for you to recall all your loved recipes with food in your fridge! (or, how to cook my favorate dish)
 
-## Usage on Local
-- set up and run client on localhost 5173
-  ```sh
-  $> cd client
-  $> npm install
-  $> npm run dev
-  ```
-
-- set up and run server on localhost 3000
-  ```sh
-  $> cd server
-  $> npm install
-  $> npm run dev
-  ```
-
 ## Data Model
 The application will store Users, Recipes, and Categories
 - Users can have multiple Recipes (via reference)
